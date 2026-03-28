@@ -16,6 +16,76 @@ try {
   promptsStyle.delimiter = () => '';
 } catch {}
 
+// Customize toggle prompt: clack-style with │ prefix and └ at bottom while active
+try {
+  const TogglePrompt = require('prompts/lib/elements/toggle');
+  const { cursor: ansiCursor, erase: ansiErase } = require('sisteransi');
+  const clearPrompt = require('prompts/lib/util/clear');
+
+  TogglePrompt.prototype.render = function () {
+    if (this.closed) return;
+    if (this.firstRender) this.out.write(ansiCursor.hide);
+    else this.out.write(clearPrompt(this.outputText, this.out.columns));
+    if (this.firstRender) this.firstRender = false;
+
+    if (this.done || this.aborted) {
+      const sym = this.aborted ? '\x1b[31m■\x1b[0m' : '\x1b[36m◇\x1b[0m';
+      const answer = this.value ? this.active : this.inactive;
+      this.outputText = `${sym}  ${this.msg}\n│  ${answer}`;
+    } else {
+      const activeOpt = this.value
+        ? `\x1b[32m●\x1b[0m ${this.active}`
+        : `\x1b[2m○\x1b[0m ${this.active}`;
+      const inactiveOpt = this.value
+        ? `\x1b[2m○\x1b[0m ${this.inactive}`
+        : `\x1b[32m●\x1b[0m ${this.inactive}`;
+      this.outputText = `\x1b[36m◆\x1b[0m  ${this.msg}\n│  ${activeOpt} / ${inactiveOpt}\n└`;
+    }
+
+    this.out.write(ansiErase.line + ansiCursor.to(0) + this.outputText);
+  };
+
+  // Fix arrow keys: left selects the left option (active), right selects the right option (inactive)
+  const origLeft = TogglePrompt.prototype.left;
+  const origRight = TogglePrompt.prototype.right;
+  TogglePrompt.prototype.left = origRight;
+  TogglePrompt.prototype.right = origLeft;
+} catch {}
+
+// Customize text prompt: clack-style with multi-line layout
+try {
+  const TextPrompt = require('prompts/lib/elements/text');
+  const { cursor: ansiCursor, erase: ansiErase } = require('sisteransi');
+  const clearPrompt = require('prompts/lib/util/clear');
+
+  TextPrompt.prototype.render = function () {
+    if (this.closed) return;
+    if (this.firstRender) this.out.write(ansiCursor.hide);
+    else this.out.write(clearPrompt(this.outputText, this.out.columns));
+    if (this.firstRender) this.firstRender = false;
+
+    if (this.done || this.aborted) {
+      const sym = this.aborted ? '\x1b[31m■\x1b[0m' : '\x1b[36m◇\x1b[0m';
+      this.outputText = `${sym}  ${this.msg}\n│  ${this.value}`;
+    } else {
+      let display;
+      if (this.value.length > 0) {
+        const before = this.value.slice(0, this.cursor);
+        const char = this.cursor < this.value.length ? this.value[this.cursor] : ' ';
+        const after = this.cursor < this.value.length ? this.value.slice(this.cursor + 1) : '';
+        display = `${before}\x1b[7m${char}\x1b[27m${after}`;
+      } else if (this.initial) {
+        display = `\x1b[7m \x1b[27m\x1b[2m${this.initial}\x1b[0m`;
+      } else {
+        display = '\x1b[7m \x1b[27m';
+      }
+      this.outputText = `\x1b[36m◆\x1b[0m  ${this.msg}\n│  ${display}\n│`;
+    }
+
+    this.out.write(ansiErase.line + ansiCursor.to(0) + this.outputText);
+  };
+} catch {}
+
 const COLORS = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
@@ -26,6 +96,7 @@ const COLORS = {
   cyan: '\x1b[36m',
   red: '\x1b[31m',
   magenta: '\x1b[35m',
+  gray: '\x1b[90m',
 };
 
 const bar = '│';
@@ -222,32 +293,38 @@ async function install() {
     initial: defaultUserName,
   }, { onCancel });
 
-  print(`${color('◇', 'cyan')} What language should agents use when chatting with you?`);
+  print(bar);
+
   const { communicationLanguage } = await prompts({
     type: 'text',
     name: 'communicationLanguage',
-    message: '',
+    message: 'What language should agents use when chatting with you?',
     initial: 'English',
   }, { onCancel });
 
-  print(`${color('◇', 'cyan')} Preferred document output language?`);
+  print(bar);
+
   const { documentLanguage } = await prompts({
     type: 'text',
     name: 'documentLanguage',
-    message: '',
+    message: 'Preferred document output language?',
     initial: 'English',
   }, { onCancel });
 
-  print(`${color('◇', 'cyan')} Project name?`);
+  print(bar);
+
   const { projectName } = await prompts({
     type: 'text',
     name: 'projectName',
-    message: '',
+    message: 'Project name?',
     initial: path.basename(targetDir),
   }, { onCancel });
 
   print(bar);
-  print(`${color('●', 'blue')} Installing RAPID...`);
+  printDiv();
+  print(bar);
+
+  print(`${color('●', 'blue')}  Installing RAPID...`);
 
   // Create directories
   const rapidDir = path.join(targetDir, '_rapid');
@@ -313,18 +390,38 @@ initialized: true
 
   fs.writeFileSync(path.join(rapidDir, 'config.yaml'), config);
 
-  print(`${color('│', 'dim')} Created ${color('_rapid/', 'cyan')}`);
-  print(`${color('│', 'dim')} Created ${color('.claude/skills/', 'cyan')}`);
+  print(`${bar}  Created ${color('_rapid/', 'cyan')}`);
+  print(`${bar}  Created ${color('.claude/skills/', 'cyan')}`);
+  
   print(bar);
-  print(`${color('●', 'green')} ${color('RAPID installed successfully!', 'green')}`);
+  printDiv();
+  print(bar);
 
-  print(bar);
-  print(color('◆', 'magenta') + color(' Next Steps', 'bright'));
-  print(bar);
-  print(`${color('│', 'dim')} ${color('rapid create-context', 'cyan')}  - Document your project context`);
-  print(`${color('│', 'dim')} ${color('rapid create-patterns', 'cyan')} - Define coding patterns`);
-  print(`${color('│', 'dim')} ${color('rapid quick-dev', 'cyan')}       - Start developing`);
-  print(finishBar);
+  // Final summary box — cap visible line at 88 chars (overhead: line = boxWidth - 30)
+  const width = process.stdout.columns || 80;
+  const boxWidth = Math.min(width - 5, 118);
+  const innerWidth = boxWidth - 35;
+
+  const truncate = (str, max) => str.length > max ? str.slice(0, max - 3) + '...' : str;
+
+  const displayDir = truncate(targetDir, innerWidth - 17);
+  const ghUrl = 'https://github.com/rapid-method/rapid-method';
+  const displayUrl = truncate(ghUrl, innerWidth - 23);
+  const skillLine = truncate(`Invoke the rapid-help skill in your IDE Agent to get started`, innerWidth - 5);
+
+  const pad = (contentLen) => ' '.repeat(Math.max(0, innerWidth - contentLen));
+
+  const grayBar = color(bar, 'gray');
+
+  print(`${color('◇', 'green')}  ${color('╭─', 'gray')} RAPID is ready to use! ${color('─', 'gray').repeat(Math.max(0, boxWidth - 60))}${color('╮', 'gray')}`);
+  print(`${bar}  ${grayBar}${' '.repeat(innerWidth)}${grayBar}`);
+  print(`${bar}  ${grayBar}  ${color('Installed to:', 'gray')} ${color(displayDir, 'cyan')}${pad(16 + displayDir.length)}${grayBar}`);
+  print(`${bar}  ${grayBar}${' '.repeat(innerWidth)}${grayBar}`);
+  print(`${bar}  ${grayBar}  ${color('Next steps:', 'gray')}${pad(13)}${grayBar}`);
+  print(`${bar}  ${grayBar}    ${color('Star us on GitHub:', 'gray')} ${color(displayUrl, 'cyan')}${pad(23 + displayUrl.length)}${grayBar}`);
+  print(`${bar}  ${grayBar}    ${color(skillLine, 'gray')}${pad(4 + skillLine.length)}${grayBar}`);
+  print(`${bar}  ${grayBar}${' '.repeat(innerWidth)}${grayBar}`);
+  print(`${bar}  ${color('╰', 'gray')}${color('─', 'gray').repeat(innerWidth)}${color('╯', 'gray')}`);
 }
 
 // Main
