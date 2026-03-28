@@ -1,6 +1,6 @@
 {
   "name": "rapid-method",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RAPID - Requirements, Architecture, Patterns, Implementation, Delivery",
   "main": "src/index.js",
   "bin": {
@@ -40,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/rapid-method/rapid-method/issues"
   },
-  "homepage": "https://github.com/rapid-method/rapid-method#readme"
+  "homepage": "https://github.com/rapid-method/rapid-method#readme",
+  "dependencies": {
+    "prompts": "^2.4.2"
+  }
 }

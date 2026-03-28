@@ -2,85 +2,140 @@
 
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
+const prompts = require('prompts');
+
+// Customize prompts symbols
+try {
+  const promptsStyle = require('prompts/lib/util/style');
+  promptsStyle.symbol = (done, aborted, exited) => {
+    if (aborted) return '\x1b[31m■\x1b[0m ';
+    if (exited) return '\x1b[33m■\x1b[0m ';
+    if (done) return '◇ ';
+    return '◇ ';
+  };
+  promptsStyle.delimiter = () => '';
+} catch {}
 
 const COLORS = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
+  dim: '\x1b[2m',
   green: '\x1b[32m',
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
   cyan: '\x1b[36m',
   red: '\x1b[31m',
+  magenta: '\x1b[35m',
 };
+
+const bar = '│';
+const finishBar = '└';
+const div = '━';
 
 function color(text, colorName) {
   return `${COLORS[colorName]}${text}${COLORS.reset}`;
 }
 
-function print(text) {
+function print(text = '') {
   console.log(text);
 }
 
+function getSystemUserName() {
+  return process.env.USER || process.env.USERNAME || process.env.LOGNAME || '';
+}
+
+function getVersion() {
+  try {
+    const pkgPath = path.join(__dirname, '..', 'package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+    return pkg.version;
+  } catch {
+    return '1.0.0';
+  }
+}
+
 function printHeader() {
-  print('');
-  print(color('╔══════════════════════════════════════════════════════════╗', 'cyan'));
-  print(color('║                                                          ║', 'cyan'));
-  print(color('║   ██████╗  █████╗ ██████╗ ██╗██████╗                     ║', 'cyan'));
-  print(color('║   ██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗                    ║', 'cyan'));
-  print(color('║   ██████╔╝███████║██████╔╝██║██║  ██║                    ║', 'cyan'));
-  print(color('║   ██╔══██╗██╔══██║██╔═══╝ ██║██║  ██║                    ║', 'cyan'));
-  print(color('║   ██║  ██║██║  ██║██║     ██║██████╔╝                    ║', 'cyan'));
-  print(color('║   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝                     ║', 'cyan'));
-  print(color('║                                                          ║', 'cyan'));
-  print(color('║   Requirements · Architecture · Patterns                 ║', 'cyan'));
-  print(color('║   Implementation · Delivery                              ║', 'cyan'));
-  print(color('║                                                          ║', 'cyan'));
-  print(color('╚══════════════════════════════════════════════════════════╝', 'cyan'));
-  print('');
+  const version = `v${getVersion()}`;
+  const width = process.stdout.columns || 80;
+  const prefix = bar + '  ';
+  const boxWidth = width - 3;
+
+  const logo = [
+    '██████╗  █████╗ ██████╗ ██╗██████╗ ',
+    '██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗',
+    '██████╔╝███████║██████╔╝██║██║  ██║',
+    '██╔══██╗██╔══██║██╔═══╝ ██║██║  ██║',
+    '██║  ██║██║  ██║██║     ██║██████╔╝',
+    '╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ',
+  ];
+
+  const tagline = 'Requirements · Architecture · Patterns · Implementation · Delivery';
+
+  const centerPad = (str, totalWidth) => {
+    const pad = Math.max(0, Math.floor((totalWidth - str.length) / 2));
+    return ' '.repeat(pad) + str;
+  };
+
+  const fillLine = (content, totalWidth) => {
+    const contentLen = content.replace(/\x1b\[[0-9;]*m/g, '').length;
+    const rightPad = Math.max(0, totalWidth - contentLen - 2);
+    return color('║', 'blue') + content + ' '.repeat(rightPad) + color('║', 'blue');
+  };
+
+  // Top border with version inside
+  const versionLabel = ` ${version} `;
+  const leftEquals = 2;
+  const rightEquals = Math.max(0, boxWidth - 2 - leftEquals - versionLabel.length);
+  print(prefix + color('╔' + '═'.repeat(leftEquals) + versionLabel + '═'.repeat(rightEquals) + '╗', 'blue'));
+
+  // Empty line
+  print(prefix + fillLine('', boxWidth));
+
+  // Logo centered
+  for (const line of logo) {
+    const centered = centerPad(line, boxWidth - 2);
+    print(prefix + color('║', 'blue') + color(centered, 'blue') + ' '.repeat(Math.max(0, boxWidth - 2 - centered.length)) + color('║', 'blue'));
+  }
+
+  // Empty line
+  print(prefix + fillLine('', boxWidth));
+
+  // Tagline centered
+  const taglineCentered = centerPad(tagline, boxWidth - 2);
+  print(prefix + color('║', 'blue') + color(taglineCentered, 'dim') + ' '.repeat(Math.max(0, boxWidth - 2 - taglineCentered.length)) + color('║', 'blue'));
+
+  // Empty line
+  print(prefix + fillLine('', boxWidth));
+
+  // Bottom border
+  print(prefix + color('╚' + '═'.repeat(boxWidth - 2) + '╝', 'blue'));
+
+  print(bar);
+}
+
+function printDiv() {
+  const width = process.stdout.columns || 80;
+  const boxWidth = width - 3;
+
+  const prefix = bar + '  ';
+
+  print(prefix + div.repeat(boxWidth));
 }
 
 function printHelp() {
-  print('');
-  print(color('RAPID', 'bright') + ' - AI-assisted development methodology for Claude Code');
-  print('');
+  print(bar);
+  print(color('RAPID', 'bright') + ' - A lean methodology for AI-driven development');
+  print(bar);
   print(color('Usage:', 'yellow'));
   print('  npx rapid-method <command>');
-  print('');
+  print(bar);
   print(color('Commands:', 'yellow'));
   print('  install     Install RAPID in current project');
   print('  help        Show this help message');
-  print('');
+  print(bar);
   print(color('Example:', 'yellow'));
   print('  npx rapid-method install');
-  print('');
-}
-
-async function ask(rl, question, defaultValue = '') {
-  return new Promise((resolve) => {
-    const defaultText = defaultValue ? color(` (${defaultValue})`, 'yellow') : '';
-    rl.question(`${color('?', 'green')} ${question}${defaultText}: `, (answer) => {
-      resolve(answer.trim() || defaultValue);
-    });
-  });
-}
-
-async function askChoice(rl, question, options) {
-  print(`\n${color('?', 'green')} ${question}`);
-  options.forEach((opt, i) => {
-    print(`  ${color(`[${i + 1}]`, 'cyan')} ${opt.label} - ${color(opt.description, 'yellow')}`);
-  });
-
-  return new Promise((resolve) => {
-    rl.question(`${color('>', 'green')} Choose (1-${options.length}): `, (answer) => {
-      const index = parseInt(answer) - 1;
-      if (index >= 0 && index < options.length) {
-        resolve(options[index].value);
-      } else {
-        resolve(options[0].value);
-      }
-    });
-  });
+  print(bar);
 }
 
 function copyDir(src, dest) {
@@ -103,67 +158,121 @@ function copyDir(src, dest) {
 }
 
 async function install() {
-  const targetDir = process.cwd();
   const templatesDir = path.join(__dirname, '..', 'templates');
 
   printHeader();
 
-  print(color('Welcome to RAPID!', 'bright'));
-  print('A lean AI-assisted development methodology for Claude Code.\n');
+  printDiv();
+  print(bar);
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+  // Handle cancellation
+  const onCancel = () => {
+    print(bar);
+    print(`${finishBar}  ${color('Installation cancelled.', 'red')}`);
+    process.exit(0);
+  };
 
-  try {
-    // Collect user information
-    print(color('── User Configuration ──', 'blue'));
-    const userName = await ask(rl, 'Your name');
+  // Installation directory
+  const { targetDir } = await prompts({
+    type: 'text',
+    name: 'targetDir',
+    message: 'Installation directory:',
+    initial: process.cwd(),
+  }, { onCancel });
 
-    const language = await askChoice(rl, 'Preferred communication language', [
-      { label: 'English', description: 'AI communicates in English', value: 'English' },
-      { label: 'Português', description: 'AI comunica em Português', value: 'Portuguese' },
-      { label: 'Español', description: 'AI comunica en Español', value: 'Spanish' },
-    ]);
+  const dirExists = fs.existsSync(targetDir);
+  const isEmpty = dirExists && fs.readdirSync(targetDir).filter(f => !f.startsWith('.')).length === 0;
 
-    const skillLevel = await askChoice(rl, 'Your skill level', [
-      { label: 'Beginner', description: 'More detailed explanations', value: 'beginner' },
-      { label: 'Intermediate', description: 'Balanced explanations', value: 'intermediate' },
-      { label: 'Advanced', description: 'Concise, technical responses', value: 'advanced' },
-      { label: 'Expert', description: 'Minimal explanations', value: 'expert' },
-    ]);
+  print(bar);
 
-    // Project configuration
-    print(color('\n── Project Configuration ──', 'blue'));
-    const projectName = await ask(rl, 'Project name', path.basename(targetDir));
+  print(`${color('●', 'blue')}  Resolved installation path: ${color(targetDir, 'cyan')}`);
+  if (dirExists) {
+    print(`${bar}  Directory exists${isEmpty ? ' and is empty' : ''}`);
+  }
+  print(bar);
 
-    print('\n' + color('Installing RAPID...', 'cyan'));
+  const { shouldInstall } = await prompts({
+    type: 'toggle',
+    name: 'shouldInstall',
+    message: 'Install to this directory?',
+    initial: true,
+    active: 'Yes',
+    inactive: 'No',
+  }, { onCancel });
 
-    // Create directories
-    const rapidDir = path.join(targetDir, '_rapid');
-    const skillsDir = path.join(targetDir, '.claude', 'skills');
+  if (!shouldInstall) {
+    print(bar);
+    print(color('Installation cancelled.', 'yellow'));
+    return;
+  }
 
-    fs.mkdirSync(rapidDir, { recursive: true });
-    fs.mkdirSync(path.join(rapidDir, 'output', 'prd'), { recursive: true });
-    fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
-    fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
-    fs.mkdirSync(skillsDir, { recursive: true });
+  print(bar);
+  printDiv();
+  print(bar);
+  
+  print(color('◆', 'magenta') + color('  Configuring RAPID Core', 'bright'));
+  print(bar);
 
-    // Copy templates
-    const rapidTemplatesDir = path.join(templatesDir, 'rapid', 'templates');
-    if (fs.existsSync(rapidTemplatesDir)) {
-      copyDir(rapidTemplatesDir, path.join(rapidDir, 'templates'));
-    }
+  const defaultUserName = getSystemUserName();
 
-    // Copy skills
-    const skillsTemplatesDir = path.join(templatesDir, 'skills');
-    if (fs.existsSync(skillsTemplatesDir)) {
-      copyDir(skillsTemplatesDir, skillsDir);
-    }
+  const { userName } = await prompts({
+    type: 'text',
+    name: 'userName',
+    message: 'What should agents call you?',
+    initial: defaultUserName,
+  }, { onCancel });
 
-    // Create config.yaml with user settings
-    const config = `# RAPID Methodology Configuration
+  print(`${color('◇', 'cyan')} What language should agents use when chatting with you?`);
+  const { communicationLanguage } = await prompts({
+    type: 'text',
+    name: 'communicationLanguage',
+    message: '',
+    initial: 'English',
+  }, { onCancel });
+
+  print(`${color('◇', 'cyan')} Preferred document output language?`);
+  const { documentLanguage } = await prompts({
+    type: 'text',
+    name: 'documentLanguage',
+    message: '',
+    initial: 'English',
+  }, { onCancel });
+
+  print(`${color('◇', 'cyan')} Project name?`);
+  const { projectName } = await prompts({
+    type: 'text',
+    name: 'projectName',
+    message: '',
+    initial: path.basename(targetDir),
+  }, { onCancel });
+
+  print(bar);
+  print(`${color('●', 'blue')} Installing RAPID...`);
+
+  // Create directories
+  const rapidDir = path.join(targetDir, '_rapid');
+  const skillsDir = path.join(targetDir, '.claude', 'skills');
+
+  fs.mkdirSync(rapidDir, { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'output', 'prd'), { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
+  fs.mkdirSync(skillsDir, { recursive: true });
+
+  // Copy templates
+  const rapidTemplatesDir = path.join(templatesDir, 'rapid', 'templates');
+  if (fs.existsSync(rapidTemplatesDir)) {
+    copyDir(rapidTemplatesDir, path.join(rapidDir, 'templates'));
+  }
+
+  // Copy skills
+  const skillsTemplatesDir = path.join(templatesDir, 'skills');
+  if (fs.existsSync(skillsTemplatesDir)) {
+    copyDir(skillsTemplatesDir, skillsDir);
+  }
+
+  // Create config.yaml
+  const config = `# RAPID Methodology Configuration
 # ================================
 
 # Project
@@ -172,9 +281,8 @@ project_version: "1.0.0"
 
 # User
 user_name: "${userName}"
-communication_language: "${language}"
-document_language: "English"
-user_skill_level: "${skillLevel}"
+communication_language: "${communicationLanguage}"
+document_language: "${documentLanguage}"
 
 # Paths
 output_folder: "{project-root}/_rapid/output"
@@ -203,31 +311,20 @@ spec_warning_threshold: 1200
 initialized: true
 `;
 
-    fs.writeFileSync(path.join(rapidDir, 'config.yaml'), config);
+  fs.writeFileSync(path.join(rapidDir, 'config.yaml'), config);
 
-    print(color('\n✓ RAPID installed successfully!\n', 'green'));
+  print(`${color('│', 'dim')} Created ${color('_rapid/', 'cyan')}`);
+  print(`${color('│', 'dim')} Created ${color('.claude/skills/', 'cyan')}`);
+  print(bar);
+  print(`${color('●', 'green')} ${color('RAPID installed successfully!', 'green')}`);
 
-    print(color('── Structure Created ──', 'blue'));
-    print(`  ${color('_rapid/', 'cyan')}`);
-    print(`    ├── config.yaml`);
-    print(`    ├── templates/`);
-    print(`    └── output/`);
-    print(`  ${color('.claude/skills/', 'cyan')}`);
-    print(`    ├── rapid-quick-dev/`);
-    print(`    ├── rapid-create-prd/`);
-    print(`    ├── rapid-create-context/`);
-    print(`    ├── rapid-create-patterns/`);
-    print(`    └── rapid-help/`);
-
-    print(color('\n── Next Steps ──', 'blue'));
-    print(`  1. ${color('rapid create-context', 'cyan')} - Document your project context`);
-    print(`  2. ${color('rapid create-patterns', 'cyan')} - Define coding patterns`);
-    print(`  3. ${color('rapid quick-dev "task"', 'cyan')} - Start developing!`);
-    print('');
-
-  } finally {
-    rl.close();
-  }
+  print(bar);
+  print(color('◆', 'magenta') + color(' Next Steps', 'bright'));
+  print(bar);
+  print(`${color('│', 'dim')} ${color('rapid create-context', 'cyan')}  - Document your project context`);
+  print(`${color('│', 'dim')} ${color('rapid create-patterns', 'cyan')} - Define coding patterns`);
+  print(`${color('│', 'dim')} ${color('rapid quick-dev', 'cyan')}       - Start developing`);
+  print(finishBar);
 }
 
 // Main
