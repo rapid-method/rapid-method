@@ -1,7 +1,7 @@
 {
   "name": "rapid-method",
   "version": "1.0.0",
-  "description": "RAPID - Requirements, Architecture, Patterns, Implementation, Delivery. A lean AI-assisted development methodology for Claude Code.",
+  "description": "RAPID - Requirements, Architecture, Patterns, Implementation, Delivery",
   "main": "src/index.js",
   "bin": {
     "rapid-method": "./src/cli.js"
@@ -10,17 +10,21 @@
     "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [
-    "claude",
-    "claude-code",
     "ai",
+    "ai-driven",
     "development",
     "methodology",
     "rapid",
     "prd",
     "tech-spec",
-    "ai-assisted"
+    "ai-assisted",
+    "agile",
+    "developer-tools",
+    "productivity",
+    "automation",
+    "llm"
   ],
-  "author": "",
+  "author": "rapid-method",
   "license": "MIT",
   "files": [
     "src/",
@@ -31,6 +35,10 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
-  }
+    "url": "git+https://github.com/rapid-method/rapid-method.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rapid-method/rapid-method/issues"
+  },
+  "homepage": "https://github.com/rapid-method/rapid-method#readme"
 }

@@ -2,7 +2,7 @@
 
 **R**equirements · **A**rchitecture · **P**atterns · **I**mplementation · **D**elivery
 
-A lean AI-assisted development methodology for [Claude Code](https://claude.ai/code).
+A lean methodology for AI-driven development.
 
 ## Installation
 
@@ -13,11 +13,11 @@ npx rapid-method install
 This will:
 1. Ask for your preferences (name, language, skill level)
 2. Configure the project
-3. Install RAPID skills for Claude Code
+3. Install RAPID skills and templates
 
 ## Usage
 
-After installation, use these commands in Claude Code:
+After installation, use these commands:
 
 | Command | Description |
 |---------|-------------|
