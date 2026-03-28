@@ -45,17 +45,17 @@ rapid quick-dev "add user authentication"
 
 ```
 ┌─────────────────────────────────────────────────┐
-│              RAPID Quick Dev                     │
+│              RAPID Quick Dev                    │
 ├─────────────────────────────────────────────────┤
-│                                                  │
-│  1. Clarify intent                               │
+│                                                 │
+│  1. Clarify intent                              │
 │  2. Create feature branch (feature/fix/chore)   │
 │  3. Write tech spec (with approval)             │
 │  4. Implement following spec                    │
 │  5. Review and commit                           │
-│                                                  │
+│                                                 │
 │  Simple changes? → One-shot fast path           │
-│                                                  │
+│                                                 │
 └─────────────────────────────────────────────────┘
 ```
 
