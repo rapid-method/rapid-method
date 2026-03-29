@@ -83,3 +83,7 @@ Update when:
 - Team adopts new conventions
 - Problems with current patterns
 - New tech introduced
+
+## Next Steps
+- `rapid create-brief` — Create product brief
+- `rapid create-spec` — Create tech spec for a task

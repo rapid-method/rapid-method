@@ -331,7 +331,7 @@ async function install() {
   const skillsDir = path.join(targetDir, '.claude', 'skills');
 
   fs.mkdirSync(rapidDir, { recursive: true });
-  fs.mkdirSync(path.join(rapidDir, 'output', 'prd'), { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'output', 'briefs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
   fs.mkdirSync(skillsDir, { recursive: true });
@@ -363,9 +363,9 @@ document_language: "${documentLanguage}"
 
 # Paths
 output_folder: "{project-root}/_rapid/output"
-prd_folder: "{project-root}/_rapid/output/prd"
+briefs_folder: "{project-root}/_rapid/output/briefs"
 specs_folder: "{project-root}/_rapid/output/specs"
-project_context: "{project-root}/_rapid/project-context.md"
+project_architecture: "{project-root}/_rapid/project-architecture.md"
 project_patterns: "{project-root}/_rapid/project-patterns.md"
 templates_folder: "{project-root}/_rapid/templates"
 

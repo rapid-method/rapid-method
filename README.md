@@ -17,7 +17,7 @@ Most AI coding tools let you throw prompts at code and hope for the best. RAPID 
 - **Smart Routing** — Automatically chooses between full spec workflow and one-shot fast path based on complexity
 - **Self-Review** — AI reviews its own code against spec, classifying findings as intent gaps, patches, or noise
 - **Project Context Aware** — Loads your architecture, tech stack, and coding patterns into every workflow
-- **Complete Lifecycle** — From PRD to implementation, review, and commit
+- **Complete Lifecycle** — From product brief to implementation, review, and commit
 
 ## Quick Start
 
@@ -35,32 +35,26 @@ Follow the interactive prompts to configure your project name, language preferen
 
 After installation, use these skills in your AI IDE:
 
+### Setup Skills
+
 | Skill | Description |
 |-------|-------------|
-| `rapid quick-dev "task"` | Main workflow: Clarify → Branch → Spec → Implement → Review |
-| `rapid create-prd` | Create a Product Requirements Document |
-| `rapid create-context` | Document your project architecture for AI awareness |
+| `rapid create-brief` | Create Product Brief (requirements) |
+| `rapid create-architecture` | Document project architecture |
 | `rapid create-patterns` | Define coding patterns and standards |
+
+### Development Skills
+
+| Skill | Description |
+|-------|-------------|
+| `rapid create-spec` | Create tech spec (clarify + investigate + write + approve) |
+| `rapid dev` | Implement approved spec (branch + code + AI review + human review) |
+| `rapid oneshot` | Fast path for simple, isolated changes |
 | `rapid help` | Get guidance on what to do next |
 
 ## How It Works
 
-```
-rapid quick-dev "add user authentication"
-
-  Step 1 — CLARIFY     Understand intent, create branch
-  Step 2 — SPEC        Investigate codebase, write tech spec
-         — APPROVE     You review and approve the plan  ← human gate
-  Step 3 — IMPLEMENT   Execute tasks following the spec
-  Step 4 — REVIEW      Self-review, classify findings, present results
-         — DECIDE      Commit, create PR, review diff, or discard
-
-  Simple change? → ONE-SHOT fast path (skip spec)
-```
-
-Each step has a defined purpose, inputs/outputs, and rules. The spec's Intent and Boundaries are **frozen** after approval to prevent scope creep during implementation.
-
-For a deep dive into each step, routing logic, frozen sections, and the self-review classification system, see the **[full workflow documentation](docs/workflow.md)**. A visual diagram is also available as an **[Excalidraw file](docs/workflow.excalidraw)**.
+See the **[full workflow documentation](docs/workflow.md)** for the complete flow, routing logic, and self-review classification system.
 
 ## Philosophy
 

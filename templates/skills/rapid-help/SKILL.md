@@ -13,7 +13,7 @@ Get help with RAPID methodology.
 
 **R**equirements · **A**rchitecture · **P**atterns · **I**mplementation · **D**elivery
 
-Lean AI-assisted development for Claude Code.
+Lean, spec-driven methodology for AI-assisted development.
 
 ---
 
@@ -21,44 +21,58 @@ Lean AI-assisted development for Claude Code.
 
 | Command | Description |
 |---------|-------------|
-| `rapid quick-dev` | Main workflow: Branch → Spec → Implement |
-| `rapid create-prd` | Create Product Requirements Document |
-| `rapid create-context` | Document project context |
+| `rapid create-brief` | Create Product Brief (requirements) |
+| `rapid create-architecture` | Document project architecture |
 | `rapid create-patterns` | Define coding patterns |
+| `rapid create-spec` | Create tech spec for a task |
+| `rapid dev` | Implement an approved spec |
+| `rapid oneshot` | Fast path for simple changes |
 | `rapid help` | Show this help |
 
 ---
 
-## Quick Start
+## Getting Started
 
-1. **Setup knowledge** (recommended)
-   ```
-   rapid create-context
-   rapid create-patterns
-   ```
+### New project (no code yet)
+```
+1. rapid create-brief         ← define what you're building
+2. rapid create-architecture  ← plan the architecture
+3. rapid create-patterns      ← set coding standards
+```
 
-2. **Start developing**
-   ```
-   rapid quick-dev "add user authentication"
-   ```
+### Existing project
+```
+1. rapid create-architecture  ← document what exists
+2. rapid create-patterns      ← capture current patterns
+3. rapid create-brief         ← define next feature
+```
 
 ---
 
-## Workflow
+## Development Workflow
 
 ```
-PRD (once) ─────────────────────┐
-Context (once) ──────────────┐  │
-Patterns (once) ──────────┐  │  │
-                          │  │  │
-┌─────────────────────────┴──┴──┴─┐
-│        rapid quick-dev          │
-│                                 │
-│  Clarify → Branch → Spec →      │
-│  Implement → Review             │
-│                                 │
-│  (repeats per task)             │
-└─────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│            RAPID Dev Flow                │
+├──────────────────────────────────────────┤
+│                                          │
+│  rapid create-spec                       │
+│    Clarify → Investigate → Write Spec    │
+│    → Self-Review → User Approval         │
+│                                          │
+│  rapid dev                               │
+│    Branch → Implement + AI Review        │
+│    → Human Code Review → Commit          │
+│                                          │
+│  (repeats per task)                      │
+├──────────────────────────────────────────┤
+│                                          │
+│  rapid oneshot                           │
+│    Clarify → Branch → Implement          │
+│    → Verify → Commit                     │
+│                                          │
+│  (for simple, isolated changes)          │
+└──────────────────────────────────────────┘
 ```
 
 ---
@@ -68,11 +82,11 @@ Patterns (once) ──────────┐  │  │
 ```
 _rapid/
 ├── config.yaml
-├── project-context.md
+├── project-architecture.md
 ├── project-patterns.md
 ├── templates/
 └── output/
-    ├── prd/
+    ├── briefs/
     └── specs/
 ```
 
@@ -81,8 +95,9 @@ _rapid/
 ## Tips
 
 - Keep specs focused (900-1600 tokens)
-- Update context/patterns when project evolves
-- Use one-shot for simple changes
+- Update architecture/patterns when project evolves
+- Use `rapid oneshot` for simple, isolated changes
+- Use `rapid create-spec` + `rapid dev` for everything else
 - Review suggested order after implementation
 
 ---
