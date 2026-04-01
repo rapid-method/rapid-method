@@ -9,7 +9,7 @@ Main development workflow: Branch → Implement + AI Review → Human Review.
 ## Prerequisites
 1. Load `_rapid/config.yaml`
 2. Load `_rapid/project-architecture.md` if exists
-3. Load `_rapid/project-patterns.md` if exists
+3. Load all rules from `_rapid/rules/*.md` if exists
 4. Communicate in `{communication_language}` from config
 5. **An approved spec must exist** with status `ready-for-dev`
 

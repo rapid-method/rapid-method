@@ -27,9 +27,26 @@ Most AI coding tools let you throw prompts at code and hope for the best. RAPID 
 npx rapid-method install
 ```
 
-Follow the interactive prompts to configure your project name, language preferences, and output paths. Then open your AI IDE (Claude Code, Cursor, etc.) in your project folder.
+Follow the interactive prompts to configure your project name, language preferences, and select your AI platforms. Then open your AI IDE in your project folder.
 
 > **Not sure what to do next?** Use `rapid help` — it guides you through the methodology step by step.
+
+## Supported Platforms
+
+RAPID works with multiple AI development environments. During installation, select the platforms you use:
+
+| Platform | Category | Description |
+|----------|----------|-------------|
+| Claude Code | CLI | Anthropic's official CLI for Claude |
+| Cursor | IDE | AI-first code editor |
+| Windsurf | IDE | AI-powered IDE with cascade flows |
+| Cline | IDE | AI coding assistant |
+| Gemini CLI | CLI | Google's CLI for Gemini |
+| Antigravity | IDE | Google's AI development environment |
+| Codex | CLI | OpenAI Codex integration |
+| Llama | CLI | Meta's Llama AI assistant |
+
+Skills are installed in platform-specific directories (e.g., `.claude/skills/`, `.cursor/skills/`).
 
 ## Usage
 

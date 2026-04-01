@@ -16,7 +16,7 @@ Store as `baseline_commit` in spec.
 For each task in the spec:
 1. Read frozen sections (Intent, Boundaries) — stay aligned
 2. Implement following the task description
-3. Follow `project-patterns.md` conventions
+3. Follow rules from `_rapid/rules/` conventions
 4. Mark task `[x]`
 5. Verify acceptance criteria as you go
 

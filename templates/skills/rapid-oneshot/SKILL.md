@@ -9,7 +9,7 @@ Fast path for simple, isolated changes. Skips the spec process for truly trivial
 ## Prerequisites
 - Load `_rapid/config.yaml`
 - Load `_rapid/project-architecture.md` if exists
-- Load `_rapid/project-patterns.md` if exists
+- Load all rules from `_rapid/rules/*.md` if exists
 - Communicate in `{communication_language}`
 
 ## Workflow

@@ -13,7 +13,12 @@ Create a Product Brief — the single requirements document for your project or 
 - Communicate in `{communication_language}`
 - Output in `{document_language}`
 
-### 2. Interactive Discovery
+### 2. Detect Context
+- Check if this is an existing project or new project
+- **Existing project**: Check if `_rapid/project-architecture.md` exists
+- **New project**: No architecture file exists
+
+### 3. Interactive Discovery
 
 Guide user through each section:
 
@@ -40,12 +45,44 @@ Guide user through each section:
 **ACCEPTANCE CRITERIA** (required):
 1. Define Given/When/Then scenarios for each must-have feature
 
-### 3. Create Brief
+### 4. New Project: Technical Foundation
+
+**Only for new projects** (no existing architecture):
+
+After the brief, guide user through initial technical decisions:
+
+**TECH STACK**:
+1. What programming language(s)?
+2. What framework(s)?
+3. What database (if any)?
+4. What key libraries/dependencies?
+
+**INITIAL ARCHITECTURE**:
+1. What's the high-level structure? (monolith, modular, microservices)
+2. What are the main components/modules?
+3. Any external integrations?
+
+**CODING RULES** (create initial rules in `_rapid/rules/`):
+1. Code style preferences? (indentation, quotes, semicolons)
+2. Naming conventions? (files, variables, functions)
+3. Any specific patterns to follow?
+4. Testing approach?
+5. Git workflow? (branch naming, commit format)
+
+Generate initial rule files:
+- `_rapid/rules/code-style.md`
+- `_rapid/rules/naming.md`
+- `_rapid/rules/architecture.md`
+- `_rapid/rules/git.md`
+
+Generate architecture: `_rapid/project-architecture.md`
+
+### 5. Create Brief
 
 Use template: `_rapid/templates/product-brief-template.md`
 Save to: `_rapid/output/briefs/brief-{slug}-{date}.md`
 
-### 4. Review
+### 6. Review
 
 Present draft:
 ```
@@ -65,7 +102,9 @@ Present draft:
 ## Output
 - Brief file created
 - Status: `approved`
+- For new projects: Architecture and initial rules created
 
 ## Next Steps
-- `rapid create-architecture` — Document project architecture
-- `rapid create-patterns` — Define coding patterns
+- **Existing project**: `rapid project-scan` — Scan and document project
+- **New project**: `rapid create-spec` — Create spec for first task
+- `rapid create-rule` — Add or modify coding rules

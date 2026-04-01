@@ -416,6 +416,7 @@ async function install() {
   fs.mkdirSync(path.join(rapidDir, 'output', 'briefs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'rules'), { recursive: true });
 
   // Copy templates
   const rapidTemplatesDir = path.join(templatesDir, 'rapid', 'templates');
@@ -491,7 +492,7 @@ output_folder: "{project-root}/_rapid/output"
 briefs_folder: "{project-root}/_rapid/output/briefs"
 specs_folder: "{project-root}/_rapid/output/specs"
 project_architecture: "{project-root}/_rapid/project-architecture.md"
-project_patterns: "{project-root}/_rapid/project-patterns.md"
+rules_folder: "{project-root}/_rapid/rules"
 templates_folder: "{project-root}/_rapid/templates"
 
 # Workflow

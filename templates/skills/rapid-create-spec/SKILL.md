@@ -9,7 +9,7 @@ Create a technical specification for a task. The spec is the contract between in
 ## Prerequisites
 - Load `_rapid/config.yaml`
 - Load `_rapid/project-architecture.md` if exists
-- Load `_rapid/project-patterns.md` if exists
+- Load all rules from `_rapid/rules/*.md` if exists
 - Communicate in `{communication_language}`
 
 ## Workflow
@@ -60,7 +60,7 @@ Found spec in progress:
 a) **Check for planning docs:**
 - `_rapid/output/briefs/` - related product briefs
 - `_rapid/project-architecture.md` - system structure
-- `_rapid/project-patterns.md` - conventions
+- `_rapid/rules/` - coding rules and conventions
 
 b) **Search for relevant code:**
 - Files/classes/functions mentioned by user

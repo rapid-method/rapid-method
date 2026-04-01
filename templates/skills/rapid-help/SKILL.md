@@ -22,8 +22,8 @@ Lean, spec-driven methodology for AI-assisted development.
 | Command | Description |
 |---------|-------------|
 | `rapid create-brief` | Create Product Brief (requirements) |
-| `rapid create-architecture` | Document project architecture |
-| `rapid create-patterns` | Define coding patterns |
+| `rapid project-scan` | Scan existing project (architecture + rules) |
+| `rapid create-rule` | Add or update coding rules |
 | `rapid create-spec` | Create tech spec for a task |
 | `rapid dev` | Implement an approved spec |
 | `rapid oneshot` | Fast path for simple changes |
@@ -35,16 +35,19 @@ Lean, spec-driven methodology for AI-assisted development.
 
 ### New project (no code yet)
 ```
-1. rapid create-brief         ← define what you're building
-2. rapid create-architecture  ← plan the architecture
-3. rapid create-patterns      ← set coding standards
+1. rapid create-brief    ← define what you're building
+                           (includes tech stack & initial rules)
+2. rapid create-spec     ← create spec for first task
+3. rapid dev             ← implement
 ```
 
 ### Existing project
 ```
-1. rapid create-architecture  ← document what exists
-2. rapid create-patterns      ← capture current patterns
-3. rapid create-brief         ← define next feature
+1. rapid project-scan    ← scan architecture & detect patterns
+                           (creates rules from existing code)
+2. rapid create-brief    ← define next feature
+3. rapid create-spec     ← create spec for task
+4. rapid dev             ← implement
 ```
 
 ---
@@ -83,7 +86,14 @@ Lean, spec-driven methodology for AI-assisted development.
 _rapid/
 ├── config.yaml
 ├── project-architecture.md
-├── project-patterns.md
+├── rules/
+│   ├── code-style.md
+│   ├── naming.md
+│   ├── architecture.md
+│   ├── error-handling.md
+│   ├── api.md
+│   ├── testing.md
+│   └── git.md
 ├── templates/
 └── output/
     ├── briefs/
@@ -95,10 +105,10 @@ _rapid/
 ## Tips
 
 - Keep specs focused (900-1600 tokens)
-- Update architecture/patterns when project evolves
+- Use `rapid create-rule` to add new coding standards
+- Use `rapid project-scan --update` when project evolves
 - Use `rapid oneshot` for simple, isolated changes
 - Use `rapid create-spec` + `rapid dev` for everything else
-- Review suggested order after implementation
 
 ---
 
