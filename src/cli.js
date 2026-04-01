@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const prompts = require('prompts');
+const { getPlatforms, getTargetDir, transformSkillForPlatform } = require('./lib/platforms');
 
 // Customize prompts symbols
 try {
@@ -80,6 +81,39 @@ try {
         display = '\x1b[7m \x1b[27m';
       }
       this.outputText = `\x1b[36m◆\x1b[0m  ${this.msg}\n│  ${display}\n│`;
+    }
+
+    this.out.write(ansiErase.line + ansiCursor.to(0) + this.outputText);
+  };
+} catch {}
+
+// Customize multiselect prompt: clack-style
+try {
+  const MultiselectPrompt = require('prompts/lib/elements/multiselect');
+  const { cursor: ansiCursor, erase: ansiErase } = require('sisteransi');
+  const clearPrompt = require('prompts/lib/util/clear');
+
+  MultiselectPrompt.prototype.render = function () {
+    if (this.closed) return;
+    if (this.firstRender) this.out.write(ansiCursor.hide);
+    else this.out.write(clearPrompt(this.outputText, this.out.columns));
+    if (this.firstRender) this.firstRender = false;
+
+    if (this.done || this.aborted) {
+      const sym = this.aborted ? '\x1b[31m■\x1b[0m' : '\x1b[36m◇\x1b[0m';
+      const selected = this.value.filter(v => v.selected).map(v => v.title).join(', ');
+      this.outputText = `${sym}  ${this.msg}\n│  ${selected || 'None selected'}`;
+    } else {
+      let lines = [`\x1b[36m◆\x1b[0m  ${this.msg}`, `│  \x1b[2m(Space to select, Enter to confirm)\x1b[0m`];
+      for (let i = 0; i < this.value.length; i++) {
+        const v = this.value[i];
+        const selected = v.selected ? '\x1b[32m◼\x1b[0m' : '\x1b[2m◻\x1b[0m';
+        const cursor = i === this.cursor ? '\x1b[36m>\x1b[0m ' : '  ';
+        const hint = v.description ? ` \x1b[2m- ${v.description}\x1b[0m` : '';
+        lines.push(`│  ${cursor}${selected} ${v.title}${hint}`);
+      }
+      lines.push('└');
+      this.outputText = lines.join('\n');
     }
 
     this.out.write(ansiErase.line + ansiCursor.to(0) + this.outputText);
@@ -280,7 +314,7 @@ async function install() {
   print(bar);
   printDiv();
   print(bar);
-  
+
   print(color('◆', 'magenta') + color('  Configuring RAPID Core', 'bright'));
   print(bar);
 
@@ -324,17 +358,64 @@ async function install() {
   printDiv();
   print(bar);
 
+  print(color('◆', 'magenta') + color('  Select AI Platforms', 'bright'));
+  print(bar);
+
+  // Build platform choices (none pre-selected)
+  const platforms = getPlatforms();
+  const platformChoices = Object.entries(platforms).map(([code, platform]) => ({
+    title: platform.name,
+    value: code,
+    description: platform.description,
+    selected: false
+  }));
+
+  let selectedPlatforms = await promptPlatformSelection(platformChoices, onCancel);
+
+  async function promptPlatformSelection(choices, onCancel) {
+    const { selected } = await prompts({
+      type: 'multiselect',
+      name: 'selected',
+      message: 'Which AI platforms do you want to use?',
+      choices: choices,
+      hint: '- Space to select. Return to submit'
+    }, { onCancel });
+
+    if (!selected || selected.length === 0) {
+      print(bar);
+      const { confirmNoTools } = await prompts({
+        type: 'toggle',
+        name: 'confirmNoTools',
+        message: 'No platforms selected. Continue without installing skills?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No',
+      }, { onCancel });
+
+      if (!confirmNoTools) {
+        print(bar);
+        return promptPlatformSelection(choices, onCancel);
+      }
+
+      return [];
+    }
+
+    return selected;
+  }
+
+  print(bar);
+  printDiv();
+  print(bar);
+
   print(`${color('●', 'blue')}  Installing RAPID...`);
 
   // Create directories
   const rapidDir = path.join(targetDir, '_rapid');
-  const skillsDir = path.join(targetDir, '.claude', 'skills');
 
   fs.mkdirSync(rapidDir, { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'briefs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
-  fs.mkdirSync(skillsDir, { recursive: true });
 
   // Copy templates
   const rapidTemplatesDir = path.join(templatesDir, 'rapid', 'templates');
@@ -342,13 +423,53 @@ async function install() {
     copyDir(rapidTemplatesDir, path.join(rapidDir, 'templates'));
   }
 
-  // Copy skills
+  // Install skills for each selected platform
   const skillsTemplatesDir = path.join(templatesDir, 'skills');
-  if (fs.existsSync(skillsTemplatesDir)) {
-    copyDir(skillsTemplatesDir, skillsDir);
+  const installedPlatforms = [];
+
+  for (const platformCode of selectedPlatforms) {
+    const targetSkillsDir = getTargetDir(platformCode);
+    if (!targetSkillsDir) continue;
+
+    const fullTargetDir = path.join(targetDir, targetSkillsDir);
+    fs.mkdirSync(fullTargetDir, { recursive: true });
+
+    if (fs.existsSync(skillsTemplatesDir)) {
+      // Copy and transform skills for this platform
+      const skillFolders = fs.readdirSync(skillsTemplatesDir, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => d.name);
+
+      for (const skillFolder of skillFolders) {
+        const srcSkillDir = path.join(skillsTemplatesDir, skillFolder);
+        const destSkillDir = path.join(fullTargetDir, skillFolder);
+        fs.mkdirSync(destSkillDir, { recursive: true });
+
+        // Copy all files in the skill folder
+        const files = fs.readdirSync(srcSkillDir, { withFileTypes: true });
+        for (const file of files) {
+          if (file.isFile()) {
+            const srcFile = path.join(srcSkillDir, file.name);
+            const destFile = path.join(destSkillDir, file.name);
+
+            // Transform SKILL.md files for the platform
+            if (file.name === 'SKILL.md') {
+              const content = fs.readFileSync(srcFile, 'utf-8');
+              const transformed = transformSkillForPlatform(content, skillFolder, platformCode);
+              fs.writeFileSync(destFile, transformed);
+            } else {
+              fs.copyFileSync(srcFile, destFile);
+            }
+          }
+        }
+      }
+    }
+
+    installedPlatforms.push({ code: platformCode, dir: targetSkillsDir });
   }
 
   // Create config.yaml
+  const platformsList = selectedPlatforms.map(p => `  - ${p}`).join('\n');
   const config = `# RAPID Methodology Configuration
 # ================================
 
@@ -360,6 +481,10 @@ project_version: "1.0.0"
 user_name: "${userName}"
 communication_language: "${communicationLanguage}"
 document_language: "${documentLanguage}"
+
+# Installed Platforms
+platforms:
+${platformsList || '  # none'}
 
 # Paths
 output_folder: "{project-root}/_rapid/output"
@@ -391,8 +516,10 @@ initialized: true
   fs.writeFileSync(path.join(rapidDir, 'config.yaml'), config);
 
   print(`${bar}  Created ${color('_rapid/', 'cyan')}`);
-  print(`${bar}  Created ${color('.claude/skills/', 'cyan')}`);
-  
+  for (const platform of installedPlatforms) {
+    print(`${bar}  Created ${color(platform.dir + '/', 'cyan')} (${platforms[platform.code].name})`);
+  }
+
   print(bar);
   printDiv();
   print(bar);
@@ -407,7 +534,7 @@ initialized: true
   const displayDir = truncate(targetDir, innerWidth - 17);
   const ghUrl = 'https://github.com/rapid-method/rapid-method';
   const displayUrl = truncate(ghUrl, innerWidth - 23);
-  const skillLine = truncate(`Invoke the rapid-help skill in your IDE Agent to get started`, innerWidth - 5);
+  const skillLine = truncate(`Invoke the rapid-help skill in your AI agent to get started`, innerWidth - 5);
 
   const pad = (contentLen) => ' '.repeat(Math.max(0, innerWidth - contentLen));
 

@@ -1,0 +1,121 @@
+# RAPID Platform Codes Configuration
+# Central configuration for all platform/IDE codes supported by RAPID
+#
+# This file defines:
+# 1. Platform metadata (name, preferred status, category, description)
+# 2. Installer configuration (target directories, templates)
+#
+# Format:
+#   code: Platform identifier used internally
+#   name: Display name shown to users
+#   preferred: Whether this platform is shown as a recommended option
+#   category: Type of platform (ide, cli, tool)
+#   description: Brief description of the platform
+#   installer: Installation configuration
+
+platforms:
+  claude-code:
+    name: "Claude Code"
+    preferred: false
+    category: cli
+    description: "Anthropic's official CLI for Claude"
+    installer:
+      target_dir: .claude/skills
+      template_type: default
+      skill_format: true
+
+  antigravity:
+    name: "Google Antigravity"
+    preferred: false
+    category: ide
+    description: "Google's AI development environment"
+    installer:
+      target_dir: .agent/skills
+      template_type: antigravity
+      skill_format: true
+
+  codex:
+    name: "Codex"
+    preferred: false
+    category: cli
+    description: "OpenAI Codex integration"
+    installer:
+      target_dir: .agents/skills
+      template_type: codex
+      skill_format: true
+
+  llama:
+    name: "Llama"
+    preferred: false
+    category: cli
+    description: "Meta's Llama AI assistant"
+    installer:
+      target_dir: .llama/skills
+      template_type: llama
+      skill_format: true
+
+  cursor:
+    name: "Cursor"
+    preferred: false
+    category: ide
+    description: "AI-first code editor"
+    installer:
+      target_dir: .cursor/skills
+      template_type: default
+      skill_format: true
+
+  gemini:
+    name: "Gemini CLI"
+    preferred: false
+    category: cli
+    description: "Google's CLI for Gemini"
+    installer:
+      target_dir: .gemini/skills
+      template_type: default
+      skill_format: true
+
+  windsurf:
+    name: "Windsurf"
+    preferred: false
+    category: ide
+    description: "AI-powered IDE with cascade flows"
+    installer:
+      target_dir: .windsurf/skills
+      template_type: default
+      skill_format: true
+
+  cline:
+    name: "Cline"
+    preferred: false
+    category: ide
+    description: "AI coding assistant"
+    installer:
+      target_dir: .cline/skills
+      template_type: default
+      skill_format: true
+
+# ============================================================================
+# Platform Categories
+# ============================================================================
+
+categories:
+  ide:
+    name: "Integrated Development Environment"
+    description: "Full-featured code editors with AI assistance"
+
+  cli:
+    name: "Command Line Interface"
+    description: "Terminal-based tools"
+
+  tool:
+    name: "Development Tool"
+    description: "Standalone development utilities"
+
+# ============================================================================
+# Installer Config Schema
+# ============================================================================
+#
+# installer:
+#   target_dir: string        # Directory where skills are installed
+#   template_type: string     # Template type to use (default, antigravity, codex, llama)
+#   skill_format: boolean     # Use directory-per-skill output: <name>/SKILL.md
