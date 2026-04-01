@@ -1,20 +1,10 @@
 # RAPID Oneshot
 
-Fast path for simple, isolated changes. Part of the RAPID development workflow.
+Fast path for simple, isolated changes. Skips the spec process for truly trivial work.
 
 ## Trigger
 - User says "rapid oneshot" or "oneshot"
 - User has a small, clearly isolated change
-
-## When to Use
-
-ALL must be true:
-- [ ] No architectural decisions
-- [ ] No shared state modified
-- [ ] Clear, isolated change
-- [ ] Crystal clear intent
-
-If any condition is false → use `rapid create-spec` + `rapid dev` instead.
 
 ## Prerequisites
 - Load `_rapid/config.yaml`
@@ -24,96 +14,177 @@ If any condition is false → use `rapid create-spec` + `rapid dev` instead.
 
 ## Workflow
 
-### 1. Clarify
+### 1. Capture & Quick Scan
 
-Understand what the user wants:
-1. **Explicit**: User provided clear task
-2. **Conversation**: Extract from recent messages
-3. **Ask**: If unclear, ask user
+**Get the user's request** (they may have already said it).
 
-**DO NOT FANTASIZE** — if ambiguous, HALT and ask.
+**Immediately scan** to understand scope:
+- Search for files/areas mentioned
+- Check what would be affected
+- Identify dependencies
 
-### 2. Confirm Scope
+---
 
+### 2. Complexity Check
+
+**Evaluate complexity signals:**
+
+| Signal | Weight |
+|--------|--------|
+| Multiple components mentioned | +2 |
+| Shared state modified | +2 |
+| New patterns needed | +2 |
+| Cross-layer changes (UI + API + DB) | +2 |
+| Uncertainty in approach | +1 |
+| Multiple files affected | +1 |
+
+| Reducer | Weight |
+|---------|--------|
+| Single file change | -2 |
+| Isolated function/method | -2 |
+| Clear pattern exists | -1 |
+| User said "simple/quick/just" | -1 |
+
+**Calculate score:**
+
+- **Score ≤ 0**: Proceed with oneshot
+- **Score 1-2**: Warn but allow
+- **Score ≥ 3**: Escalate
+
+---
+
+### 3. Handle Complexity
+
+**If Score ≤ 0 (Simple):**
 ```
 Quick change: {description}
 Files: {file_list}
 
-Zero blast radius?
-- [x] No architectural decisions
-- [x] No shared state modified
-- [x] Clear, isolated change
-
 Proceed? [Y/N]
 ```
 
-### 3. Create Branch
+**If Score 1-2 (Borderline):**
+```
+This looks slightly complex:
+- {reason_1}
+- {reason_2}
 
+Options:
+[Y] Proceed anyway (at your own risk)
+[S] Create a spec first (recommended)
+```
+
+**If Score ≥ 3 (Escalate):**
+```
+This is too complex for oneshot:
+- {reason_1}
+- {reason_2}
+- {reason_3}
+
+Run `rapid create-spec` to plan this properly.
+```
+→ **EXIT oneshot**
+
+---
+
+### 4. Execute (If Proceeding)
+
+a) **Create branch:**
 ```bash
 git checkout -b {prefix}/{slug}
 ```
+Use semantic prefix: fix/, chore/, docs/, refactor/, perf/
 
-Use semantic prefix (fix/, chore/, docs/, etc.).
-
-### 4. Baseline
-
+b) **Capture baseline:**
 ```bash
 git rev-parse HEAD
 ```
 
-### 5. Implement
-
+c) **Implement:**
 - Make the change
 - Follow project patterns
 - Keep minimal
 
-### 6. Verify
-
+d) **Verify:**
 ```bash
 {test_command}
 {lint_command}
 ```
 
-### 7. Quick Review
+---
 
-- Check diff for obvious issues
-- Auto-fix if needed
+### 5. Quick Review
 
-### 8. Present
-
-```markdown
-## Quick Change ✓
-
-**Change**: {description}
-**Branch**: {branch}
-
-### Diff
-{summary}
-
-### Verify
-- Tests: ✓
-- Lint: ✓
+**Self-check the diff:**
+- Any unexpected changes? → Revert and explain
+- Obvious issues? → Auto-fix
+- Scope creep? → Warn user
 
 ---
-[C] Commit  [X] Discard
+
+### 6. Present
+
+```markdown
+## Quick Change Done
+
+**Change:** {description}
+**Branch:** {branch}
+**Files:** {count}
+
+### Diff Summary
+{summary}
+
+### Verification
+- Tests: {status}
+- Lint: {status}
+
+---
+[C] Commit  [R] Review diff  [X] Discard
 ```
 
-### 9. Commit
+**Handle choice:**
 
-```bash
-git add -A
-git commit -m "{type}: {description}"
+- `[C] Commit`:
+  ```bash
+  git add -A
+  git commit -m "{type}: {description}"
+  ```
+  Done.
+
+- `[R] Review`:
+  - Show full diff
+  - After review, re-present options
+
+- `[X] Discard`:
+  - Confirm: "Discard all changes? (y/n)"
+  - If yes: `git checkout -- .`
+
+---
+
+## Flow Summary
+
+```
+[Capture + Scan] → [Complexity Check] → [Execute] → [Review] → [Commit]
+       ↓                   ↓                ↓          ↓          ↓
+    (silent)         Simple? Warn?      (silent)   (silent)     C/R/X
+                     Escalate?
 ```
 
-## Escalation
+Only 2 user interactions: Confirm scope → Commit
 
-If more complex than expected:
-```
-This is more complex than expected.
-Use `rapid create-spec` to create a proper spec first.
-```
-→ Abort oneshot, guide user to `rapid create-spec`
+---
+
+## Escalation Triggers (Auto-Exit)
+
+The following **always** trigger escalation to `rapid create-spec`:
+- User mentions "architecture" or "design decision"
+- Change affects more than 3 files
+- New external dependency needed
+- Breaking change to existing API
+- User is uncertain: "I'm not sure", "maybe", "best way to"
+
+---
 
 ## Output
-- Change committed on feature branch
-- Ready for human PR creation
+- Change committed on semantic branch
+- Ready for PR

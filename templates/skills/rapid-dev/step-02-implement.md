@@ -1,7 +1,7 @@
 # Step 2: Implement + AI Code Review
 
 ## Objective
-Execute the approved spec tasks and self-review the implementation.
+Execute the approved spec tasks, verify, and perform structured AI review.
 
 ## Actions
 
@@ -44,38 +44,76 @@ For each task in the spec:
 
 **If fails:** Fix and re-verify. Do not proceed until all pass.
 
-### 2.5 AI Code Review
+---
 
-Review your own implementation:
+### 2.5 AI Code Review (Structured)
 
-**Check against:**
-1. Spec Intent — does the code do what was planned?
-2. Acceptance Criteria — all satisfied?
-3. Project Patterns — conventions followed?
-4. Edge Cases — handled per spec?
+**Build complete diff:**
+```bash
+git diff {baseline_commit}
+```
 
-**Classify findings:**
+**Review against:**
+1. **Intent** — Does the code do what was planned?
+2. **Acceptance Criteria** — All satisfied?
+3. **Project Patterns** — Conventions followed?
+4. **Boundaries** — Stayed within scope?
+5. **Edge Cases** — Handled per spec?
+
+**Generate findings with IDs:**
+
+For each issue found, assign an ID and classify:
+
+| ID | Severity | Type | Description |
+|----|----------|------|-------------|
+| F1 | Critical | `intent_gap` | Deviation from spec intent |
+| F2 | High | `missing_ac` | Acceptance criteria not met |
+| F3 | Medium | `pattern_violation` | Project pattern not followed |
+| F4 | Low | `code_smell` | Minor quality issue |
+| F5 | Info | `suggestion` | Nice to have improvement |
+
+**Finding types:**
 
 | Type | Action |
 |------|--------|
 | `intent_gap` | **HALT** — needs user decision |
-| `bad_spec` | Note for user |
-| `patch` | Auto-fix immediately |
-| `defer` | Add to backlog |
-| `noise` | Ignore |
+| `missing_ac` | Must fix before proceeding |
+| `pattern_violation` | Should fix |
+| `code_smell` | Auto-fix if trivial |
+| `suggestion` | Note for user |
 
-### 2.6 Self-Check
+---
 
-Before proceeding:
+### 2.6 Auto-Fix Trivial Issues
+
+**Immediately fix** (no user input needed):
+- Typos in comments/strings
+- Missing semicolons, formatting
+- Unused imports
+- Obvious code smells with clear fix
+
+**Mark as:** `[F{n}] Auto-fixed: {description}`
+
+---
+
+### 2.7 Self-Check
+
+Before proceeding, verify:
 - [ ] All tasks `[x]`
 - [ ] All ACs met
 - [ ] Tests pass
 - [ ] Build succeeds
 - [ ] No lint errors
 - [ ] No `intent_gap` findings
+- [ ] No `missing_ac` findings
+
+**If any `intent_gap` found:** HALT and ask user before proceeding.
+
+---
 
 ## Output
 - Implementation complete
-- AI review done, patches applied
+- Findings documented with IDs
+- Auto-fixes applied
 - Verification passed
 - → Proceed to `step-03-review.md`
