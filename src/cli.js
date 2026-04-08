@@ -461,6 +461,11 @@ async function install() {
             } else {
               fs.copyFileSync(srcFile, destFile);
             }
+          } else if (file.isDirectory()) {
+            // Recursively copy subdirectories (prompts, resources, etc.)
+            const srcSubDir = path.join(srcSkillDir, file.name);
+            const destSubDir = path.join(destSkillDir, file.name);
+            copyDir(srcSubDir, destSubDir);
           }
         }
       }
