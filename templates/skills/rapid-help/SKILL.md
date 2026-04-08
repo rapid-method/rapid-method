@@ -19,37 +19,48 @@ Lean, spec-driven methodology for AI-assisted development.
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `rapid create-brief` | Create Product Brief (requirements) |
-| `rapid create-architecture` | Document project architecture |
-| `rapid create-patterns` | Define coding patterns |
-| `rapid create-spec` | Create tech spec for a task |
-| `rapid dev` | Implement an approved spec |
-| `rapid oneshot` | Fast path for simple changes |
-| `rapid help` | Show this help |
+| Command | Flow | Description |
+|---------|------|-------------|
+| `rapid create-brief` | Initiation | Create Product Brief (requirements) |
+| `rapid create-architecture` | Initiation | Document project architecture |
+| `rapid create-patterns` | Initiation | Define coding patterns |
+| `rapid create-prd` | Plan | Create PRD for a feature |
+| `rapid create-spec` | Development | Create tech spec for a task |
+| `rapid dev` | Development | Implement an approved spec |
+| `rapid oneshot` | Development | Fast path for simple changes |
+| `rapid help` | — | Show this help |
 
 ---
 
-## Getting Started
+## Initiation Flow (one-time setup)
 
-### New project (no code yet)
 ```
 1. rapid create-brief         ← define what you're building
-2. rapid create-architecture  ← plan the architecture
-3. rapid create-patterns      ← set coding standards
-```
-
-### Existing project
-```
-1. rapid create-architecture  ← document what exists
-2. rapid create-patterns      ← capture current patterns
-3. rapid create-brief         ← define next feature
+2. rapid create-architecture  ← document/plan the architecture
+3. rapid create-patterns      ← capture/set coding standards
 ```
 
 ---
 
-## Development Workflow
+## Plan Flow (per feature)
+
+```
+┌──────────────────────────────────────────┐
+│            RAPID Plan Flow               │
+├──────────────────────────────────────────┤
+│                                          │
+│  rapid create-prd                        │
+│    Feature discovery → User Stories      │
+│    → Scope → Approval                    │
+│                                          │
+│  PRDs track features across specs.       │
+│  create-spec auto-detects pending PRDs.  │
+└──────────────────────────────────────────┘
+```
+
+---
+
+## Development Flow (per task)
 
 ```
 ┌──────────────────────────────────────────┐
@@ -57,9 +68,9 @@ Lean, spec-driven methodology for AI-assisted development.
 ├──────────────────────────────────────────┤
 │                                          │
 │  rapid create-spec                       │
-│    Clarify → Investigate → Write Spec    │
-│    → Self-Review → User Approval         │
-│                                          │
+│    Check PRDs → Clarify → Investigate    │
+│    → Write Spec → Approve               │
+│             ↓                            │
 │  rapid dev                               │
 │    Branch → Implement + AI Review        │
 │    → Human Code Review → Commit          │
@@ -87,6 +98,7 @@ _rapid/
 ├── templates/
 └── output/
     ├── briefs/
+    ├── prds/
     └── specs/
 ```
 

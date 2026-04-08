@@ -414,6 +414,7 @@ async function install() {
 
   fs.mkdirSync(rapidDir, { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'briefs'), { recursive: true });
+  fs.mkdirSync(path.join(rapidDir, 'output', 'prds'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'output', 'specs'), { recursive: true });
   fs.mkdirSync(path.join(rapidDir, 'templates'), { recursive: true });
 
@@ -489,6 +490,7 @@ ${platformsList || '  # none'}
 # Paths
 output_folder: "{project-root}/_rapid/output"
 briefs_folder: "{project-root}/_rapid/output/briefs"
+prds_folder: "{project-root}/_rapid/output/prds"
 specs_folder: "{project-root}/_rapid/output/specs"
 project_architecture: "{project-root}/_rapid/project-architecture.md"
 project_patterns: "{project-root}/_rapid/project-patterns.md"

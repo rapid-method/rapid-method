@@ -1,6 +1,6 @@
 # RAPID Workflow
 
-RAPID has two flows: **Initiation** (set up your project) and **Development** (build features).
+RAPID has three flows: **Initiation** (set up your project), **Plan** (define features), and **Development** (build features).
 
 ## Flow Overview
 
@@ -10,31 +10,46 @@ RAPID has two flows: **Initiation** (set up your project) and **Development** (b
 
 ## Initiation Flow
 
-The initiation flow sets up project knowledge that every development task will use.
-
-### Existing Project
-
-If you already have code, start by documenting what exists:
-
-```
-rapid create-architecture  →  rapid create-patterns  →  rapid create-brief
-```
-
-1. **Architecture** — Auto-detects tech stack, documents structure, modules, dependencies
-2. **Patterns** — Scans code for conventions, validates with you, creates standards doc
-3. **Product Brief** — Defines the next feature or product requirements
-
-### New Project
-
-If starting from scratch, define what you're building first:
+The initiation flow sets up project knowledge that every development task will use. Run once per project.
 
 ```
 rapid create-brief  →  rapid create-architecture  →  rapid create-patterns
 ```
 
 1. **Product Brief** — Vision, target users, core features, success metrics
-2. **Architecture** — Plan the tech stack, structure, and key modules
-3. **Patterns** — Set coding standards before the first line of code
+2. **Architecture** — Document (or plan) the tech stack, structure, and key modules
+3. **Patterns** — Capture (or set) coding standards and conventions
+
+---
+
+## Plan Flow
+
+The plan flow helps track and define features before implementation. Use it when the user doesn't have a clear picture of what they want to build, or when features need discovery before jumping into a spec.
+
+### `rapid create-prd` — PRD
+
+**Purpose**: Create a Product Requirements Document for a feature, guiding the user from a vague idea to concrete requirements.
+
+#### When to use
+- User is unsure about what they want
+- Feature needs discovery before specifying
+- Want to track feature requirements separately from the spec
+
+#### What happens
+
+1. **Discovery** — Guided conversation to clarify the feature goal, target users, and expected behavior
+2. **Write PRD** — Fill the template with user stories, acceptance criteria, and scope boundaries
+3. **User Approval** — `[A]pprove` / `[E]dit` / `[C]ancel`
+
+#### Output
+- PRD file in `_rapid/output/prds/` with status `approved`
+- Ready to feed into `rapid create-spec`
+
+#### PRD Statuses
+- `draft` — work in progress
+- `approved` — ready for spec creation
+- `in-progress` — at least one spec is being developed from this PRD
+- `done` — all planned items have been implemented
 
 ---
 
@@ -43,6 +58,21 @@ rapid create-brief  →  rapid create-architecture  →  rapid create-patterns
 ### `rapid create-spec` — Tech Spec
 
 **Purpose**: Plan before you code. The spec is the contract between intent and implementation.
+
+#### PRD Check (before starting)
+
+Before anything else, the spec workflow checks for PRDs with status `approved` or `in-progress` in `_rapid/output/prds/`. If found:
+
+```
+Found pending PRDs:
+1. {prd_title} (status: approved, {n} user stories)
+2. {prd_title} (status: in-progress, {n}/{total} stories done)
+
+[P] Pick a story from a PRD
+[S] Start something separate
+```
+
+This ensures planned work is tracked and nothing falls through the cracks.
 
 #### What happens
 

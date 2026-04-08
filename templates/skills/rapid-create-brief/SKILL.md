@@ -67,5 +67,5 @@ Present draft:
 - Status: `approved`
 
 ## Next Steps
-- `rapid create-architecture` — Document project architecture
-- `rapid create-patterns` — Define coding patterns
+- `rapid create-architecture` — Document/plan project architecture
+- `rapid create-patterns` — Capture/set coding patterns

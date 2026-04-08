@@ -16,7 +16,9 @@ Create a technical specification for a task. The spec is the contract between in
 
 ### 0. Check Work in Progress
 
-**Before anything else, check for existing WIP:**
+**Before anything else, two checks in order:**
+
+#### 0a. Check for existing WIP specs
 
 Look for `_rapid/output/specs/spec-*-wip.md`
 
@@ -31,10 +33,29 @@ Found spec in progress:
 ```
 
 - `[C]`: Load WIP, jump to step 4 (present for approval)
-- `[A]`: Rename to `spec-{slug}-archived-{date}.md`, continue to step 1
-- `[D]`: Delete WIP, continue to step 1
+- `[A]`: Rename to `spec-{slug}-archived-{date}.md`, continue to step 0b
+- `[D]`: Delete WIP, continue to step 0b
 
-**If no WIP:** Continue to step 1
+**If no WIP:** Continue to step 0b
+
+#### 0b. Check for pending PRDs
+
+Look for PRDs with status `approved` or `in-progress` in `_rapid/output/prds/`
+
+**If pending PRDs exist:**
+```
+Found pending PRDs:
+1. {prd_title} (status: approved, {n} user stories)
+2. {prd_title} (status: in-progress, {n}/{total} stories implemented)
+
+[P] Pick a story from a PRD
+[S] Start something separate
+```
+
+- `[P]`: Show user stories from the selected PRD, let user pick one. Use the story as context for the spec (link via `prd_ref` in spec frontmatter). Continue to step 2 (Quick Scan) — intent is already captured from the PRD.
+- `[S]`: Continue to step 1 as normal
+
+**If no pending PRDs:** Continue to step 1
 
 ---
 
@@ -58,6 +79,7 @@ Found spec in progress:
 **Immediately scan the codebase to understand context:**
 
 a) **Check for planning docs:**
+- `_rapid/output/prds/` - related PRDs (if one exists, link it via `prd_ref` in the spec)
 - `_rapid/output/briefs/` - related product briefs
 - `_rapid/project-architecture.md` - system structure
 - `_rapid/project-patterns.md` - conventions
