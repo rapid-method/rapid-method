@@ -55,4 +55,4 @@ Set spec status: `in-progress`
 ## Output
 - Branch created
 - Spec status: `in-progress`
-- → Proceed to `step-02-implement.md`
+- → Proceed to `steps/step-02-implement.md`

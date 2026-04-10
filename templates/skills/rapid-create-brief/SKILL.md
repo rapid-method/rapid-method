@@ -13,8 +13,8 @@ Built through collaborative discovery, not a questionnaire.
 | Stage | Purpose | Handler |
 |-------|---------|---------|
 | 1 | Understand Intent | SKILL.md (this file) |
-| 2 | Guided Discovery | prompts/guided-discovery.md |
-| 3 | Draft & Review | prompts/draft-and-review.md |
+| 2 | Guided Discovery | steps/step-01-discovery.md |
+| 3 | Draft & Review | steps/step-02-draft.md |
 
 ### Principle: Build With the User, Not At Them
 
@@ -57,7 +57,7 @@ Don't force a rigid format. Let the user talk naturally. When you have enough co
 
 Then transition: **"Great — let's build the brief together. I'll walk through a few topics one at a time."**
 
-→ **Route to**: `prompts/guided-discovery.md`
+→ **Route to**: `steps/step-01-discovery.md`
 
 ---
 

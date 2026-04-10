@@ -116,4 +116,4 @@ Before proceeding, verify:
 - Findings documented with IDs
 - Auto-fixes applied
 - Verification passed
-- → Proceed to `step-03-review.md`
+- → Proceed to `steps/step-03-review.md`

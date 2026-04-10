@@ -132,4 +132,4 @@ You're ready to draft when you have solid coverage of:
 **Early draft offer**: If the user provides rich, confident answers covering most areas in 3-4 exchanges, proactively offer:
 > "I think I have enough to draft the brief. Want me to go ahead, or is there anything else you'd like to cover first?"
 
-→ **Route to**: `prompts/draft-and-review.md`
+→ **Route to**: `steps/step-02-draft.md`

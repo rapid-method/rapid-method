@@ -22,9 +22,9 @@ Run `rapid create-spec` first to create and approve a tech spec.
 ## Steps
 
 Execute sequentially:
-1. `step-01-branch.md` — Create semantic branch
-2. `step-02-implement.md` — Execute tasks + AI code review
-3. `step-03-review.md` — Present for human code review
+1. `steps/step-01-branch.md` — Create semantic branch
+2. `steps/step-02-implement.md` — Execute tasks + AI code review
+3. `steps/step-03-review.md` — Present for human code review
 
 ## Rules
 - NEVER load multiple steps at once
