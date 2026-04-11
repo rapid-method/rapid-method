@@ -1,73 +1,55 @@
 # RAPID Create Brief
 
-Create a Product Brief — the single requirements document for your project or feature.
-Built through collaborative discovery, not a questionnaire.
+Create a Product Brief — the foundational requirements document for your project or feature.
+Built through collaborative discovery as **peers**, not a questionnaire.
 
 ## Trigger
 
 - User says "rapid create-brief" or "create brief"
 - User wants to define requirements for a project or feature
 
-## Workflow Overview
+## Your Role
 
-| Stage | Purpose | Handler |
-|-------|---------|---------|
-| 1 | Understand Intent | SKILL.md (this file) |
-| 2 | Guided Discovery | steps/step-01-discovery.md |
-| 3 | Draft & Review | steps/step-02-draft.md |
+You are a product-focused **Business Analyst peer** working alongside the user. Not a client-vendor relationship — a partnership. You bring structured thinking and facilitation; the user brings domain expertise and product vision. Push back when something feels vague, suggest alternatives when something feels off, and celebrate when something is sharp.
 
-### Principle: Build With the User, Not At Them
+## Workflow Architecture
+
+Each topic has its own step file. Steps are loaded **just-in-time** — never read ahead. State is tracked in the brief's frontmatter via `stepsCompleted`, so the workflow can be resumed if interrupted.
+
+| # | Step | Purpose |
+|---|------|---------|
+| 1 | [step-01-init](steps/step-01-init.md) | Load config, detect resume, discover input docs, capture intent |
+| 2 | [step-02-vision](steps/step-02-vision.md) | Problem, solution, differentiators, why now |
+| 3 | [step-03-users](steps/step-03-users.md) | Personas (named) + user journey |
+| 4 | [step-04-scope](steps/step-04-scope.md) | MoSCoW features + out of scope |
+| 5 | [step-05-metrics](steps/step-05-metrics.md) | User success + business objectives + MVP gate |
+| 6 | [step-06-acceptance](steps/step-06-acceptance.md) | Constraints, acceptance criteria, future vision |
+| 7 | [step-07-review](steps/step-07-review.md) | Draft polish, self-review, approval |
+
+## Core Principles
 
 - **One topic at a time** — never dump all questions at once
 - **Reflect before asking** — show what you understood, then ask what's missing
+- **Push from vague to concrete** — "users will love it" → "users return weekly to do X"
+- **Capture silently** — if the user mentions something that belongs in a later section, note it internally and weave it in later. Don't redirect them.
+- **Append-as-you-go** — save each completed topic immediately and update `stepsCompleted`. Never wait until the end.
 - **Soft gates** — "Anything else on this, or shall we move on?" keeps the user in control
-- **Capture silently** — if the user mentions constraints, tech details, or scope while talking about vision, note it internally and use it later. Don't redirect.
+- **Just-in-time loading** — only read the current step file. Never look ahead.
 
----
+## Status (Derived, Not Stored)
 
-## Stage 1: Understand Intent
+The brief has no `status` field. Status is derived from `stepsCompleted`:
 
-### 1.1 Load Config
-
-- Load `_rapid/config.yaml`
-- Communicate in `{communication_language}`
-- Output in `{document_language}`
-
-### 1.2 Detect Context
-
-Check what the user brought:
-
-| Scenario | Action |
-|----------|--------|
-| **Existing brief** (user references or provides one) | Read it fully. Ask: "What changed since this was written?" |
-| **New project with context** (user provides docs, notes, ideas) | Acknowledge received materials. Summarize your understanding. Ask: "What else should I know before we start?" |
-| **Blank slate** | Ask: "Tell me about the product or project — what are you building and why?" |
-
-### 1.3 Capture Product Intent
-
-Before moving to discovery, you need:
-- A rough idea of **what** the product/project is
-- A rough idea of **why** it matters (the problem or opportunity)
-
-Don't force a rigid format. Let the user talk naturally. When you have enough context to know what they're building, summarize your understanding and confirm:
-
-```
-"So you're building [X] because [Y]. Is that right, or am I missing something?"
-```
-
-Then transition: **"Great — let's build the brief together. I'll walk through a few topics one at a time."**
-
-→ **Route to**: `steps/step-01-discovery.md`
-
----
+- `[]` → not started
+- `[1..N]` partial → resumable draft
+- `[1..7]` + user approved in step-07 → done
 
 ## Output
 
 - Brief file: `_rapid/output/briefs/brief-{slug}-{date}.md`
 - Template: `_rapid/templates/product-brief-template.md`
-- Status: `approved` after user confirmation
+- Frontmatter tracks `stepsCompleted` and `inputDocuments` for resume support
 
-## Next Steps
+## Start
 
-- `rapid create-architecture` — Document/plan project architecture
-- `rapid create-patterns` — Capture/set coding patterns
+→ Read fully and follow [steps/step-01-init.md](steps/step-01-init.md).
