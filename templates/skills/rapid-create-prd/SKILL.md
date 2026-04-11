@@ -1,154 +1,76 @@
-# RAPID Create PRD (Plan Flow)
+# RAPID Create PRD
 
-Create a Product Requirements Document for a feature. Part of the **Plan Flow** — helps users who don't have a clear picture of what they want to build, guiding them from vague idea to concrete requirements.
+Create a Product Requirements Document for a feature. Part of the **Plan Flow** — bridges from a vague idea (or a product brief) to concrete user stories that `rapid create-spec` can turn into implementation specs.
 
-PRDs track features across multiple specs. Each user story in a PRD can become a separate spec, allowing incremental delivery while keeping the big picture visible.
+PRDs track features across multiple specs. Each user story in a PRD can become its own spec, allowing incremental delivery while keeping the big picture visible.
 
 ## Trigger
+
 - User says "rapid create-prd" or "create prd"
-- User is unsure about what they want to build
 - User wants to plan a feature before creating specs
+- User has a product brief and needs to scope a specific feature out of it
 
-## Prerequisites
-- Load `_rapid/config.yaml`
-- Load `_rapid/project-architecture.md` if exists
-- Load `_rapid/project-patterns.md` if exists
-- Communicate in `{communication_language}`
-- Output in `{document_language}`
+## Your Role
 
-## Workflow
+You are a **product-focused planner**. You take a feature idea (or a brief) and produce a PRD that's sharp enough to drive implementation. You ask informed questions, you don't ping-pong, and you generate a complete PRD in one shot for review.
 
-### 1. Load Context
+## Workflow Architecture
 
-- Load config and project docs
-- Check for related product briefs in `_rapid/output/briefs/`
-- If a brief exists, use it as context for the feature
+Each phase has its own step file. Steps load **just-in-time** — never read ahead. State is tracked via `stepsCompleted` in the PRD's frontmatter for resume support.
 
----
+| # | Step | Purpose | User halt? |
+|---|------|---------|------------|
+| 1 | [step-01-init](steps/step-01-init.md) | Load context, find brief, check WIPs, capture initial idea | ✋ Yes (feature idea) |
+| 2 | [step-02-discover](steps/step-02-discover.md) | Read brief, ask one batch of informed questions | ✋ Yes (questions) |
+| 3 | [step-03-generate](steps/step-03-generate.md) | Silently generate the full PRD | (no halt) |
+| 4 | [step-04-review](steps/step-04-review.md) | Present, iterate, approve | ✋ Yes (review) |
 
-### 2. Feature Discovery
+## Three Interactions, Period
 
-**Guide the user through discovery.** The goal is to go from vague idea to clear feature definition.
+The user only interacts **three times**:
 
-**Start with the big picture:**
+1. **Initial idea** — "what feature are you thinking about?" (step-01)
+2. **Informed questions** — one batch after reading the brief and project context (step-02)
+3. **Review** — present the full PRD for A/E/C approval (step-04)
 
-"What feature are you thinking about? Even a rough idea is fine."
+Everything else is silent. Do **not** ask the user to validate intermediate sections. Trust the brief, trust your questions, generate the PRD, surface it for review.
 
-**Then drill down with targeted questions:**
+## Core Principles
 
-a) **Goal** (required):
-- What problem does this feature solve?
-- Who benefits from it?
-- Why is it needed now?
-
-b) **User Stories** (required):
-- Walk through: "As a [user], I want to [action], so that [benefit]"
-- Capture 2-5 stories that cover the feature
-
-c) **Scope** (required):
-- What's included?
-- What's explicitly NOT included? (this prevents scope creep later)
-
-d) **Expected Behavior** (required):
-- Happy path: what should happen?
-- Edge cases: what could go wrong?
-- Errors: how should the system respond?
-
-e) **Acceptance Criteria** (required):
-- Define Given/When/Then for each user story
-
-**Adapt to `{user_skill_level}`:**
-- Non-technical users → plain language, concrete examples
-- Technical users → can be more precise
-
-**After discovery, confirm understanding:**
-```
-Got it. Here's what I understood:
-
-**Feature:** {1 sentence}
-**Goal:** {1 sentence}
-**Scope:** {in} / {out}
-**Stories:** {count} user stories
-
-Correct? (y/n)
-```
-
-If no, clarify. If yes, continue.
-
----
-
-### 3. Generate PRD
-
-**Create the PRD file immediately:**
-
-Use template: `_rapid/templates/prd-template.md`
-Save to: `_rapid/output/prds/prd-{date}-{slug}.md`
-
-Fill all sections from the discovery conversation.
-
----
-
-### 4. Present for Approval
-
-```markdown
-## PRD Ready
-
-**Feature:** {title}
-**Stories:** {story_count}
-**ACs:** {ac_count}
-
-{Show full PRD content}
-
----
-[A] Approve  [E] Edit  [C] Cancel
-```
-
-**Handle choice:**
-
-- `[A] Approve`:
-  - Set status: `approved`
-  - Done. Suggest: "Run `rapid create-spec` to plan the implementation"
-
-- `[E] Edit`:
-  - Ask what to change
-  - Apply changes
-  - Re-present (loop back to step 4)
-
-- `[C] Cancel`:
-  - Confirm: "Delete the draft? (y/n)"
-  - If yes: delete file
-  - If no: keep as draft for later
-
----
-
-## Flow Summary
-
-```
-[Load Context] → [Feature Discovery] → [Generate PRD] → [Approve]
-      ↓                  ↓                   ↓              ↓
-   (silent)        Goal → Stories →       (silent)        A/E/C
-                   Scope → Behavior →
-                   ACs
-```
-
-Only 2 user interactions: Discovery → Approval
-
----
+- **Brief is the source of truth** — if a brief exists, the personas, vision, and differentiators come from it. Don't re-elicit.
+- **Stories are the unit of work** — each user story should be implementable as one spec
+- **MoSCoW priorities** — every story is must/should/could
+- **Out of scope is mandatory** — explicitly list what's NOT in this PRD with rationale
+- **Just-in-time loading** — only read the current step file
 
 ## PRD Lifecycle
 
-PRDs track progress across multiple specs:
+PRDs track progress across multiple specs via the `status` field:
 
 | Status | Meaning |
 |--------|---------|
-| `draft` | Work in progress |
+| `draft` | Work in progress (resumable via `stepsCompleted`) |
 | `approved` | Ready — `rapid create-spec` will offer its stories |
 | `in-progress` | At least one spec is being developed from this PRD |
 | `done` | All planned stories have been implemented |
 
+`stepsCompleted` tracks the create-prd workflow itself; `status` tracks the PRD's lifecycle across the project.
+
+## Resume Behavior
+
+If a draft PRD exists with partial `stepsCompleted`, step-01 will detect it and offer to continue.
+
 ## Output
-- PRD file saved with status `approved`
-- `rapid create-spec` will automatically detect this PRD and offer its stories
+
+- PRD file: `_rapid/output/prds/prd-{date}-{slug}.md`
+- Template: `_rapid/templates/prd-template.md`
+- Status: `approved` after user confirmation
+- `rapid create-spec` will automatically detect approved PRDs and offer their stories
 
 ## Next Steps
-- `rapid create-spec` — Will find this PRD and let you pick a story to implement
+
+- `rapid create-spec` — pick a story from this PRD and turn it into an implementation spec
+
+## Start
+
+→ Read fully and follow [steps/step-01-init.md](steps/step-01-init.md).

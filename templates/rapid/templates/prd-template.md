@@ -1,10 +1,11 @@
 ---
 title: '{title}'
 created: '{date}'
-status: 'draft | approved'
+status: 'draft | approved | in-progress | done'
 feature: '{feature_slug}'
 brief_ref: ''
 owner: '{owner}'
+stepsCompleted: []
 ---
 
 # PRD: {title}
@@ -19,9 +20,9 @@ owner: '{owner}'
 
 ## User Stories
 
-| # | As a... | I want to... | So that... |
-|---|---------|--------------|------------|
-| 1 | {user_type} | {action} | {benefit} |
+| # | As a... | I want to... | So that... | Priority |
+|---|---------|--------------|------------|----------|
+| 1 | {user_type} | {action} | {benefit} | must / should / could |
 
 ## Scope
 
@@ -29,7 +30,7 @@ owner: '{owner}'
 - {what's included}
 
 **Out of Scope:**
-- {what's explicitly excluded}
+- {what's explicitly excluded — with one-line rationale}
 
 ## Expected Behavior
 
@@ -41,12 +42,12 @@ owner: '{owner}'
 
 ## Acceptance Criteria
 
-| # | Scenario | Given | When | Then |
-|---|----------|-------|------|------|
-| 1 | {scenario} | {precondition} | {action} | {result} |
+| # | Story # | Given | When | Then |
+|---|---------|-------|------|------|
+| 1 | 1 | {precondition} | {action} | {result} |
 
 ## Open Questions
 
-| # | Question | Answer | Status |
-|---|----------|--------|--------|
+| # | Question | Owner | Status |
+|---|----------|-------|--------|
 | 1 | {question} | | open |
