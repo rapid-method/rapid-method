@@ -1,6 +1,6 @@
 # Step 1: Initialize
 
-**Goal**: Load context, detect resumable drafts, find related briefs, and capture the user's initial feature idea. This is **user interaction #1 of 3**.
+**Goal**: Load context, detect resumable drafts, find related briefs, and capture the user's initial product/feature idea. This is **user interaction #1 of 3**.
 
 **Next step**: [step-02-discover.md](step-02-discover.md)
 
@@ -47,41 +47,43 @@ Silently scan `_rapid/output/briefs/` for product briefs.
 ```
 Found {n} product brief(s):
 
-1. {brief_title} ({date}) — {one-line summary}
-2. {brief_title} ({date}) — {one-line summary}
+1. {brief_title} ({date}) — {one-line summary of vision}
+2. {brief_title} ({date}) — {one-line summary of vision}
 
-Is this PRD for a feature in one of these briefs, or standalone?
+Is this PRD grounded in one of these briefs, or standalone?
 
 [1-{n}] Pick a brief
-[S] Standalone (no brief)
+[S] Standalone (no brief — I'll ask more discovery questions in step 2)
 ```
 
 - **[1-n]** → store `brief_path` for step-02 to read in detail
-- **[S]** → no brief context
+- **[S]** → no brief context (warn that the PRD will be lighter on persona/vision rationale)
 
 **If no briefs exist** → continue to section 4 with no brief context.
 
-## 4. Capture Initial Feature Idea (User Interaction #1)
+> **Recommendation**: PRDs are much sharper when grounded in a brief. If the user picks Standalone, suggest they consider running `rapid create-brief` first — but don't block them.
+
+## 4. Capture Initial Idea (User Interaction #1)
 
 Ask **one** question:
 
-> "What feature are you thinking about? Even a rough idea is fine — I'll read the brief (if any) and ask sharper questions next."
+> "What product or feature is this PRD for? Even a rough idea is fine — I'll read the brief (if any) and ask sharper questions next."
 
-Get just enough to know **what** they want and **where** in the brief it lives. Don't ask follow-ups yet — that's step-02.
-
-**Extract from their answer**:
-- Rough feature title
+Get just enough to know:
+- Rough scope (whole product / a major capability area / a single feature)
 - Which user(s) it's for (if mentioned)
-- The core problem it addresses
-- Any specific constraints they mentioned
+- The core problem or capability it adds
 
-If the user already linked this PRD to a story or section in the brief, note it.
+Don't ask follow-ups yet — that's step-02.
+
+If the user already linked this PRD to a specific section of the brief, note it.
 
 ## 5. Hold Initial Context
 
 Hold internally for step-02:
-- `feature_title` (rough)
-- `feature_intent` (1-2 sentences)
+- `prd_title` (rough)
+- `prd_intent` (1-2 sentences)
+- `prd_scope_size` (whole product / capability area / single feature)
 - `brief_path` (if linked to a brief)
 - `referenced_users`, `referenced_constraints`
 

@@ -45,17 +45,43 @@ Look in `_rapid/output/prds/` for PRDs with status `approved` or `in-progress`.
 
 **If pending PRDs exist**:
 
+PRDs use a nested structure: capability areas → Functional Requirements (FR1, FR2...) → user stories (S1.1, S1.2...). Stories carry a `Status` column (`not started` / `in spec` / `in dev` / `done`). Filter to **stories with status `not started`** when offering picks.
+
 ```
 Found pending PRDs:
 
-1. {prd_title} (status: approved, {n} user stories)
-2. {prd_title} (status: in-progress, {n}/{total} stories implemented)
+1. {prd_title} (status: approved, {n_not_started}/{n_total} stories available)
+2. {prd_title} (status: in-progress, {n_not_started}/{n_total} stories available)
 
 [P] Pick a story from a PRD (recommended)
 [S] Start something separate
 ```
 
-- **[P] Pick**: Show user stories from the chosen PRD, let user pick one. Use the story as the source of intent — store the PRD path for `prd_ref` later. **Skip section 4** (intent already captured) and go straight to section 5.
+- **[P] Pick**: Read the chosen PRD fully. Show all stories with status `not started`, grouped by capability area / FR for context:
+
+  ```
+  PRD: {title}
+
+  ### Capability Area: User Management
+    FR1: Users can sign up with email
+      - S1.1 (must): As a new user, I want to sign up with email and password, so that I can access the app — not started
+      - S1.2 (should): As a new user, I want to verify my email, so that my account is secure — not started
+    FR2: Users can recover forgotten passwords
+      - S2.1 (must): As an existing user, I want to reset my password via email link, so that I can regain access — not started
+
+  ### Capability Area: Profiles
+    FR3: Users can edit their profile
+      - S3.1 (should): As a logged-in user, I want to update my display name, so that others see me correctly — not started
+
+  Pick a story by ID (e.g., S1.1):
+  ```
+
+  When the user picks a story:
+  - Use the story as the source of intent for the spec
+  - Store the PRD path + story ID for `prd_ref` (e.g., `prds/prd-2026-04-11-auth.md#S1.1`)
+  - Mark the story's status as `in spec` in the PRD file (and save)
+  - **Skip section 4** (intent already captured) and go straight to section 5
+
 - **[S] Separate**: Continue to section 4.
 
 **If no pending PRDs** → continue to section 4.

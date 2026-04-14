@@ -1,6 +1,6 @@
 # Step 4: Review & Approve
 
-**Goal**: Present the complete PRD, iterate on edits if needed, and finalize on approval. This is **user interaction #3 of 3**.
+**Goal**: Present the complete PRD with stats and self-check findings, iterate on edits if needed, finalize on approval. This is **user interaction #3 of 3**.
 
 **Previous step**: [step-03-generate.md](step-03-generate.md)
 
@@ -11,11 +11,24 @@
 Read the current draft PRD file fully. You should see:
 
 - Frontmatter with `status: 'draft'` and `stepsCompleted: [1, 2, 3]`
-- All sections filled: Overview, User Stories, Scope, Expected Behavior, Acceptance Criteria, Open Questions
+- All sections filled: Executive Summary, Success Criteria, Product Scope, User Journeys, Functional Requirements (with capability areas + FRs + stories), Non-Functional Requirements, optional Domain Requirements, Open Questions
 
 If anything is missing, return to step-03 and finish generating before continuing.
 
-## 2. Present for Approval (User Interaction #3)
+## 2. Compute Stats
+
+Hold internally for the presentation:
+- `capability_area_count`
+- `fr_count`
+- `story_count` (split by must / should / could)
+- `nfr_count`
+- `success_criteria_count`
+- `domain_req_count` (0 if section omitted)
+- `open_questions_count`
+- `out_of_scope_count`
+- `journeys_count`
+
+## 3. Present for Approval (User Interaction #3)
 
 Show the **complete PRD** plus stats and any review notes from step-03:
 
@@ -26,10 +39,14 @@ Show the **complete PRD** plus stats and any review notes from step-03:
 {If linked to brief}: **Brief**: `{brief_ref}`
 
 ### Stats
-- {story_count} user stories ({must_count} must / {should_count} should / {could_count} could)
-- {ac_count} acceptance criteria
-- {out_of_scope_count} explicit out-of-scope items
-- {open_questions_count} open questions
+- **Capability areas**: {capability_area_count}
+- **Functional Requirements**: {fr_count}
+- **User Stories**: {story_count} ({must_count} must / {should_count} should / {could_count} could)
+- **Non-Functional Requirements**: {nfr_count}
+- **Success Criteria (SMART)**: {success_criteria_count}
+- **Out of Scope items**: {out_of_scope_count}
+{If domain section included}: - **Domain Requirements**: {domain_req_count}
+- **Open Questions**: {open_questions_count}
 
 {If step-03 surfaced review notes}:
 ### Review Notes
@@ -44,25 +61,31 @@ Show the **complete PRD** plus stats and any review notes from step-03:
 [A] Approve  [E] Edit a section  [C] Cancel
 ```
 
-## 3. Handle Choice
+## 4. Handle Choice
 
 ### [A] Approve
-→ continue to section 4 (Finalize)
+→ continue to section 5 (Finalize)
 
 ### [E] Edit
 - Ask: "Which section needs changes, and what should change?"
 - Apply the edits to the PRD file
-- Re-run the silent self-check from step-03 (section 5) since edits may invalidate it
-- Re-present the complete PRD (loop back to section 2)
+- Re-run the silent self-check from step-03 (section 5) since edits may invalidate the SMART/density/coverage checks
+- Re-present the complete PRD (loop back to section 3)
 
 The user can edit as many times as needed. **Do not halt for confirmation between edits** — just apply, re-check, re-present.
+
+Common edit requests and how to handle:
+- "Add an FR to Area X" → add it, re-number subsequent FRs only if user explicitly wants, otherwise append
+- "Tighten this NFR" → enforce SMART format
+- "Move FR2 to Growth" → move the FR's MVP-priority stories to Growth scope, update story priorities
+- "Change persona X to Y" → update across stories, journeys, and Executive Summary
 
 ### [C] Cancel
 - Confirm: "Discard the PRD, or keep it as a draft for later?"
 - **Discard** → delete the file
-- **Keep** → leave the file on disk with `status: draft` and current `stepsCompleted` so it can be resumed via step-01's resume detection
+- **Keep** → leave the file on disk with `status: draft` and current `stepsCompleted` so step-01's resume detection picks it up next time
 
-## 4. Finalize
+## 5. Finalize
 
 On approval:
 
@@ -81,12 +104,19 @@ On approval:
 
 **File**: _rapid/output/prds/prd-{date}-{slug}.md
 **Status**: approved
-**Stories**: {story_count} ({must_count} must / {should_count} should / {could_count} could)
+
+### Capability Contract Locked
+- {capability_area_count} capability areas
+- {fr_count} Functional Requirements
+- {story_count} stories ({must_count} must / {should_count} should / {could_count} could)
+- {nfr_count} NFRs
 
 ### Recommended Next Step
-- `rapid create-spec` — pick a story from this PRD and turn it into an implementation spec
+- `rapid create-spec` — pick a story from this PRD and turn it into a tech spec
 
-The PRD is now visible to `rapid create-spec`, which will offer its stories when invoked. As specs get implemented, the PRD's status will progress: `approved` → `in-progress` → `done`.
+The PRD is now visible to `rapid create-spec`, which will offer its stories when invoked. As specs get implemented, the PRD's status progresses: `approved` → `in-progress` (first story picked up) → `done` (all `must` stories implemented).
+
+Story status updates (`not started` → `in spec` → `in dev` → `done`) are maintained by `create-spec` and `dev`.
 ```
 
 The PRD is done. No more steps to load.
