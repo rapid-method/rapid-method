@@ -10,15 +10,31 @@ RAPID has three flows: **Initiation** (set up your project), **Plan** (define fe
 
 ## Initiation Flow
 
-The initiation flow sets up project knowledge that every development task will use. Run once per project.
+The initiation flow sets up project knowledge that every development task will use. Run once per project. There are two paths, depending on whether you already have code.
+
+### Existing Project
+
+If you already have code, start by documenting what exists:
+
+```
+rapid create-architecture  →  rapid create-patterns  →  rapid create-brief
+```
+
+1. **Architecture** — Auto-detects tech stack, documents structure, modules, dependencies
+2. **Patterns** — Scans code for conventions, validates with you, creates standards doc
+3. **Product Brief** — Defines the next feature or product requirements
+
+### New Project
+
+If starting from scratch, define what you're building first:
 
 ```
 rapid create-brief  →  rapid create-architecture  →  rapid create-patterns
 ```
 
 1. **Product Brief** — Vision, target users, core features, success metrics
-2. **Architecture** — Document (or plan) the tech stack, structure, and key modules
-3. **Patterns** — Capture (or set) coding standards and conventions
+2. **Architecture** — Plan the tech stack, structure, and key modules
+3. **Patterns** — Set coding standards before the first line of code
 
 ---
 
