@@ -269,11 +269,11 @@
     {
       "id": "plan-prd-text",
       "type": "text",
-      "x": 588.671142578125,
-      "y": 176.1,
-      "width": 322.65771484375,
-      "height": 72.8,
-      "text": "PRD\nDiscovery → User Stories → Scope → Approve\nGuides vague ideas into concrete requirements\nTracks features across multiple specs",
+      "x": 590,
+      "y": 186.25,
+      "width": 320,
+      "height": 52.5,
+      "text": "PRD\nTurns vague ideas into\nconcrete, tracked requirements",
       "fontSize": 14,
       "fontFamily": 1,
       "textAlign": "center",
@@ -299,9 +299,9 @@
       "strokeStyle": "solid",
       "frameId": null,
       "verticalAlign": "middle",
-      "originalText": "PRD\nDiscovery → User Stories → Scope → Approve\nGuides vague ideas into concrete requirements\nTracks features across multiple specs",
+      "originalText": "PRD\nTurns vague ideas into\nconcrete, tracked requirements",
       "autoResize": true,
-      "lineHeight": 1.3
+      "lineHeight": 1.25
     },
     {
       "id": "plan-to-dev-arrow",
@@ -540,11 +540,11 @@
     {
       "id": "dev-spec-text",
       "type": "text",
-      "x": 1019.0984497070312,
-      "y": 176.1,
-      "width": 301.8031005859375,
-      "height": 72.8,
-      "text": "Spec\nCheck PRDs → Clarify → Scan → Questions\n→ Write Spec → Approve\nFrozen: Intent · Boundaries · I/O",
+      "x": 1010,
+      "y": 186.25,
+      "width": 320,
+      "height": 52.5,
+      "text": "Spec\nThe contract between intent and code\nplan it before you build",
       "fontSize": 14,
       "fontFamily": 1,
       "textAlign": "center",
@@ -570,9 +570,9 @@
       "strokeStyle": "solid",
       "frameId": null,
       "verticalAlign": "middle",
-      "originalText": "Spec\nCheck PRDs → Clarify → Scan → Questions\n→ Write Spec → Approve\nFrozen: Intent · Boundaries · I/O",
+      "originalText": "Spec\nThe contract between intent and code\nplan it before you build",
       "autoResize": true,
-      "lineHeight": 1.3
+      "lineHeight": 1.25
     },
     {
       "id": "arr-dev-2",
@@ -661,11 +661,11 @@
     {
       "id": "dev-impl-text",
       "type": "text",
-      "x": 1036.3140869140625,
-      "y": 289.5,
-      "width": 267.371826171875,
-      "height": 91,
-      "text": "Development\nStep 1: Branch (semantic naming)\nStep 2: Implement + AI Code Review\nStep 3: Human Review + Commit\n[C] Commit · [R] Review · [X] Discard",
+      "x": 1010,
+      "y": 308.75,
+      "width": 320,
+      "height": 52.5,
+      "text": "Development\nBuild, review, and ship\nthe change safely",
       "fontSize": 14,
       "fontFamily": 1,
       "textAlign": "center",
@@ -691,9 +691,9 @@
       "strokeStyle": "solid",
       "frameId": null,
       "verticalAlign": "middle",
-      "originalText": "Development\nStep 1: Branch (semantic naming)\nStep 2: Implement + AI Code Review\nStep 3: Human Review + Commit\n[C] Commit · [R] Review · [X] Discard",
+      "originalText": "Development\nBuild, review, and ship\nthe change safely",
       "autoResize": true,
-      "lineHeight": 1.3
+      "lineHeight": 1.25
     },
     {
       "id": "or-line",
@@ -813,11 +813,11 @@
     {
       "id": "dev-oneshot-text",
       "type": "text",
-      "x": 1041.8049926757812,
-      "y": 457.7,
-      "width": 256.3900146484375,
-      "height": 54.599999999999994,
-      "text": "Oneshot (simple changes only)\nClarify → Complexity Check → Branch\n→ Implement → Verify → Commit",
+      "x": 1010,
+      "y": 467.5,
+      "width": 320,
+      "height": 35.0,
+      "text": "Oneshot (simple changes only)\nFrom request to commit in one pass",
       "fontSize": 14,
       "fontFamily": 1,
       "textAlign": "center",
@@ -843,9 +843,9 @@
       "strokeStyle": "solid",
       "frameId": null,
       "verticalAlign": "middle",
-      "originalText": "Oneshot (simple changes only)\nClarify → Complexity Check → Branch\n→ Implement → Verify → Commit",
+      "originalText": "Oneshot (simple changes only)\nFrom request to commit in one pass",
       "autoResize": true,
-      "lineHeight": 1.3
+      "lineHeight": 1.25
     },
     {
       "id": "init-header",
