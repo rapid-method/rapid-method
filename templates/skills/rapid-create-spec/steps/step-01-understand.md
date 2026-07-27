@@ -15,7 +15,7 @@
 
 ## 2. Check for WIP Specs
 
-Look for `_rapid/output/specs/spec-*-wip.md`.
+Run the shell command `npx rapid-method pending-specs` and use the entries with `status: "wip"`. It returns compact JSON (path, title, `step`, created, task counts) — **do not open the spec files yourself** just to build this list; only read a WIP fully when the user chooses **[C] Continue**.
 
 **If one or more WIPs exist**:
 
@@ -41,9 +41,9 @@ Found spec(s) in progress:
 
 ## 3. Check for Pending PRDs
 
-Look in `_rapid/output/prds/` for PRDs with status `approved` or `in-progress`.
+Run the shell command `npx rapid-method pending-prds`. It returns compact JSON of PRDs with status `approved` or `in-progress`, each already carrying `stories_not_started` / `stories_total`. Use this to build the list below — **do not open any PRD file yet**. Only read the chosen PRD fully when the user picks **[P]** (see below).
 
-**If pending PRDs exist**:
+**If the command returns a non-empty list**:
 
 PRDs use a nested structure: capability areas → Functional Requirements (FR1, FR2...) → user stories (S1.1, S1.2...). Stories carry a `Status` column (`not started` / `in spec` / `in dev` / `done`). Filter to **stories with status `not started`** when offering picks.
 
@@ -84,7 +84,7 @@ Found pending PRDs:
 
 - **[S] Separate**: Continue to section 4.
 
-**If no pending PRDs** → continue to section 4.
+**If `npx rapid-method pending-prds` returns an empty list** → continue to section 4.
 
 ## 4. Capture Initial Request (User Interaction #1)
 

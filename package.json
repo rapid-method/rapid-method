@@ -7,7 +7,7 @@
     "rapid-method": "./src/cli.js"
   },
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "node --test \"tests/**/*.test.js\""
   },
   "keywords": [
     "ai",

@@ -8,7 +8,11 @@
 
 ## 1. Find the Spec
 
-Look in `_rapid/output/specs/` for specs with status `ready-for-dev` or `in-progress`.
+Run the shell command `npx rapid-method pending-specs`. It returns compact JSON of actionable specs, each with `status`, `title`, `created`, `branch`, and `tasks_done` / `tasks_total`. Filter to:
+- `status: "in-progress"` → the **resume case** below
+- `status: "ready-for-dev"` → the **fresh case** below
+
+**Do not open any spec file to build this list** — only read the chosen spec fully in section 2.
 
 ### Resume case (status `in-progress`)
 

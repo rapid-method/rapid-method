@@ -8,8 +8,10 @@ function run() {
   print('  npx rapid-method <command>');
   print(bar);
   print(color('Commands:', 'yellow'));
-  print('  install     Install RAPID in current project');
-  print('  help        Show this help message');
+  print('  install         Install RAPID in current project');
+  print('  pending-prds    List pending PRDs (JSON) for the create-spec skill');
+  print('  pending-specs   List actionable specs (JSON) for the dev skill');
+  print('  help            Show this help message');
   print(bar);
   print(color('Example:', 'yellow'));
   print('  npx rapid-method install');
