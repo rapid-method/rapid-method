@@ -1,6 +1,6 @@
 # Step 4: Review & Finalize
 
-**Goal**: Present the complete spec, iterate on edits if needed, and finalize on approval. This is **user interaction #3 of 3**.
+**Goal**: Present the complete spec, iterate on edits if needed, and finalize on approval. This is the review-and-approval interaction.
 
 **Previous step**: [step-03-generate.md](step-03-generate.md)
 

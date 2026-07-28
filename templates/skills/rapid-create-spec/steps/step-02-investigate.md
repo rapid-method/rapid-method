@@ -1,6 +1,6 @@
 # Step 2: Investigate & Ask Informed Questions
 
-**Goal**: Scan the codebase silently to build a mental model, then ask **one batch** of 2-5 sharp questions informed by what you found. This is **user interaction #2 of 3**.
+**Goal**: Scan the codebase silently to build a mental model, then ask however many sharp questions you genuinely need, informed by what you found. Deduce the simple; ask the complex.
 
 **Previous step**: [step-01-understand.md](step-01-understand.md)
 **Next step**: [step-03-generate.md](step-03-generate.md)
@@ -41,9 +41,11 @@ Capture in your head — do not show the user yet:
 - What the rough task order will be
 - What you're **uncertain** about — these uncertainties become your questions
 
-## 3. Ask Informed Questions (User Interaction #2)
+## 3. Ask What You Genuinely Need (User Interaction #2)
 
-Ask **2-5 sharp questions in one batch**. Make them specific to the actual code, not generic. Each question should resolve a real uncertainty that would otherwise force you to fantasize.
+**Deduce the simple and obvious from the code and conventions; ask the complex, ambiguous, or high-impact.** Guessing wrong here produces a spec that doesn't match the intent — far more expensive than one more question.
+
+Group your questions so the user isn't answering one at a time, but **don't force a fixed count**, and **follow up** if an answer opens a new uncertainty. If the user wants to explore or think out loud, engage. Make every question specific to the actual code; skip anything you can safely infer.
 
 ### Bad vs good
 

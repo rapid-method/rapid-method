@@ -1,6 +1,6 @@
 # Step 4: Review & Approve
 
-**Goal**: Present the complete PRD with stats and self-check findings, iterate on edits if needed, finalize on approval. This is **user interaction #3 of 3**.
+**Goal**: Present the complete PRD with stats and self-check findings, iterate on edits if needed, finalize on approval. This is the review-and-approval interaction.
 
 **Previous step**: [step-03-generate.md](step-03-generate.md)
 

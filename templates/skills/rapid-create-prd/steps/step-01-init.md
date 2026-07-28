@@ -1,6 +1,6 @@
 # Step 1: Initialize
 
-**Goal**: Load context, detect resumable drafts, find related briefs, and capture the user's initial product/feature idea. This is **user interaction #1 of 3**.
+**Goal**: Load context, detect resumable drafts, find related briefs, and capture the user's initial product/feature idea. This is the first user interaction.
 
 **Next step**: [step-02-discover.md](step-02-discover.md)
 

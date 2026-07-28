@@ -33,7 +33,7 @@ stepsCompleted: [1, 2, 3]
 
 ## 3. Generate Every Section
 
-Fill the PRD sections directly from discovery + brief. **Do not ask the user anything.** If something is uncertain, mark it `[needs validation]` — don't fantasize.
+Fill the PRD sections directly from discovery + brief. Generation is heads-down writing — questions belonged in step-02, so you shouldn't need to ask here. But if a genuinely blocking ambiguity slipped through, **ask rather than fantasize**; mark smaller uncertainties `[needs validation]`.
 
 > **Information density rule**: Every sentence carries weight. Eliminate filler, hedging, and conversational padding as you write.
 

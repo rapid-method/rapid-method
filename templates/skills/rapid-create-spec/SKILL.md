@@ -28,13 +28,13 @@ Each phase has its own step file. Steps load **just-in-time** — never read ahe
 
 ## Interaction Model
 
-The user is in the loop at each step, but interactions stay tight:
+Three steps — but questions are **free, not capped**:
 
 1. **Intent** — "what do you want to build?" (step-01)
-2. **Questions** — 2-5 informed questions after the code scan (step-02)
+2. **Investigate & ask** — scan the code, then ask whatever you genuinely need (step-02). Deduce the simple and obvious from the code and conventions; **ask** the complex, ambiguous, or high-impact — as many exchanges as it takes. Guessing wrong here produces a spec that doesn't match the intent, which is far more expensive than one more question.
 3. **Review** — essentials asked as questions, then the full spec for A/E/C approval (step-04)
 
-Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint, so the user can steer before you move on. Generation itself is silent — don't narrate the writing or ask the user to validate intermediate sections mid-draft; trust the scan and your questions, then surface the whole thing at the step boundary.
+Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint. Take the `[D]` path seriously: if the user wants to explore or think out loud, engage. Generation itself stays silent (don't narrate the writing), but never pad step-02 with questions you could safely infer — nor guess on something the user would need to correct.
 
 ## Core Principles
 

@@ -40,7 +40,7 @@ stepsCompleted: [1, 2, 3]
 
 ## 3. Generate Every Section
 
-Fill the spec sections directly from intent + investigation. **Do not ask the user anything.** If something is uncertain, you should have asked in step-02 — at this point, make the best call from context and surface it as a Review Note in step-04 if necessary.
+Fill the spec sections directly from intent + investigation. Generation is heads-down writing — questions belonged in step-02. But if a genuinely blocking ambiguity slipped through, **ask rather than guess wrong**; otherwise make the best call from context and surface it as a Review Note in step-04.
 
 ### Intent
 

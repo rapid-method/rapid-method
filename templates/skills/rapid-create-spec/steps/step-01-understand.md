@@ -1,6 +1,6 @@
 # Step 1: Understand the Request
 
-**Goal**: Check for work in progress, check for pending PRDs, capture the user's initial request. This is **user interaction #1 of 3**.
+**Goal**: Check for work in progress, check for pending PRDs, capture the user's initial request. This is the first user interaction.
 
 **Next step**: [step-02-investigate.md](step-02-investigate.md)
 

@@ -1,6 +1,6 @@
 # Step 2: Discovery — Read Brief, Ask Informed Questions
 
-**Goal**: Read the linked brief silently (if any), then ask **one batch** of 6-10 sharp questions that surface what the PRD needs beyond what the brief already covers. This is **user interaction #2 of 3**.
+**Goal**: Read the linked brief silently (if any), then ask however many sharp questions you genuinely need to surface what the PRD requires beyond the brief. Deduce the simple; ask the complex.
 
 **Previous step**: [step-01-init.md](step-01-init.md)
 **Next step**: [step-03-generate.md](step-03-generate.md)
@@ -42,11 +42,13 @@ Hold in your head:
 ### What you're uncertain about
 These become your questions.
 
-## 3. Ask Informed Questions (User Interaction #2)
+## 3. Ask What You Genuinely Need (User Interaction #2)
 
-Ask **6-10 sharp questions in one batch**. Make them specific to the brief and the feature, not generic. Each question should resolve a real uncertainty.
+**Deduce the simple and obvious from the brief; ask the complex, ambiguous, or high-impact.** A wrong guess on something that matters produces a PRD that doesn't match what the user wants — far more expensive than one more question.
 
-### Question categories (pick ~6-10 across these)
+Group your questions so the user isn't answering one at a time, but **don't force a fixed count**, and **follow up** if an answer opens a new uncertainty. If the user wants to explore or think out loud, go with it — don't cut the conversation short to rush ahead. Make every question specific to the brief and feature; skip anything you can safely infer.
+
+### Question categories (draw from these as needed)
 
 **A. Scope confirmation** (always ask)
 - "Is this PRD for the whole product from the brief, or just {area X}?"

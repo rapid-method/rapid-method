@@ -29,19 +29,19 @@ You enforce the **information density principle**: every sentence carries weight
 | # | Step | Purpose | User halt? |
 |---|------|---------|------------|
 | 1 | [step-01-init](steps/step-01-init.md) | Load context, find brief, capture initial idea | ✋ Yes (intent) |
-| 2 | [step-02-discover](steps/step-02-discover.md) | Read brief, ask one batch of informed questions | ✋ Yes (questions) |
+| 2 | [step-02-discover](steps/step-02-discover.md) | Read brief, ask the informed questions you genuinely need | ✋ Yes (questions) |
 | 3 | [step-03-generate](steps/step-03-generate.md) | Silently generate the full PRD | (no halt) |
 | 4 | [step-04-review](steps/step-04-review.md) | Present, iterate, approve | ✋ Yes (review) |
 
 ## Interaction Model
 
-The user is in the loop at each step, but interactions stay tight:
+Three steps — but questions are **free, not capped**:
 
 1. **Initial idea** — "what product/feature is this PRD for?" (step-01)
-2. **Informed questions** — one batch after reading the brief (step-02)
+2. **Discovery** — read the brief, then ask whatever you genuinely need (step-02). Deduce the simple and obvious from the brief; **ask** the complex, ambiguous, or high-impact — as many exchanges as it takes. A wrong guess on something that matters produces a PRD that doesn't match what the user wants, which is far more expensive than one more question.
 3. **Review** — essentials asked as questions, then the full PRD for A/E/C approval (step-04)
 
-Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint, so the user can steer before you move on. The PRD is substantive (FRs, NFRs, journeys, stories), but keep questioning minimal by leaning hard on the brief for context.
+Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint. Take the `[D]` path seriously: if the user wants to explore or think out loud, engage — don't rush to generation. The balance: never pad with questions you could safely infer, but never guess on something the user would need to correct.
 
 ## Information Density Principles (Anti-Patterns to Eliminate)
 
