@@ -62,7 +62,7 @@ Document your project's architecture for AI-assisted development.
 | Update | `--update` | Re-analyze and highlight changes |
 | Auto | `--auto` | Minimal interaction, auto-detected info only |
 
-**Output:** `_rapid/project-architecture.md`
+**Output:** `_rapid-output/architecture.md`
 
 **Next:** `rapid create-patterns`
 
@@ -89,7 +89,7 @@ Capture coding conventions and standards from your project.
 - Testing (structure, naming)
 - Git (branches, commits)
 
-**Output:** `_rapid/project-patterns.md`
+**Output:** `_rapid-output/patterns.md`
 
 **Next:** Start developing with `rapid create-prd` or `rapid create-spec`
 

@@ -213,10 +213,10 @@ ${platformsList || '  # none'}
 # Paths
 output_folder: "{project-root}/${this.outputFolderName}"
 brief_file: "{project-root}/${this.outputFolderName}/brief.md"
+architecture_file: "{project-root}/${this.outputFolderName}/architecture.md"
+patterns_file: "{project-root}/${this.outputFolderName}/patterns.md"
 prds_folder: "{project-root}/${this.outputFolderName}/prds"
 specs_folder: "{project-root}/${this.outputFolderName}/specs"
-project_architecture: "{project-root}/_rapid/project-architecture.md"
-project_patterns: "{project-root}/_rapid/project-patterns.md"
 templates_folder: "{project-root}/_rapid/templates"
 
 # Workflow

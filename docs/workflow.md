@@ -134,7 +134,7 @@ After approval, **Intent**, **Boundaries**, and **I/O** are locked. Implementati
 
 - Capture baseline commit
 - Execute each task from the spec, following frozen sections
-- Follow `project-patterns.md` conventions
+- Follow `patterns.md` conventions
 - Run tests, build, and lint
 - **AI self-review** — check against spec intent, ACs, patterns, edge cases
 - **Classify findings**:

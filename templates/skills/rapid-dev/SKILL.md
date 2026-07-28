@@ -45,8 +45,8 @@ Do **not** halt for: minor pattern questions, formatting choices, "should I add 
 ## Prerequisites
 
 1. Load `_rapid/config.yaml`
-2. Load `_rapid/project-architecture.md` if exists
-3. Load `_rapid/project-patterns.md` if exists
+2. Load `_rapid-output/architecture.md` if exists
+3. Load `_rapid-output/patterns.md` if exists
 4. Communicate in `{communication_language}` from config
 5. **An approved spec must exist** with status `ready-for-dev`
 

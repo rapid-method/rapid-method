@@ -19,7 +19,7 @@ If `brief_path` was set in step-01, read the brief file in full. Extract everyth
 - **Constraints & assumptions** — feed NFRs and Domain Requirements
 - **Future Vision** — feeds the Vision phase of Product Scope
 
-If no brief is linked, build context from `_rapid/project-architecture.md` and `_rapid/project-patterns.md` if they exist. Without a brief, you'll need to ask more discovery questions.
+If no brief is linked, build context from `_rapid-output/architecture.md` and `_rapid-output/patterns.md` if they exist. Without a brief, you'll need to ask more discovery questions.
 
 ## 2. Build a Mental Model (Silent)
 

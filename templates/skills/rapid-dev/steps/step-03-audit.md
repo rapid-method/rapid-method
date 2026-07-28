@@ -45,7 +45,7 @@ For each section of the spec, generate findings:
 - Did any change skip something the `Always` list requires? → `missing_required` (High)
 
 ### Patterns
-- Does the new code follow conventions from `_rapid/project-patterns.md` and adjacent code?
+- Does the new code follow conventions from `_rapid-output/patterns.md` and adjacent code?
 - Mismatches → `pattern_violation` (Medium)
 
 ### Edge Cases

@@ -42,7 +42,7 @@ Present detected information and ask:
 ### 4. Generate
 
 Use template: `_rapid/templates/project-architecture-template.md`
-Save to: `_rapid/project-architecture.md`
+Save to: `_rapid-output/architecture.md`
 
 ### 5. Review & Confirm
 
@@ -54,7 +54,7 @@ Recap what was captured and let the user steer before finalizing (skip the halt 
 **Stack**: {one-line summary of the detected stack}
 **Documented**: Overview · Structure · Modules · Domain · Setup · Deployment
 
-Saved to: _rapid/project-architecture.md
+Saved to: _rapid-output/architecture.md
 
 [A] Looks right   [D] Discuss / refine a section
 ```
@@ -68,7 +68,7 @@ Saved to: _rapid/project-architecture.md
 - **Auto** (`--auto`): Minimal interaction, detected info only
 
 ## Output
-- `_rapid/project-architecture.md`
+- `_rapid-output/architecture.md`
 
 ## Next Steps
 - `rapid create-patterns` — Define coding patterns

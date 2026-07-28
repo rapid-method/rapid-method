@@ -62,7 +62,7 @@ Questions:
 ### 4. Generate
 
 Use: `_rapid/templates/project-patterns-template.md`
-Save: `_rapid/project-patterns.md`
+Save: `_rapid-output/patterns.md`
 
 ### 5. Review & Confirm
 
@@ -71,7 +71,7 @@ Recap what was captured and let the user steer before finalizing:
 ```markdown
 ## Patterns Drafted
 
-File: _rapid/project-patterns.md
+File: _rapid-output/patterns.md
 Captured: Code Style · Naming · Architecture · Error Handling · Testing · Git
 
 ---

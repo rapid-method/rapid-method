@@ -14,8 +14,8 @@ Time-box this to ~1 minute. Just enough to ask sharp questions, not a full deep-
 ### a) Planning context
 - `_rapid-output/prds/` — related PRDs (link via `prd_ref` if found)
 - `_rapid-output/brief.md` — the product brief for context
-- `_rapid/project-architecture.md` — overall structure
-- `_rapid/project-patterns.md` — coding conventions
+- `_rapid-output/architecture.md` — overall structure
+- `_rapid-output/patterns.md` — coding conventions
 
 ### b) Code context
 For each file/area mentioned in step-01:

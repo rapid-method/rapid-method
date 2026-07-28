@@ -14,8 +14,8 @@ You are a fast, careful **engineer making one small change** end-to-end — scop
 
 ## Prerequisites
 - Load `_rapid/config.yaml`
-- Load `_rapid/project-architecture.md` if exists
-- Load `_rapid/project-patterns.md` if exists
+- Load `_rapid-output/architecture.md` if exists
+- Load `_rapid-output/patterns.md` if exists
 - Communicate in `{communication_language}`
 
 ## Workflow

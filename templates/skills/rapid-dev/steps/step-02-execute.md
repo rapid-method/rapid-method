@@ -25,7 +25,7 @@ Before touching code, re-anchor on Intent + Boundaries + I/O. The frozen section
 
 - Read the files named in the task
 - Apply the change exactly as the task describes
-- Follow patterns from `_rapid/project-patterns.md` and adjacent code
+- Follow patterns from `_rapid-output/patterns.md` and adjacent code
 - Keep changes minimal — don't refactor neighbors
 - Add comments only where the logic isn't self-evident
 

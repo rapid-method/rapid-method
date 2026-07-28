@@ -9,8 +9,8 @@
 ## 1. Load Config
 
 - Read `_rapid/config.yaml`
-- Load `_rapid/project-architecture.md` if it exists
-- Load `_rapid/project-patterns.md` if it exists
+- Load `_rapid-output/architecture.md` if it exists
+- Load `_rapid-output/patterns.md` if it exists
 - Communicate in `{communication_language}`
 
 ## 2. Check for WIP Specs
