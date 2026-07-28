@@ -24,7 +24,7 @@ Write the complete brief in one pass. Fill every section from the template using
 - **Lead with the problem**, not the solution
 - **Concrete > abstract** — "reduces onboarding from 3 days to 30 minutes" beats "improves onboarding"
 - **Confident voice** — this is a decision document, not a proposal
-- **Tight** — overflow detail goes in Open Questions or in the PRD later
+- **Tight** — overflow detail goes in the PRD later
 - **Executive Summary last** — write it after all sections are complete so it reflects the full picture
 
 ## 3. Fan Out Review Subagents

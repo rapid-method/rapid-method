@@ -11,7 +11,7 @@
 Read the current draft PRD file fully. You should see:
 
 - Frontmatter with `status: 'draft'` and `stepsCompleted: [1, 2, 3]`
-- All sections filled: Executive Summary, Success Criteria, Product Scope, User Journeys, Functional Requirements (with capability areas + FRs + stories), Non-Functional Requirements, optional Domain Requirements, Open Questions
+- All sections filled: Executive Summary, Success Criteria, Product Scope, User Journeys, Functional Requirements (with capability areas + FRs + stories), Non-Functional Requirements, optional Domain Requirements
 
 If anything is missing, return to step-03 and finish generating before continuing.
 
@@ -46,7 +46,6 @@ Show the **complete PRD** plus stats and any review notes from step-03:
 - **Success Criteria (SMART)**: {success_criteria_count}
 - **Out of Scope items**: {out_of_scope_count}
 {If domain section included}: - **Domain Requirements**: {domain_req_count}
-- **Open Questions**: {open_questions_count}
 
 {If step-03 surfaced review notes}:
 ### Review Notes

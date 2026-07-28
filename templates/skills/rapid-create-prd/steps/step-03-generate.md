@@ -33,7 +33,7 @@ stepsCompleted: [1, 2, 3]
 
 ## 3. Generate Every Section
 
-Fill the PRD sections directly from discovery + brief. **Do not ask the user anything.** If something is uncertain, surface it as an Open Question — don't fantasize.
+Fill the PRD sections directly from discovery + brief. **Do not ask the user anything.** If something is uncertain, mark it `[needs validation]` — don't fantasize.
 
 > **Information density rule**: Every sentence carries weight. Eliminate filler, hedging, and conversational padding as you write.
 
@@ -59,7 +59,7 @@ Sharpen the brief's success metrics into SMART criteria. Each row must have a sp
 | SC1 | {behavioral or business outcome} | {specific number/threshold + timeframe} | {tool / how} | {brief section: persona / journey / vision} |
 ```
 
-If the brief's metrics are vague and the user didn't sharpen them in step-02, leave a row in **Open Questions** but still write the best target you can derive — flag it as `[needs validation]`.
+If the brief's metrics are vague and the user didn't sharpen them in step-02, still write the best target you can derive — flag it as `[needs validation]`.
 
 ### Product Scope (Phased)
 
@@ -174,7 +174,7 @@ For each capability area captured in step-02:
 
 Use the values from step-02. If the user gave concrete numbers, lock them in. If they punted on a category, either:
 - Skip it (don't pad the table)
-- Or write a placeholder marked `[needs validation]` and add a row to Open Questions
+- Or write a placeholder marked `[needs validation]`
 
 ```markdown
 ## Non-Functional Requirements
@@ -211,23 +211,6 @@ Triggers:
 |---|----------|-------------|-------|
 | DR1 | {standard} | {what must be true} | {how it's enforced} |
 ```
-
-### Open Questions
-
-Surface anything that came up but wasn't resolved. Including:
-- `[needs validation]` items from Success Criteria, NFRs, or Domain
-- Questions the user couldn't answer in step-02
-- Tensions you noticed while drafting (e.g. "FR3 implies a UI change, but the brief is API-only")
-
-```markdown
-## Open Questions
-
-| # | Question | Owner | Status |
-|---|----------|-------|--------|
-| 1 | {question} | {user/owner} | open |
-```
-
-If everything is resolved, write a single row: `1 | (none) | — | —`.
 
 ## 4. Save the PRD File
 

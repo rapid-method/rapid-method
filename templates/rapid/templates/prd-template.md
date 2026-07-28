@@ -166,16 +166,6 @@ Skip categories that don't apply. Don't pad with "the system shall be reliable" 
 
 ---
 
-## Open Questions
-
-Unresolved decisions that need to be answered before or during implementation.
-
-| # | Question | Owner | Status |
-|---|----------|-------|--------|
-| 1 | {question} | {owner} | open |
-
----
-
 ## Status Tracking (auto-maintained)
 
 The PRD's `status` field reflects implementation progress across its stories:

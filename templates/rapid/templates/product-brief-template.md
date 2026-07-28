@@ -123,11 +123,3 @@ inputDocuments: []
 ## Future Vision
 
 {If this is wildly successful in 2-3 years, what does it become? Post-MVP capabilities, expansion paths, ecosystem opportunities. Keep it inspiring but not a commitment.}
-
----
-
-## Open Questions
-
-| # | Question | Owner | Status |
-|---|----------|-------|--------|
-| 1 | {question} | {owner} | open |
