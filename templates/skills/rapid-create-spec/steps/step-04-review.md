@@ -17,7 +17,7 @@ If anything is missing, return to step-03 and finish generating before continuin
 
 ## 2. Present for Approval (User Interaction #3)
 
-Show the **complete spec** plus stats and any review notes from step-03:
+Lead with a 1–2 sentence **plain-prose overview** — what this spec builds and the approach it takes — before the details. Then a compact scope line (size + complexity is a real approval signal for a spec), any review notes, and the full spec.
 
 ```markdown
 ## Tech Spec Ready: {title}
@@ -25,10 +25,9 @@ Show the **complete spec** plus stats and any review notes from step-03:
 **Type**: {type}  |  **Branch**: {branch}
 {If linked}: **PRD**: `{prd_ref}`
 
-### Stats
-- {task_count} tasks across {file_count} files
-- {ac_count} acceptance criteria
-- Complexity: {optimal | acceptable | consider splitting}
+{1–2 sentence overview: what this spec builds and the approach it takes.}
+
+**Scope**: {task_count} tasks across {file_count} files · {ac_count} acceptance criteria · complexity {optimal | acceptable | consider splitting}
 
 {If step-03 surfaced review notes}:
 ### Review Notes

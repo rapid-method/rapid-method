@@ -30,7 +30,7 @@ Hold internally for the presentation:
 
 ## 3. Present for Approval (User Interaction #3)
 
-Show the **complete PRD** plus stats and any review notes from step-03:
+Lead with a short **plain-prose overview** — 2–4 sentences on the capability this PRD covers, who it serves, the problem it addresses, and the scope shape (MVP vs later). The gist first, not a table of counts. Then any review notes, then the full PRD for the read.
 
 ```markdown
 ## PRD Ready: {title}
@@ -38,14 +38,7 @@ Show the **complete PRD** plus stats and any review notes from step-03:
 **Feature**: `{feature_slug}`
 {If linked to brief}: **Brief**: `{brief_ref}`
 
-### Stats
-- **Capability areas**: {capability_area_count}
-- **Functional Requirements**: {fr_count}
-- **User Stories**: {story_count} ({must_count} must / {should_count} should / {could_count} could)
-- **Non-Functional Requirements**: {nfr_count}
-- **Success Criteria (SMART)**: {success_criteria_count}
-- **Out of Scope items**: {out_of_scope_count}
-{If domain section included}: - **Domain Requirements**: {domain_req_count}
+{2–4 sentence overview in prose: the capability, who it serves, the problem it addresses, and the MVP-vs-later scope shape.}
 
 {If step-03 surfaced review notes}:
 ### Review Notes

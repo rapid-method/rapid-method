@@ -70,21 +70,15 @@ From the subagent results:
 
 ## 5. Present to User
 
+Lead with a short **plain-prose overview** — 2–4 sentences on what the product is, who it's for, the core problem it solves, and the shape of the scope (what's in the MVP vs deferred). This is the gist the user can nod along to, **not** a dashboard of counts. Then surface any review notes, and the full brief for the actual read.
+
 ```
 ## Product Brief Ready
 
-**Title**: {title}
-**Persona**: {primary persona name + role}
-**Differentiator**: {one-line key differentiator}
-**Features**: {must_count} must / {should_count} should / {could_count} could
-**Out of Scope**: {count} items
-**Metrics**: {user_metric_count} user / {business_metric_count} business
-**MVP Gate**: {1 sentence}
-**ACs**: {ac_count} scenarios
+{2–4 sentence overview in prose: what it is, who it's for, the problem it solves, and the MVP-vs-later scope shape. Read like an executive summary spoken aloud — no lists of counts.}
 
 {If review surfaced substantive items}:
-### Review Notes
-While drafting, I noticed:
+### Worth a look before you approve
 - {substantive question, risk, or suggestion}
 - {another}
 
