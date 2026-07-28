@@ -146,6 +146,6 @@ If the user starts spec'ing v2 in detail:
 
 When all topics are covered, transition:
 
-> "That covers everything I need. Let me draft the brief — I'll have it ready for your review shortly."
+> "That covers what I need — drafting the brief now."
 
 → Read fully and follow [draft-and-review.md](draft-and-review.md).

@@ -11,6 +11,8 @@
 
 Questions are expensive — every question the user has to answer is friction. The more context you gather autonomously *before* asking, the smarter and fewer your questions will be in Stage 3.
 
+**Run this stage silently.** Don't announce that you're analyzing documents or researching the market — no "let me dig into your docs and look at competitors" narration. Do the work, then surface only the concise synthesis in section 6.
+
 ## 1. Gather Artifact Paths
 
 From Stage 1 you should have:

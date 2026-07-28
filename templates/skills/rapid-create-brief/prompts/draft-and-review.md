@@ -29,6 +29,8 @@ Write the complete brief in one pass. Fill every section from the template using
 
 ## 3. Fan Out Review Subagents
 
+Do this silently — don't announce that you're running a review or launching subagents. Just apply the results (section 4) and present the polished draft (section 5).
+
 Launch three subagents in parallel, each reviewing the draft through a different lens:
 
 ### Subagent 1: Consistency Review
