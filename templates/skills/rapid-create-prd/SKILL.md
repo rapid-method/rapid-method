@@ -33,15 +33,15 @@ You enforce the **information density principle**: every sentence carries weight
 | 3 | [step-03-generate](steps/step-03-generate.md) | Silently generate the full PRD | (no halt) |
 | 4 | [step-04-review](steps/step-04-review.md) | Present, iterate, approve | ✋ Yes (review) |
 
-## Three Interactions, Period
+## Interaction Model
 
-The user only interacts **three times**:
+The user is in the loop at each step, but interactions stay tight:
 
 1. **Initial idea** — "what product/feature is this PRD for?" (step-01)
 2. **Informed questions** — one batch after reading the brief (step-02)
-3. **Review** — present the full PRD for A/E/C approval (step-04)
+3. **Review** — essentials asked as questions, then the full PRD for A/E/C approval (step-04)
 
-The PRD is substantive (FRs, NFRs, journeys, stories), but interactions stay tight by leaning hard on the brief for context.
+Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint, so the user can steer before you move on. The PRD is substantive (FRs, NFRs, journeys, stories), but keep questioning minimal by leaning hard on the brief for context.
 
 ## Information Density Principles (Anti-Patterns to Eliminate)
 

@@ -64,24 +64,22 @@ Questions:
 Use: `_rapid/templates/project-patterns-template.md`
 Save: `_rapid/project-patterns.md`
 
-### 5. Confirm
+### 5. Review & Confirm
+
+Recap what was captured and let the user steer before finalizing:
 
 ```markdown
-## Patterns Created ✓
+## Patterns Drafted
 
 File: _rapid/project-patterns.md
-
-Sections:
-- Code Style
-- Naming
-- Architecture
-- Error Handling
-- Testing
-- Git
+Captured: Code Style · Naming · Architecture · Error Handling · Testing · Git
 
 ---
-[V] View  [E] Edit  [D] Done
+[A] Looks right   [D] Discuss / refine a section
 ```
+
+- **[A]** → done.
+- **[D]** → ask what's off, update the file, re-show.
 
 ## Notes
 

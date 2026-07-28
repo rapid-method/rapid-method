@@ -87,8 +87,15 @@ Hold internally:
 - `decisions` (the answers from the user)
 - `uncertainties_resolved` vs `uncertainties_remaining`
 
-## 5. Transition (silent — no user halt)
+## 5. Checkpoint & Transition
 
-Do **not** present a summary. Do **not** ask "shall we continue?" Move directly to generation.
+Recap what you found and decided in 1–2 lines, then let the user confirm before you write the spec:
+
+> "Here's the shape: {1-line recap of the approach + key decisions from your answers}. Ready for me to write the spec, or anything to adjust first?"
+>
+> [A] Write it   [D] Discuss / refine
+
+- **[A]** → move to generation.
+- **[D]** → resolve the open point, then re-confirm.
 
 → Read fully and follow [step-03-generate.md](step-03-generate.md).

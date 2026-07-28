@@ -89,8 +89,15 @@ Hold internally for step-02:
 
 **Do not create the PRD file yet** — it's created in step-03 once you have everything to fill it.
 
-## 6. Transition (silent — no user halt)
+## 6. Checkpoint & Transition
 
-Move directly to discovery. Do **not** ask "shall we continue?" — just go.
+Recap what this PRD will cover in 1–2 lines and let the user confirm before discovery:
+
+> "So this PRD is for {intent} at {scope size}{, linked to the {brief} brief if any}. Good to start the discovery questions, or adjust the framing first?"
+>
+> [A] Continue   [D] Discuss / refine
+
+- **[A]** → move to discovery.
+- **[D]** → refine intent/scope, then re-confirm.
 
 → Read fully and follow [step-02-discover.md](step-02-discover.md).

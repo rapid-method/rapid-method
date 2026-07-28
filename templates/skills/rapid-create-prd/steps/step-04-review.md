@@ -24,13 +24,19 @@ Hold internally for the presentation:
 - `nfr_count`
 - `success_criteria_count`
 - `domain_req_count` (0 if section omitted)
-- `open_questions_count`
 - `out_of_scope_count`
 - `journeys_count`
 
-## 3. Present for Approval (User Interaction #3)
+## 3. Ask Essentials, Then Present (User Interaction #3)
 
-Lead with a short **plain-prose overview** — 2–4 sentences on the capability this PRD covers, who it serves, the problem it addresses, and the scope shape (MVP vs later). The gist first, not a table of counts. Then any review notes, then the full PRD for the read.
+**First, put the essentials to the user as questions.** If step-03 surfaced `review_notes`, ask them in one focused batch, each with a recommended default — you drive the important calls, don't leave them to hunt an edit menu:
+
+> - "Step-03 flagged {issue}. {Concrete question} — I'd go with {default}. That, or something else?"
+> - "{another essential}"
+
+Apply their answers to the PRD. If there were no review notes, go straight to the presentation.
+
+**Then present the finished PRD** — lead with a short **plain-prose overview** (the capability, who it serves, the problem it addresses, and the MVP-vs-later scope shape), then the full PRD for the read:
 
 ```markdown
 ## PRD Ready: {title}
@@ -39,11 +45,6 @@ Lead with a short **plain-prose overview** — 2–4 sentences on the capability
 {If linked to brief}: **Brief**: `{brief_ref}`
 
 {2–4 sentence overview in prose: the capability, who it serves, the problem it addresses, and the MVP-vs-later scope shape.}
-
-{If step-03 surfaced review notes}:
-### Review Notes
-- {substantive issue, gap, or tension that needs your call}
-- {another}
 
 ### Full PRD
 

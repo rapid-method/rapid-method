@@ -116,10 +116,16 @@ Hold internally for step-03:
 - `success_criteria_smart` (sharpened SMART metrics)
 - `journeys` (detailed primary + secondary if applicable)
 - `out_of_scope` (from brief + any new ones)
-- `open_questions` (anything user couldn't answer)
 
-## 5. Transition (silent — no user halt)
+## 5. Checkpoint & Transition
 
-Do **not** present a summary. Do **not** ask "shall we continue?" Move directly to generation.
+Recap the picture in 1–2 lines and let the user confirm before you generate the PRD:
+
+> "Got it — {1-line recap of the capability shape and the key answers}. Ready for me to generate the full PRD, or anything to adjust first?"
+>
+> [A] Generate it   [D] Discuss / add more
+
+- **[A]** → move to generation.
+- **[D]** → cover the gap, then re-confirm.
 
 → Read fully and follow [step-03-generate.md](step-03-generate.md).

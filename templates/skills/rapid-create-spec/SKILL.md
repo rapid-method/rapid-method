@@ -26,15 +26,15 @@ Each phase has its own step file. Steps load **just-in-time** — never read ahe
 | 3 | [step-03-generate](steps/step-03-generate.md) | Silently generate the full spec | (no halt) |
 | 4 | [step-04-review](steps/step-04-review.md) | Present, iterate, approve, finalize | ✋ Yes (review) |
 
-## Three Interactions, Period
+## Interaction Model
 
-The user only interacts **three times** through the entire flow:
+The user is in the loop at each step, but interactions stay tight:
 
 1. **Intent** — "what do you want to build?" (step-01)
 2. **Questions** — 2-5 informed questions after the code scan (step-02)
-3. **Review** — present the full spec for A/E/C approval (step-04)
+3. **Review** — essentials asked as questions, then the full spec for A/E/C approval (step-04)
 
-Everything else is silent generation. Do **not** add reflect/confirm gates between steps. Do **not** ask the user to validate intermediate sections. Trust the scan, trust your questions, generate the spec, then surface the whole thing for review.
+Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint, so the user can steer before you move on. Generation itself is silent — don't narrate the writing or ask the user to validate intermediate sections mid-draft; trust the scan and your questions, then surface the whole thing at the step boundary.
 
 ## Core Principles
 

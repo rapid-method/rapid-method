@@ -44,21 +44,23 @@ Present detected information and ask:
 Use template: `_rapid/templates/project-architecture-template.md`
 Save to: `_rapid/project-architecture.md`
 
-### 5. Confirm
+### 5. Review & Confirm
+
+Recap what was captured and let the user steer before finalizing (skip the halt in `--auto` mode):
 
 ```
-## Architecture Created ✓
+## Architecture Drafted
 
-Sections:
-- [x] Overview & Tech Stack
-- [x] Structure
-- [x] Architecture & Modules
-- [x] Domain
-- [x] Development Setup
-- [x] Deployment
+**Stack**: {one-line summary of the detected stack}
+**Documented**: Overview · Structure · Modules · Domain · Setup · Deployment
 
 Saved to: _rapid/project-architecture.md
+
+[A] Looks right   [D] Discuss / refine a section
 ```
+
+- **[A]** → done.
+- **[D]** → ask what's off, update the file, re-show.
 
 ## Modes
 - **Create** (default): Full interactive setup

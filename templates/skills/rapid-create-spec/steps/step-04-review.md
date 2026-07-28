@@ -17,7 +17,13 @@ If anything is missing, return to step-03 and finish generating before continuin
 
 ## 2. Present for Approval (User Interaction #3)
 
-Lead with a 1–2 sentence **plain-prose overview** — what this spec builds and the approach it takes — before the details. Then a compact scope line (size + complexity is a real approval signal for a spec), any review notes, and the full spec.
+**First, put the essentials to the user as questions.** If step-03 surfaced `review_notes`, ask them in one focused batch, each with a recommended default — you drive the important calls, don't leave them to hunt an edit menu:
+
+> - "Step-03 flagged {issue/edge case}. {Concrete question} — I'd go with {default}. That, or something else?"
+
+Apply their answers to the spec. If there were no review notes, go straight to the presentation.
+
+**Then present the finished spec** — lead with a 1–2 sentence **plain-prose overview** (what it builds and the approach), then a compact scope line, then the full spec:
 
 ```markdown
 ## Tech Spec Ready: {title}
@@ -28,11 +34,6 @@ Lead with a 1–2 sentence **plain-prose overview** — what this spec builds an
 {1–2 sentence overview: what this spec builds and the approach it takes.}
 
 **Scope**: {task_count} tasks across {file_count} files · {ac_count} acceptance criteria · complexity {optimal | acceptable | consider splitting}
-
-{If step-03 surfaced review notes}:
-### Review Notes
-- {substantive issue or risk that needs your call}
-- {edge case to confirm}
 
 ---
 

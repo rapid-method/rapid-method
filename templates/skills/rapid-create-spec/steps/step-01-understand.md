@@ -110,8 +110,15 @@ Track internally:
 - `referenced_areas`: files/components mentioned
 - `prd_ref`: PRD path if from [P] path, else empty
 
-## 6. Transition (silent — no user halt)
+## 6. Checkpoint & Transition
 
-Move directly to the next step. Do **not** ask "shall we continue?" — just go.
+Recap the intent in 1–2 lines and let the user confirm before you investigate the code:
+
+> "So we're building {intent}{, from PRD story {id} if picked}. Good to dig into the code and shape the spec, or refine the intent first?"
+>
+> [A] Continue   [D] Discuss / refine
+
+- **[A]** → move to investigation.
+- **[D]** → refine the intent, then re-confirm.
 
 → Read fully and follow [step-02-investigate.md](step-02-investigate.md).
