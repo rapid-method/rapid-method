@@ -68,17 +68,18 @@ Compare what you know against the six brief topics:
 
 This gap analysis drives Stage 3 — high-gap topics get deep questioning, low-gap topics get quick confirmation.
 
-## 6. Transition
+## 6. Checkpoint & Transition
 
-Tell the user what you learned (briefly — don't dump everything):
+Tell the user what you learned (briefly — don't dump everything), then let them confirm the picture before elicitation:
 
 ```
-I've reviewed {what you analyzed}. I have a good picture of {strong areas}.
-I still need to dig deeper on {gap areas}.
+I've reviewed {what you analyzed}. I have a good picture of {strong areas},
+and I still need to dig deeper on {gap areas}.
 
-Let's talk through {first high-gap topic}. {Opening question}
+[A] Sounds right — let's fill the gaps   [D] Something's off — let's discuss
 ```
 
-Lead directly into the first question — don't wait for permission to start.
+- **[A]** → open Stage 3 with the first high-gap topic.
+- **[D]** → discuss what you missed or misread, then continue.
 
 → Read fully and follow [guided-elicitation.md](guided-elicitation.md).

@@ -113,8 +113,15 @@ Also let me know: do you have any documents, research, or brainstorming notes I 
 
 Do **not** scan the filesystem for documents. Only read files the user explicitly provides.
 
-### 6. Transition
+### 6. Checkpoint & Transition
 
-When you have enough to understand the product intent, route to Stage 2.
+Reflect back what you understood in 1–2 lines and let the user confirm before moving on:
+
+> "So, in short: {product intent} for {who}, solving {problem}. Good to start digging into the context — or want to adjust anything first?"
+>
+> [A] That's right — continue   [D] Let's refine it
+
+- **[A]** → route to Stage 2.
+- **[D]** → refine your understanding, then re-confirm.
 
 → Read fully and follow [prompts/contextual-discovery.md](prompts/contextual-discovery.md).

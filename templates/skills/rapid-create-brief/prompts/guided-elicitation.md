@@ -144,8 +144,13 @@ If the user starts spec'ing v2 in detail:
 
 ## After All Topics
 
-When all topics are covered, transition:
+When all topics are covered, recap and confirm before drafting:
 
-> "That covers what I need — drafting the brief now."
+> "That covers what I need: {1-line recap — problem, who it's for, core scope}. Ready for me to draft the brief, or anything to add first?"
+>
+> [A] Draft it   [D] One more thing to cover
+
+- **[A]** → proceed to draft.
+- **[D]** → cover the addition, then re-confirm.
 
 → Read fully and follow [draft-and-review.md](draft-and-review.md).

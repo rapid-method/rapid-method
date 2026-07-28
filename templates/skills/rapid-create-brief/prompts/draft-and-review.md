@@ -62,39 +62,40 @@ Launch three subagents in parallel, each reviewing the draft through a different
 > - Could the aha moment be stronger?
 > Return a list of opportunities (or "No significant opportunities found").
 
-## 4. Apply Non-Controversial Fixes
+## 4. Triage the Findings by Importance
 
-From the subagent results:
-- **Apply directly**: typos, phrasing improvements, small consistency fixes
-- **Save as Review Notes**: substantive issues that need the user's input
+From the subagent results, sort every finding:
+- **Basics** (typos, phrasing, small consistency fixes) → apply directly and silently.
+- **Essentials** (substantive gaps, risks, or decisions that change what the brief *means*) → hold as questions for the next section. Keep this set tight — only what genuinely needs the user's call.
 
-## 5. Present to User
+## 5. Ask the Essentials First (User Interaction)
 
-Lead with a short **plain-prose overview** — 2–4 sentences on what the product is, who it's for, the core problem it solves, and the shape of the scope (what's in the MVP vs deferred). This is the gist the user can nod along to, **not** a dashboard of counts. Then surface any review notes, and the full brief for the actual read.
+Before showing the finished brief, put the essential findings to the user **as questions** — one focused batch, each with a recommended default. Don't make them hunt through an edit menu; you drive the important decisions:
+
+> - "The review flagged {issue}. {Concrete question} — I'd go with {default}. That, or something else?"
+> - "{another essential}"
+
+Apply their answers to the brief. If there were no essentials, skip straight to section 6.
+
+## 6. Present the Overview & Decide (User Interaction)
+
+Now show how it turned out — lead with the plain-prose overview (what it is, who it's for, the problem it solves, the MVP-vs-later scope shape), then the full brief for the read:
 
 ```
 ## Product Brief Ready
 
-{2–4 sentence overview in prose: what it is, who it's for, the problem it solves, and the MVP-vs-later scope shape. Read like an executive summary spoken aloud — no lists of counts.}
-
-{If review surfaced substantive items}:
-### Worth a look before you approve
-- {substantive question, risk, or suggestion}
-- {another}
+{2–4 sentence overview in prose. Read like an executive summary spoken aloud — no lists of counts.}
 
 ### Full Brief
 {complete brief content}
 
 ---
-[A] Approve  [E] Edit section  [R] Redo section
+[A] Approve   [E] Edit a section
 ```
 
-## 6. Iterate
-
 - **[A] Approve** → route to Stage 5
-- **[E] Edit** → ask which section to refine, apply changes, re-present
-- **[R] Redo** → re-elicit a specific section, then re-draft
+- **[E] Edit** → ask which section, apply the change, re-present the overview
 
-Loop back to section 5 after each edit until the user approves.
+Loop until the user approves.
 
 → On approval, read fully and follow [finalize.md](finalize.md).
