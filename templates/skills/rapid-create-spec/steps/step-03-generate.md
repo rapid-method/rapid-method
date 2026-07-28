@@ -20,7 +20,7 @@ From the captured intent, derive:
 Copy `_rapid/templates/tech-spec-template.md` to:
 
 ```
-_rapid/output/specs/spec-{timestamp}-{slug}-wip.md
+_rapid-output/specs/spec-{timestamp}-{slug}-wip.md
 ```
 
 Fill the frontmatter:

@@ -16,7 +16,7 @@
 
 ## 2. Detect Resume State
 
-Check `_rapid/output/prds/` for PRDs with `status: draft` and `stepsCompleted` partially filled.
+Check `_rapid-output/prds/` for PRDs with `status: draft` and `stepsCompleted` partially filled.
 
 **If a draft exists**:
 
@@ -40,7 +40,7 @@ Next up: {next step name}
 
 ## 3. Discover Related Briefs
 
-Silently scan `_rapid/output/briefs/` for product briefs.
+Silently check for a product brief at `_rapid-output/brief.md`.
 
 **If briefs exist**:
 

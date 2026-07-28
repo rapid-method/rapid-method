@@ -76,15 +76,15 @@ On approval:
 2. **Freeze the contract sections** — ensure Intent, Boundaries, and I/O & Edge Cases are inside the `<frozen-after-approval>` markers in the file. These must not be edited by `rapid dev` later.
 
 3. **Rename the WIP file**:
-   - From: `_rapid/output/specs/spec-{timestamp}-{slug}-wip.md`
-   - To: `_rapid/output/specs/spec-{timestamp}-{slug}.md`
+   - From: `_rapid-output/specs/spec-{timestamp}-{slug}-wip.md`
+   - To: `_rapid-output/specs/spec-{timestamp}-{slug}.md`
 
 4. **Present completion**:
 
 ```
 ## Spec Ready for Development ✓
 
-**File**: _rapid/output/specs/spec-{timestamp}-{slug}.md
+**File**: _rapid-output/specs/spec-{timestamp}-{slug}.md
 **Status**: ready-for-dev
 **Frozen**: Intent, Boundaries, I/O & Edge Cases
 

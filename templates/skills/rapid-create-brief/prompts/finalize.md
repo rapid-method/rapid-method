@@ -18,7 +18,7 @@ On user approval:
 ```
 ## Brief Approved
 
-**File**: _rapid/output/briefs/brief-{slug}-{date}.md
+**File**: _rapid-output/brief.md
 
 ### Recommended Next Steps
 - `rapid create-prd` — Create a PRD for a specific capability in the brief
@@ -32,6 +32,6 @@ If during Stages 1–3 the user shared information beyond brief scope (technical
 
 > "You mentioned some things during our conversation that go beyond the brief — {examples}. Want me to save these as notes for the PRD or spec phase?"
 
-If yes, write to `_rapid/output/briefs/brief-{slug}-distillate.md` with the captured context, organized by likely destination (PRD, architecture, patterns).
+If yes, write to `_rapid-output/brief-distillate.md` with the captured context, organized by likely destination (PRD, architecture, patterns).
 
 The brief is done. No more stages to load.

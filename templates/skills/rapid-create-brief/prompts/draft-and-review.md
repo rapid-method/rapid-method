@@ -9,7 +9,7 @@
 
 ## 1. Create the Brief File
 
-1. Copy `_rapid/templates/product-brief-template.md` to `_rapid/output/briefs/brief-{slug}-{date}.md`
+1. Copy `_rapid/templates/product-brief-template.md` to `_rapid-output/brief.md` (single brief at the output root; use the `output_folder` from config if renamed)
 2. Fill in frontmatter:
    - `title`, `created`, `owner` (from config `user_name`)
    - `inputDocuments`: list of files the user provided

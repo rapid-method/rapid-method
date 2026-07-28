@@ -95,7 +95,7 @@ On approval:
 ```
 ## PRD Approved ✓
 
-**File**: _rapid/output/prds/prd-{date}-{slug}.md
+**File**: _rapid-output/prds/prd-{date}-{slug}.md
 **Status**: approved
 
 ### Capability Contract Locked

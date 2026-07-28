@@ -13,7 +13,7 @@ From the captured PRD title, derive:
 - `slug` — lowercase, hyphens, descriptive but short
 - `feature_slug` — same format, used in frontmatter
 - `brief_ref` — relative path to the linked brief if any, else empty
-- File path: `_rapid/output/prds/prd-{date}-{slug}.md`
+- File path: `_rapid-output/prds/prd-{date}-{slug}.md`
 
 ## 2. Create the PRD File
 

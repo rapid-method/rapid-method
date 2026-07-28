@@ -38,7 +38,7 @@ The brief is built in five stages. Stage 1 is handled here in SKILL.md. Stages 2
 
 ## Output
 
-- Brief file: `_rapid/output/briefs/brief-{slug}-{date}.md`
+- Brief file: `_rapid-output/brief.md` (one brief per project, at the output root)
 - Template: `_rapid/templates/product-brief-template.md`
 
 ---
@@ -49,13 +49,13 @@ The brief is built in five stages. Stage 1 is handled here in SKILL.md. Stages 2
 
 ### 1. Load Config
 
-- Read `_rapid/config.yaml`
+- Read `_rapid/config.yaml`. Output paths come from `output_folder` (default `_rapid-output`, a sibling of `_rapid`); the brief is a single file at its root.
 - Communicate in `{communication_language}`
 - Output the brief in `{document_language}`
 
 ### 2. Detect Resume State
 
-Check `_rapid/output/briefs/` for an in-progress brief matching this project/feature.
+Check for an in-progress brief at `_rapid-output/brief.md` (a file with `stagesCompleted` in its frontmatter).
 
 **If a brief exists with `stagesCompleted` in frontmatter**:
 

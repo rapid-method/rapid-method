@@ -22,6 +22,10 @@ as `1.1.0` (backward-compatible additions).
 - CI workflow (tests on push/PR) and a tag-triggered npm release workflow.
 
 ### Changed
+- **Output layout**: generated artifacts now live in a configurable sibling
+  folder (`_rapid-output` by default, named during install) instead of
+  `_rapid/output`. The product brief is a single `brief.md` at its root; PRDs
+  and specs sit in `prds/` and `specs/`. The `briefs/` subfolder is gone.
 - Modularized the CLI installer architecture (`src/commands`, `src/installers`,
   `src/lib`).
 - Restructured skills: create-brief into a 5-stage discovery flow; create-prd,

@@ -2,3 +2,6 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# Vendored reference copy of BMAD-METHOD (not part of this package)
+BMAD-METHOD-6.1.0/

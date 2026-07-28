@@ -59,7 +59,7 @@ This standard is verified silently in step-03 and surfaced in step-04 if anythin
 
 ## WIP File Convention
 
-The spec is written to `_rapid/output/specs/spec-{timestamp}-{slug}-wip.md` while in progress. On approval (step-04), the file is renamed to drop `-wip`.
+The spec is written to `_rapid-output/specs/spec-{timestamp}-{slug}-wip.md` while in progress. On approval (step-04), the file is renamed to drop `-wip`.
 
 Multiple WIPs can coexist — each has its own slug.
 

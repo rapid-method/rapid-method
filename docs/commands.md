@@ -35,7 +35,7 @@ Create a Product Brief — the project-level requirements document.
 | Constraints | Recommended | Technical and business constraints |
 | Acceptance Criteria | Yes | Given/When/Then scenarios |
 
-**Output:** `_rapid/output/briefs/brief-{slug}-{date}.md`
+**Output:** `_rapid-output/brief.md`
 
 **Next:** `rapid create-architecture`
 
@@ -136,7 +136,7 @@ PRDs track features across multiple specs. Each user story can become a separate
 | `in-progress` | At least one spec is being developed |
 | `done` | All stories implemented |
 
-**Output:** `_rapid/output/prds/prd-{date}-{slug}.md`
+**Output:** `_rapid-output/prds/prd-{date}-{slug}.md`
 
 **Next:** `rapid create-spec` will auto-detect this PRD and offer its stories
 
@@ -190,7 +190,7 @@ Create a technical specification — the contract between intent and implementat
 | 4-6 | 4-8 | Acceptable |
 | 7+ | 9+ | Consider splitting |
 
-**Output:** `_rapid/output/specs/spec-{timestamp}-{slug}.md` with status `ready-for-dev`
+**Output:** `_rapid-output/specs/spec-{timestamp}-{slug}.md` with status `ready-for-dev`
 
 **Next:** `rapid dev`
 

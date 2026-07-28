@@ -91,15 +91,16 @@ Lean, spec-driven methodology for AI-assisted development.
 ## Structure
 
 ```
-_rapid/
+_rapid/                  # install (config, docs, templates)
 ├── config.yaml
 ├── project-architecture.md
 ├── project-patterns.md
-├── templates/
-└── output/
-    ├── briefs/
-    ├── prds/
-    └── specs/
+└── templates/
+
+_rapid-output/           # your artifacts (name configurable at install)
+├── brief.md             # single product brief
+├── prds/
+└── specs/
 ```
 
 ---

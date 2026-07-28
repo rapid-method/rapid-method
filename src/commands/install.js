@@ -166,6 +166,19 @@ async function run(options) {
   }, { onCancel });
 
   print(bar);
+
+  const currentOutputName = existing.installed && existing.config?.output_folder
+    ? String(existing.config.output_folder).split('/').pop()
+    : '_rapid-output';
+
+  const { outputFolderName } = await prompts({
+    type: 'text',
+    name: 'outputFolderName',
+    message: 'Output folder (for the brief, PRDs and specs)?',
+    initial: currentOutputName,
+  }, { onCancel });
+
+  print(bar);
   printDiv();
   print(bar);
 
@@ -199,6 +212,7 @@ async function run(options) {
     communicationLanguage,
     documentLanguage,
     projectName,
+    outputFolderName,
     selectedPlatforms,
     version: options.version,
   });

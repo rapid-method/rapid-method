@@ -1,5 +1,5 @@
 /**
- * rapid-docs — read-only helpers to scan _rapid/output for pending PRDs and specs.
+ * rapid-docs — read-only helpers to scan the output folder for pending PRDs and specs.
  *
  * The goal is token efficiency for the skills: instead of the agent opening and
  * reading every PRD/spec to build a picker, these functions parse only the
@@ -26,6 +26,33 @@ function findRapidDir(startDir) {
     if (parent === dir) return null; // reached filesystem root
     dir = parent;
   }
+}
+
+/** Read and parse `_rapid/config.yaml`. Returns {} when absent/invalid. */
+function readConfig(rapidDir) {
+  try {
+    return yaml.parse(fs.readFileSync(path.join(rapidDir, 'config.yaml'), 'utf8')) || {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Resolve the output locations from config. The output folder is a sibling of
+ * `_rapid` and its name is user-configurable, so paths must come from config
+ * (with sensible `_rapid-output` defaults) rather than being hardcoded.
+ */
+function resolveOutputPaths(rapidDir) {
+  const projectRoot = path.dirname(rapidDir);
+  const cfg = readConfig(rapidDir);
+  const resolve = (val, ...fallback) =>
+    val
+      ? path.resolve(String(val).replace('{project-root}', projectRoot))
+      : path.join(projectRoot, ...fallback);
+  return {
+    prds: resolve(cfg.prds_folder, '_rapid-output', 'prds'),
+    specs: resolve(cfg.specs_folder, '_rapid-output', 'specs'),
+  };
 }
 
 /** Parse the leading YAML frontmatter block. Returns {} when absent/invalid. */
@@ -84,7 +111,7 @@ function countTasks(content) {
 
 /** List PRDs with status `approved` or `in-progress`, with story counts. */
 function listPendingPrds(rapidDir) {
-  const dir = path.join(rapidDir, 'output', 'prds');
+  const dir = resolveOutputPaths(rapidDir).prds;
   if (!fs.existsSync(dir)) return [];
   const out = [];
   for (const file of fs.readdirSync(dir)) {
@@ -116,7 +143,7 @@ function listPendingPrds(rapidDir) {
  * WIP is detected by the `-wip.md` filename; `step` is how many steps are complete.
  */
 function listPendingSpecs(rapidDir) {
-  const dir = path.join(rapidDir, 'output', 'specs');
+  const dir = resolveOutputPaths(rapidDir).specs;
   if (!fs.existsSync(dir)) return [];
   const out = [];
   for (const file of fs.readdirSync(dir)) {
@@ -151,6 +178,8 @@ function listPendingSpecs(rapidDir) {
 
 module.exports = {
   findRapidDir,
+  readConfig,
+  resolveOutputPaths,
   parseFrontmatter,
   countStories,
   countTasks,

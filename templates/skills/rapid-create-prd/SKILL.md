@@ -125,7 +125,7 @@ If a draft PRD exists with partial `stepsCompleted`, step-01 will detect it and 
 
 ## Output
 
-- PRD file: `_rapid/output/prds/prd-{date}-{slug}.md`
+- PRD file: `_rapid-output/prds/prd-{date}-{slug}.md`
 - Template: `_rapid/templates/prd-template.md`
 - Status: `approved` after user confirmation
 

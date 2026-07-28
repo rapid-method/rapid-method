@@ -58,7 +58,7 @@ The plan flow helps track and define features before implementation. Use it when
 3. **User Approval** — `[A]pprove` / `[E]dit` / `[C]ancel`
 
 #### Output
-- PRD file in `_rapid/output/prds/` with status `approved`
+- PRD file in `_rapid-output/prds/` with status `approved`
 - Ready to feed into `rapid create-spec`
 
 #### PRD Statuses
@@ -77,7 +77,7 @@ The plan flow helps track and define features before implementation. Use it when
 
 #### PRD Check (before starting)
 
-Before anything else, the spec workflow checks for PRDs with status `approved` or `in-progress` in `_rapid/output/prds/`. If found:
+Before anything else, the spec workflow checks for PRDs with status `approved` or `in-progress` in `_rapid-output/prds/`. If found:
 
 ```
 Found pending PRDs:
@@ -114,7 +114,7 @@ This ensures planned work is tracked and nothing falls through the cracks.
 After approval, **Intent**, **Boundaries**, and **I/O** are locked. Implementation reads these sections on every task to prevent scope creep.
 
 #### Output
-- Spec file in `_rapid/output/specs/` with status `ready-for-dev`
+- Spec file in `_rapid-output/specs/` with status `ready-for-dev`
 
 ---
 
