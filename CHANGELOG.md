@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-The published npm package has been stuck at `1.0.2` (March 2026) while `main`
-advanced significantly. The next tagged release ships everything below — likely
-as `1.1.0` (backward-compatible additions).
+## [1.1.0] - 2026-08-31
+
+The first release since `1.0.2` (March 2026). npm had been stuck there while
+`main` advanced significantly; this ships everything below.
 
 ### Added
 - Multi-platform install support.
