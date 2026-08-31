@@ -61,7 +61,7 @@ Questions:
 
 ### 4. Generate
 
-Use: `_rapid/templates/project-patterns-template.md`
+Use: `_rapid/templates/patterns-template.md`
 Save: `_rapid-output/patterns.md`
 
 ### 5. Review & Confirm
