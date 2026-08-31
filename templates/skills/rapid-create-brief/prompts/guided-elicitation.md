@@ -79,16 +79,43 @@ Map the **primary persona's journey**:
 
 ### Topic 3: Scope & Features
 
-Open with:
-> "What are the must-have features for v1 — the things that, if missing, would make {persona name} say 'this doesn't solve my problem'?"
+**Propose the split; don't ask for it.** By now you know the problem, the persona
+and the aha moment — that is enough to draft the MoSCoW yourself. Asking "what are
+your must-haves?" hands back work you can already do, and it reliably produces a
+wish list instead of a v1.
 
-Use **MoSCoW** prioritization:
-- **Must Have** — each tested against: "Does this create the aha moment?"
-- **Should Have** — important but not blocking launch
-- **Could Have** — nice to have if time allows
-- **Out of Scope** — explicitly say NO with rationale (most important list)
+Open with your proposal, derived from the aha moment:
 
-**Push back on bloat**: If 10+ must-haves:
+> "Based on {aha moment}, here's the v1 I'd argue for:
+>
+> **Must have**
+> 1. {feature} — without it, {persona} never reaches the aha moment
+> 2. {feature} — {why it's load-bearing}
+>
+> **Should have** — {feature}, {feature}
+> **Could have** — {feature}
+>
+> What's wrong here? Anything I promoted that you'd cut, or cut that you'd promote?"
+
+Rules for your own proposal:
+- Every must-have passes "does this create the aha moment?" — if you can't name
+  which one it serves, it isn't a must-have.
+- Three to five must-haves. If **your** list runs past five, you haven't made the
+  call yet.
+- Use the user's words for features. Don't rename their domain into yours.
+
+**Out of scope is the list you must propose, never request.** Users rarely
+volunteer what they're *not* building — but they react strongly to seeing it
+written down, and that reaction is the whole value:
+
+> "And explicitly **not** in v1: {thing}, {thing}, {thing} — each because
+> {reason}. Say the word and any of them moves."
+
+Draw the candidates from what you already heard: features mentioned in passing,
+the obvious adjacent scope, competitor capabilities that surfaced in contextual
+discovery. Fewer than three items means you didn't try.
+
+**Push back on bloat**: if the user pushes must-haves past five:
 > "If you could only ship three, which three would still get {persona name} to the aha moment?"
 
 ### Topic 4: Success Metrics
