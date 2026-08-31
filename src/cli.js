@@ -144,6 +144,12 @@ switch (command) {
   case 'install':
     require('./commands/install').run({ version }).catch(console.error);
     break;
+  case 'pending-prds':
+    require('./commands/pending-prds').run();
+    break;
+  case 'pending-specs':
+    require('./commands/pending-specs').run();
+    break;
   case 'help':
   case '--help':
   case '-h':

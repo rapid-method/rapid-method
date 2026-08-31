@@ -1,5 +1,3 @@
-# {Title} - Tech Spec
-
 ---
 title: '{title}'
 type: 'feature | bugfix | refactor | chore'
@@ -8,7 +6,10 @@ status: 'draft | ready-for-dev | in-progress | done'
 branch: '{branch_name}'
 baseline_commit: ''
 prd_ref: ''
+stepsCompleted: []
 ---
+
+# {Title} - Tech Spec
 
 <frozen-after-approval>
 

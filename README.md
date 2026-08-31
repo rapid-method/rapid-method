@@ -35,7 +35,7 @@ Follow the interactive prompts to configure your project name, language preferen
 
 After installation, use these skills in your AI IDE:
 
-### Setup Skills
+### Initiation Skills
 
 | Skill | Description |
 |-------|-------------|
@@ -43,11 +43,17 @@ After installation, use these skills in your AI IDE:
 | `rapid create-architecture` | Document project architecture |
 | `rapid create-patterns` | Define coding patterns and standards |
 
+### Plan Skills
+
+| Skill | Description |
+|-------|-------------|
+| `rapid create-prd` | Create a PRD for a feature (tracks requirements across specs) |
+
 ### Development Skills
 
 | Skill | Description |
 |-------|-------------|
-| `rapid create-spec` | Create tech spec (clarify + investigate + write + approve) |
+| `rapid create-spec` | Create tech spec (auto-detects pending PRDs + clarify + write + approve) |
 | `rapid dev` | Implement approved spec (branch + code + AI review + human review) |
 | `rapid oneshot` | Fast path for simple, isolated changes |
 | `rapid help` | Get guidance on what to do next |

@@ -6,6 +6,16 @@ const { generate: generateManifest, loadFilesManifest } = require('./manifest');
 const { detect } = require('./detector');
 
 /**
+ * Keep the output folder a single, safe path segment (no slashes / traversal).
+ */
+function sanitizeFolderName(name) {
+  if (!name) return '';
+  const cleaned = String(name).trim().replace(/[\\/]+/g, '');
+  if (cleaned === '' || cleaned === '.' || cleaned === '..') return '';
+  return cleaned;
+}
+
+/**
  * Core installer — handles fresh installs and updates.
  */
 class Installer {
@@ -19,7 +29,11 @@ class Installer {
     this.selectedPlatforms = options.selectedPlatforms || [];
     this.version = options.version;
 
+    // Output folder: a sibling of _rapid, name is user-configurable.
+    this.outputFolderName = sanitizeFolderName(options.outputFolderName) || '_rapid-output';
+
     this.rapidDir = path.join(this.targetDir, '_rapid');
+    this.outputDir = path.join(this.targetDir, this.outputFolderName);
     this.existingInstall = null;
     this.existingFilesManifest = null;
     this.installedPlatforms = [];
@@ -80,10 +94,11 @@ class Installer {
 
   _createDirectories() {
     fs.mkdirSync(this.rapidDir, { recursive: true });
-    fs.mkdirSync(path.join(this.rapidDir, 'output', 'briefs'), { recursive: true });
-    fs.mkdirSync(path.join(this.rapidDir, 'output', 'prds'), { recursive: true });
-    fs.mkdirSync(path.join(this.rapidDir, 'output', 'specs'), { recursive: true });
     fs.mkdirSync(path.join(this.rapidDir, 'templates'), { recursive: true });
+    // Output lives in a sibling folder (the single brief.md sits at its root).
+    fs.mkdirSync(this.outputDir, { recursive: true });
+    fs.mkdirSync(path.join(this.outputDir, 'prds'), { recursive: true });
+    fs.mkdirSync(path.join(this.outputDir, 'specs'), { recursive: true });
   }
 
   _installTemplates() {
@@ -196,12 +211,12 @@ platforms:
 ${platformsList || '  # none'}
 
 # Paths
-output_folder: "{project-root}/_rapid/output"
-briefs_folder: "{project-root}/_rapid/output/briefs"
-prds_folder: "{project-root}/_rapid/output/prds"
-specs_folder: "{project-root}/_rapid/output/specs"
-project_architecture: "{project-root}/_rapid/project-architecture.md"
-project_patterns: "{project-root}/_rapid/project-patterns.md"
+output_folder: "{project-root}/${this.outputFolderName}"
+brief_file: "{project-root}/${this.outputFolderName}/brief.md"
+architecture_file: "{project-root}/${this.outputFolderName}/architecture.md"
+patterns_file: "{project-root}/${this.outputFolderName}/patterns.md"
+prds_folder: "{project-root}/${this.outputFolderName}/prds"
+specs_folder: "{project-root}/${this.outputFolderName}/specs"
 templates_folder: "{project-root}/_rapid/templates"
 
 # Workflow

@@ -1,219 +1,74 @@
 # RAPID Create Spec
 
-Create a technical specification for a task. The spec is the contract between intent and implementation.
+Create a technical specification for a task. The spec is the contract between intent and implementation — a fresh dev agent should be able to implement it without reading any history.
 
 ## Trigger
+
 - User says "rapid create-spec" or "create spec"
 - User wants to plan implementation before coding
 
-## Prerequisites
-- Load `_rapid/config.yaml`
-- Load `_rapid/project-architecture.md` if exists
-- Load `_rapid/project-patterns.md` if exists
-- Communicate in `{communication_language}`
+## Your Role
 
-## Workflow
+You are an **elite developer and spec engineer**. You ask sharp questions, investigate existing code thoroughly, and produce specs that contain ALL context a fresh dev agent needs. No handoffs, no missing context — just complete, actionable specs.
 
-### 0. Check Work in Progress
+**Tone:** precise and investigative — sharp questions, no filler.
 
-**Before anything else, check for existing WIP:**
+**Embody this — don't narrate it.** A short, warm opener about the task is fine; never explain your role or method. Lead with the work, not a description of how you work.
 
-Look for `_rapid/output/specs/spec-*-wip.md`
+## Workflow Architecture
 
-**If WIP exists:**
-```
-Found spec in progress:
-**{title}** (created {date})
+Each phase has its own step file. Steps load **just-in-time** — never read ahead. State is tracked in the spec's frontmatter via `stepsCompleted` so the workflow can be resumed if interrupted.
 
-[C] Continue where you left off
-[A] Archive and start fresh
-[D] Delete and start fresh
-```
+| # | Step | Purpose | User halt? |
+|---|------|---------|------------|
+| 1 | [step-01-understand](steps/step-01-understand.md) | WIP check, PRD check, capture initial intent | ✋ Yes (intent) |
+| 2 | [step-02-investigate](steps/step-02-investigate.md) | Silent code scan + ask informed questions | ✋ Yes (questions) |
+| 3 | [step-03-generate](steps/step-03-generate.md) | Silently generate the full spec | (no halt) |
+| 4 | [step-04-review](steps/step-04-review.md) | Present, iterate, approve, finalize | ✋ Yes (review) |
 
-- `[C]`: Load WIP, jump to step 4 (present for approval)
-- `[A]`: Rename to `spec-{slug}-archived-{date}.md`, continue to step 1
-- `[D]`: Delete WIP, continue to step 1
+## Interaction Model
 
-**If no WIP:** Continue to step 1
+Three steps — but questions are **free, not capped**:
 
----
+1. **Intent** — "what do you want to build?" (step-01)
+2. **Investigate & ask** — scan the code, then ask whatever you genuinely need (step-02). Deduce the simple and obvious from the code and conventions; **ask** the complex, ambiguous, or high-impact — as many exchanges as it takes. Guessing wrong here produces a spec that doesn't match the intent, which is far more expensive than one more question.
+3. **Review** — essentials asked as questions, then the full spec for A/E/C approval (step-04)
 
-### 1. Capture Intent
+Each step ends with a short mini-review and an **[A] continue / [D] discuss** checkpoint. Take the `[D]` path seriously: if the user wants to explore or think out loud, engage. Generation itself stays silent (don't narrate the writing), but never pad step-02 with questions you could safely infer — nor guess on something the user would need to correct.
 
-**Get the user's request.** They may have already said it, or ask:
+## Core Principles
 
-"What do you want to build?"
+- **Investigate before asking** — quick scan first, then ask informed questions
+- **DO NOT FANTASIZE** — if something is ambiguous, ask in step-02. Never invent file paths or APIs.
+- **Self-contained output** — a fresh agent should implement without reading the conversation
+- **Contract is frozen after approval** — Intent, Boundaries, and I/O sections lock once approved
+- **Just-in-time loading** — only read the current step file. Never look ahead.
 
-**Extract:**
-- What they want (the goal)
-- Any constraints mentioned
-- Files/areas they referenced
+## Ready for Development Standard
 
-**DO NOT FANTASIZE** — If ambiguous, ask for clarification.
+A spec is "ready for dev" only if it meets ALL of:
 
----
+- **Actionable** — every task has a file path and a specific action
+- **Logical** — tasks ordered by dependency (lowest level first)
+- **Testable** — all ACs use Given/When/Then, cover happy path + edge cases
+- **Complete** — no TBDs, no placeholders, no "we'll figure it out"
+- **Self-Contained** — a fresh agent can implement without extra context
+- **Bounded** — frozen sections (Intent, Boundaries, I/O) are clear
 
-### 2. Quick Scan (No Pause)
+This standard is verified silently in step-03 and surfaced in step-04 if anything fails.
 
-**Immediately scan the codebase to understand context:**
+## WIP File Convention
 
-a) **Check for planning docs:**
-- `_rapid/output/briefs/` - related product briefs
-- `_rapid/project-architecture.md` - system structure
-- `_rapid/project-patterns.md` - conventions
+The spec is written to `_rapid-output/specs/spec-{timestamp}-{slug}-wip.md` while in progress. On approval (step-04), the file is renamed to drop `-wip`.
 
-b) **Search for relevant code:**
-- Files/classes/functions mentioned by user
-- Related areas that might be affected
-- Existing patterns for similar features
-
-c) **Build mental model:**
-- What exists today
-- What needs to change
-- What patterns to follow
-
-**This should take <30 seconds. Just enough to ask smart questions.**
-
----
-
-### 3. Ask Informed Questions
-
-**Ask 2-5 targeted questions based on what you found:**
-
-Instead of generic questions, ask specific ones:
-- "Found `AuthService` uses JWT. Should the new endpoint follow the same auth pattern?"
-- "The `UserController` has 15 methods. Should this be a new controller or extend it?"
-- "There's already a `validate()` helper. Use it or create specific validation?"
-
-**Adapt to `{user_skill_level}`:**
-- Technical users → technical questions
-- Non-technical users → plain language
-
-**After answers, confirm understanding:**
-```
-Got it. To confirm:
-- Problem: {1 sentence}
-- Approach: {1 sentence}
-- Scope: {what's in, what's out}
-
-Correct? (y/n)
-```
-
-If no, clarify. If yes, continue.
-
----
-
-### 4. Generate Spec (No Pause)
-
-**Create the spec file immediately:**
-
-a) **Determine scope:**
-- Single focused task? → Continue
-- Multiple unrelated goals? → Suggest splitting, ask user
-
-b) **Write spec:**
-
-Use template: `_rapid/templates/tech-spec-template.md`
-Save to: `_rapid/output/specs/spec-{timestamp}-{slug}-wip.md`
-
-Fill all sections:
-
-| Section | Content | Notes |
-|---------|---------|-------|
-| Intent | Problem + Approach | 1-2 sentences each |
-| Boundaries | Always / Ask First / Never | Guard rails |
-| I/O & Edge Cases | Scenarios table | Happy, edge, error |
-| Code Map | Files and roles | From investigation |
-| Tasks | Ordered with file paths | Actionable |
-| Acceptance Criteria | Given/When/Then | Testable |
-| Verification | Commands to run | Test, build, lint |
-
-c) **Self-verify Ready for Development:**
-- [ ] **Actionable**: Every task has file path + action
-- [ ] **Logical**: Tasks ordered by dependency
-- [ ] **Testable**: ACs use Given/When/Then
-- [ ] **Complete**: No TBDs or placeholders
-- [ ] **Bounded**: Frozen sections are clear
-
-d) **Complexity check:**
-
-| Tasks | Files | Guidance |
-|-------|-------|----------|
-| 1-3 | 1-3 | Optimal for focused work |
-| 4-6 | 4-8 | Acceptable, stay focused |
-| 7+ | 9+ | Consider splitting into multiple specs |
-
-**Red flags (suggest splitting):**
-- Tasks touch unrelated areas
-- Multiple independent features bundled
-- Spec requires context-switching between domains
-
----
-
-### 5. Present for Approval
-
-**Show the complete spec:**
-
-```markdown
-## Tech Spec: {title}
-
-### Intent
-**Problem:** {problem}
-**Approach:** {approach}
-
-### Boundaries
-**Always:** {always}
-**Ask First:** {ask_first}
-**Never:** {never}
-
-### Tasks
-1. {task_1}
-2. {task_2}
-...
-
-### Acceptance Criteria
-- Given X, when Y, then Z
-...
-
----
-**Stats:** {task_count} tasks | {file_count} files | {ac_count} ACs
-
-[A] Approve  [E] Edit  [C] Cancel
-```
-
-**Handle choice:**
-
-- `[A] Approve`:
-  - Set status: `ready-for-dev`
-  - Rename: `spec-{slug}-wip.md` → `spec-{timestamp}-{slug}.md`
-  - Freeze Intent/Boundaries/I/O sections
-  - Done. Suggest: "Run `rapid dev` to start implementation"
-
-- `[E] Edit`:
-  - Ask what to change
-  - Apply changes
-  - Re-present (loop back to step 5)
-
-- `[C] Cancel`:
-  - Confirm: "Delete the draft? (y/n)"
-  - If yes: delete WIP file
-  - If no: keep as WIP for later
-
----
-
-## Flow Summary
-
-```
-[Check WIP] → [Capture Intent] → [Quick Scan] → [Ask Questions] → [Generate Spec] → [Approve]
-     ↓              ↓                  ↓               ↓                 ↓              ↓
-  Continue?      What?             (silent)        2-5 Qs           (silent)        A/E/C
-```
-
-Only 3 user interactions: Intent → Questions → Approval
-
----
+Multiple WIPs can coexist — each has its own slug.
 
 ## Output
+
 - Spec file saved with status `ready-for-dev`
-- Frozen sections locked
-- Ready for `rapid dev`
+- Frozen sections locked (Intent, Boundaries, I/O & Edge Cases)
+- Ready to be picked up by `rapid dev`
+
+## Start
+
+→ Read fully and follow [steps/step-01-understand.md](steps/step-01-understand.md).

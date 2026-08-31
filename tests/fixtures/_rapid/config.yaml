@@ -1,0 +1,5 @@
+# Fixture config — output folder is a sibling of _rapid (renamable).
+output_folder: "{project-root}/_rapid-output"
+brief_file: "{project-root}/_rapid-output/brief.md"
+prds_folder: "{project-root}/_rapid-output/prds"
+specs_folder: "{project-root}/_rapid-output/specs"

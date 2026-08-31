@@ -1,0 +1,124 @@
+# Step 1: Understand the Request
+
+**Goal**: Check for work in progress, check for pending PRDs, capture the user's initial request. This is the first user interaction.
+
+**Next step**: [step-02-investigate.md](step-02-investigate.md)
+
+---
+
+## 1. Load Config
+
+- Read `_rapid/config.yaml`
+- Load `_rapid-output/architecture.md` if it exists
+- Load `_rapid-output/patterns.md` if it exists
+- Communicate in `{communication_language}`
+
+## 2. Check for WIP Specs
+
+Run the shell command `npx rapid-method pending-specs` and use the entries with `status: "wip"`. It returns compact JSON (path, title, `step`, created, task counts) — **do not open the spec files yourself** just to build this list; only read a WIP fully when the user chooses **[C] Continue**.
+
+**If one or more WIPs exist**:
+
+```
+Found spec(s) in progress:
+
+1. {title} — Step {lastStep}/4 — created {date}
+2. {title} — Step {lastStep}/4 — created {date}
+
+[C] Continue one of these
+[A] Archive a WIP and start fresh
+[D] Delete a WIP and start fresh
+```
+
+- **[C] Continue**: Read the chosen WIP, extract `stepsCompleted`, jump directly to the next uncompleted step:
+  - `[1]` → load `step-02-investigate.md`
+  - `[1, 2]` → load `step-03-generate.md`
+  - `[1, 2, 3]` → load `step-04-review.md`
+- **[A] Archive**: rename to `spec-{slug}-archived-{date}.md`, then continue to section 3
+- **[D] Delete**: confirm with user, delete file, then continue to section 3
+
+**If no WIP** → continue to section 3.
+
+## 3. Check for Pending PRDs
+
+Run the shell command `npx rapid-method pending-prds`. It returns compact JSON of PRDs with status `approved` or `in-progress`, each already carrying `specs_not_started` / `specs_total`. Use this to build the list below — **do not open any PRD file yet**. Only read the chosen PRD fully when the user picks **[P]** (see below).
+
+**If the command returns a non-empty list**:
+
+PRDs use a nested structure: epics → Functional Requirements (FR1, FR2...) → specs (S1.1, S1.2...). Specs carry a `Status` column (`not started` / `in spec` / `in dev` / `done`). Filter to **specs with status `not started`** when offering picks.
+
+```
+Found pending PRDs:
+
+1. {prd_title} (status: approved, {n_not_started}/{n_total} specs available)
+2. {prd_title} (status: in-progress, {n_not_started}/{n_total} specs available)
+
+[P] Pick a spec from a PRD (recommended)
+[S] Start something separate
+```
+
+- **[P] Pick**: Read the chosen PRD fully. Show all specs with status `not started`, grouped by epic / FR for context:
+
+  ```
+  PRD: {title}
+
+  ### Epic: User Management
+    FR1: Users can sign up with email
+      - S1.1 (must): As a new user, I want to sign up with email and password, so that I can access the app — not started
+      - S1.2 (should): As a new user, I want to verify my email, so that my account is secure — not started
+    FR2: Users can recover forgotten passwords
+      - S2.1 (must): As an existing user, I want to reset my password via email link, so that I can regain access — not started
+
+  ### Epic: Profiles
+    FR3: Users can edit their profile
+      - S3.1 (should): As a logged-in user, I want to update my display name, so that others see me correctly — not started
+
+  Pick a spec by ID (e.g., S1.1):
+  ```
+
+  When the user picks a spec:
+  - Use the spec as the source of intent for the spec
+  - Store the PRD path + spec ID for `prd_ref` (e.g., `prds/prd-2026-04-11-auth.md#S1.1`)
+  - Mark the spec's status as `in spec` in the PRD file (and save)
+  - **Skip section 4** (intent already captured) and go straight to section 5
+
+- **[S] Separate**: Continue to section 4.
+
+**If `npx rapid-method pending-prds` returns an empty list** → continue to section 4.
+
+## 4. Capture Initial Request (User Interaction #1)
+
+If the user already stated what they want when invoking the skill, use that. Otherwise ask **one** question:
+
+> "What do you want to build?"
+
+Get just enough to know **what** they want and **where to look**. Don't ask follow-ups yet — that's step-02.
+
+**Extract from their answer**:
+- The goal (1-2 sentences)
+- Any files/areas/components they referenced
+- Any constraints they mentioned
+
+**DO NOT FANTASIZE** — If the request is so ambiguous you can't even start a code scan, ask **one** clarifying question. Never invent file paths or assume APIs exist.
+
+## 5. Save Initial Context
+
+Hold the captured intent in memory for step-02. **Do not create the WIP file yet** — it's created in step-03 once you have everything to fill it.
+
+Track internally:
+- `initial_goal`: what they want
+- `referenced_areas`: files/components mentioned
+- `prd_ref`: PRD path if from [P] path, else empty
+
+## 6. Checkpoint & Transition
+
+Recap the intent in 1–2 lines and let the user confirm before you investigate the code:
+
+> "So we're building {intent}{, from PRD spec {id} if picked}. Good to dig into the code and shape the spec, or refine the intent first?"
+>
+> [A] Continue   [D] Discuss / refine
+
+- **[A]** → move to investigation.
+- **[D]** → refine the intent, then re-confirm.
+
+→ Read fully and follow [step-02-investigate.md](step-02-investigate.md).
