@@ -50,7 +50,7 @@ Lean, spec-driven methodology for AI-assisted development.
 ├──────────────────────────────────────────┤
 │                                          │
 │  rapid create-prd                        │
-│    Feature discovery → User Stories      │
+│    Feature discovery → specs      │
 │    → Scope → Approval                    │
 │                                          │
 │  PRDs track features across specs.       │

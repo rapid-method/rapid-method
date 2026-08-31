@@ -105,7 +105,7 @@ These commands help define features before implementation. Use them when you nee
 
 Create a Product Requirements Document for a feature. Helps users who don't have a clear picture of what they want to build — guiding from vague idea to concrete requirements.
 
-PRDs track features across multiple specs. Each user story can become a separate spec, allowing incremental delivery while keeping the big picture visible.
+PRDs track features across multiple specs. Each spec is written up and delivered on its own, while the PRD keeps the big picture visible.
 
 **When to use:**
 - You have a vague idea but aren't sure about scope or details
@@ -120,7 +120,7 @@ PRDs track features across multiple specs. Each user story can become a separate
 1. **Load Context** — reads project brief and architecture for background
 2. **Feature Discovery** — guided conversation:
    - **Goal** — what problem does this feature solve?
-   - **User Stories** — "As a [user], I want to [action], so that [benefit]"
+   - **specs** — "As a [user], I want to [action], so that [benefit]"
    - **Scope** — what's in and what's explicitly out
    - **Expected Behavior** — happy path, edge cases, errors
    - **Acceptance Criteria** — Given/When/Then scenarios
@@ -132,13 +132,13 @@ PRDs track features across multiple specs. Each user story can become a separate
 | Status | Meaning |
 |--------|---------|
 | `draft` | Work in progress |
-| `approved` | Ready — `create-spec` will offer its stories |
+| `approved` | Ready — `create-spec` will offer its specs |
 | `in-progress` | At least one spec is being developed |
-| `done` | All stories implemented |
+| `done` | All specs implemented |
 
 **Output:** `_rapid-output/prds/prd-{date}-{slug}.md`
 
-**Next:** `rapid create-spec` will auto-detect this PRD and offer its stories
+**Next:** `rapid create-spec` will auto-detect this PRD and offer its specs
 
 ---
 
@@ -157,11 +157,11 @@ Create a technical specification — the contract between intent and implementat
 
 **When to use:**
 - Before implementing any non-trivial feature
-- After creating a PRD to implement one of its stories
+- After creating a PRD to implement one of its specs
 
 **What happens:**
 1. **Check WIP** — looks for existing draft specs. If found: continue, archive, or delete
-2. **Check PRDs** — looks for PRDs with status `approved` or `in-progress`. If found, offers their stories to implement. User can pick a story or start something separate
+2. **Check PRDs** — looks for PRDs with status `approved` or `in-progress`. If found, offers their specs to implement. User can pick a spec or start something separate
 3. **Capture Intent** — understand what you want to build (skipped if picked from PRD)
 4. **Quick Scan** — silently investigates codebase, reads architecture and patterns
 5. **Ask Informed Questions** — 2-5 targeted questions based on what was found (not generic)

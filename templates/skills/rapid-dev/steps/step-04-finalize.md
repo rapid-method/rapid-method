@@ -158,15 +158,15 @@ Update the spec frontmatter:
 
 Save the spec.
 
-### Update linked PRD story (if any)
+### Update linked PRD spec (if any)
 
 If `prd_ref` is set on the spec:
 
 1. Read the PRD at `prd_ref` (path before the `#`)
-2. Find the story by ID (after the `#`)
-3. Change the story's `Status` column from `in dev` to `done`
+2. Find the spec by ID (after the `#`)
+3. Change the spec's `Status` column from `in dev` to `done`
 4. Check the PRD's overall progress:
-   - If **all `must` stories** in the PRD are now `done`, update PRD's `status` from `in-progress` to `done`
+   - If **all `must` specs** in the PRD are now `done`, update PRD's `status` from `in-progress` to `done`
    - Otherwise leave PRD `status` as `in-progress`
 5. Save the PRD
 

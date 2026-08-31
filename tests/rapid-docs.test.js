@@ -3,7 +3,7 @@ const assert = require('node:assert');
 const path = require('path');
 const {
   parseFrontmatter,
-  countStories,
+  countSpecs,
   countTasks,
   listPendingPrds,
   listPendingSpecs,
@@ -18,7 +18,7 @@ test('parseFrontmatter reads YAML block, {} when absent', () => {
   assert.deepStrictEqual(parseFrontmatter('# no frontmatter'), {});
 });
 
-test('countStories counts total and not-started from tables', () => {
+test('countSpecs counts total and not-started from tables', () => {
   const md = [
     '| ID | As a | Status |',
     '| S1.1 | u | not started |',
@@ -26,7 +26,7 @@ test('countStories counts total and not-started from tables', () => {
     '| S2.1 | u | not started |',
     '| notarow | u | done |',
   ].join('\n');
-  assert.deepStrictEqual(countStories(md), { total: 3, notStarted: 2 });
+  assert.deepStrictEqual(countSpecs(md), { total: 3, notStarted: 2 });
 });
 
 test('countTasks only counts inside the Tasks section', () => {
@@ -47,8 +47,8 @@ test('listPendingPrds returns approved/in-progress with counts, excludes done', 
   const prd = prds[0];
   assert.strictEqual(prd.status, 'approved');
   assert.strictEqual(prd.title, 'Authentication');
-  assert.strictEqual(prd.stories_total, 3);
-  assert.strictEqual(prd.stories_not_started, 2);
+  assert.strictEqual(prd.specs_total, 3);
+  assert.strictEqual(prd.specs_not_started, 2);
   assert.strictEqual(prd.path, 'prds/prd-approved.md');
 });
 

@@ -31,9 +31,9 @@ Hold in your head:
 - Why now / market context
 
 ### What the PRD needs to add on top
-- **Capability areas (epics)** — how do the brief's must-haves cluster into 5-8 logical groups?
-- **Functional Requirements** — for each capability area, what specific capabilities exist?
-- **User stories per FR** — implementable units (each becomes a tech spec)
+- **Epics (epics)** — how do the brief's must-haves cluster into 5-8 logical groups?
+- **Functional Requirements** — for each epic, what specific capabilities exist?
+- **specs per FR** — implementable units (each one gets written up by `rapid create-spec`)
 - **NFRs** — performance, availability, security, accessibility, scalability
 - **Domain compliance** — does the project domain trigger HIPAA/PCI/WCAG/GDPR/etc.?
 - **Phased scope** — MVP / Growth / Vision split (more granular than the brief's MVP)
@@ -54,11 +54,11 @@ Group your questions so the user isn't answering one at a time, but **don't forc
 - "Is this PRD for the whole product from the brief, or just {area X}?"
 - "Should the PRD's MVP match the brief's MVP, or is there a tighter v1 cut for this PRD specifically?"
 
-**B. Capability areas / epics** (always ask)
-- "Looking at the brief's must-haves, I'd cluster them into these capability areas: {Area 1, Area 2, Area 3}. Does that grouping work, or would you organize them differently?"
+**B. Epics / epics** (always ask)
+- "Looking at the brief's must-haves, I'd cluster them into these epics: {Area 1, Area 2, Area 3}. Does that grouping work, or would you organize them differently?"
 
 **C. FR coverage** (1-2 questions)
-- "For the {Area X} capability area, the obvious FRs are {FR1, FR2, FR3}. Is anything missing?"
+- "For the {Area X} epic, the obvious FRs are {FR1, FR2, FR3}. Is anything missing?"
 - "I see the brief mentions {feature}, but I'm not sure if it should be one FR or split into two (e.g. {option A} vs {option B}). Which?"
 
 **D. NFRs** (1-2 questions, depending on what's known)
@@ -93,7 +93,7 @@ Send all questions in one message, numbered:
 I read the brief. Before I draft the PRD, here are the things I need to lock in:
 
 1. **Scope**: {specific question grounded in the brief}
-2. **Capability areas**: I'd cluster the brief's must-haves into {A, B, C} — work for you, or organize differently?
+2. **Epics**: I'd cluster the brief's must-haves into {A, B, C} — work for you, or organize differently?
 3. **FR coverage** (Area A): {specific question}
 4. **NFRs — performance**: {specific question with concrete options}
 5. **NFRs — availability**: {specific question}
@@ -111,7 +111,7 @@ Take the user's answers. Do **not** ask follow-ups unless an answer is so unclea
 Hold internally for step-03:
 - `personas_used` (from brief, confirmed scope)
 - `capability_areas` (5-8 logical groups, with name + 1-line description each)
-- `frs_per_area` (FRs grouped under each area, with proposed stories)
+- `frs_per_area` (FRs grouped under each area, with proposed specs)
 - `nfrs` (specific measurable requirements per category)
 - `domain_requirements` (compliance items, if any)
 - `phased_scope` (MVP / Growth / Vision split)

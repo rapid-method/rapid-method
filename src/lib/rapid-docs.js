@@ -3,7 +3,7 @@
  *
  * The goal is token efficiency for the skills: instead of the agent opening and
  * reading every PRD/spec to build a picker, these functions parse only the
- * metadata (frontmatter + story/task status counts) and return compact objects.
+ * metadata (frontmatter + spec/task status counts) and return compact objects.
  * The full document is read (by the skill) only for the single item the user picks.
  */
 
@@ -67,11 +67,11 @@ function parseFrontmatter(content) {
 }
 
 /**
- * Count PRD user stories from the markdown tables.
- * Story rows look like: `| S1.1 | ... | must | not started |`
+ * Count PRD specs from the markdown tables.
+ * Spec rows look like: `| S1.1 | ... | must | not started |`
  * The Status is the last cell.
  */
-function countStories(content) {
+function countSpecs(content) {
   let total = 0;
   let notStarted = 0;
   for (const line of content.split('\n')) {
@@ -109,7 +109,7 @@ function countTasks(content) {
   return { total, done };
 }
 
-/** List PRDs with status `approved` or `in-progress`, with story counts. */
+/** List PRDs with status `approved` or `in-progress`, with spec counts. */
 function listPendingPrds(rapidDir) {
   const dir = resolveOutputPaths(rapidDir).prds;
   if (!fs.existsSync(dir)) return [];
@@ -125,14 +125,14 @@ function listPendingPrds(rapidDir) {
     const fm = parseFrontmatter(content);
     const status = String(fm.status || '').trim();
     if (status !== 'approved' && status !== 'in-progress') continue;
-    const { total, notStarted } = countStories(content);
+    const { total, notStarted } = countSpecs(content);
     out.push({
       path: `prds/${file}`,
       title: String(fm.title || file).trim(),
       status,
       created: String(fm.created || '').trim(),
-      stories_total: total,
-      stories_not_started: notStarted,
+      specs_total: total,
+      specs_not_started: notStarted,
     });
   }
   return out;
@@ -181,7 +181,7 @@ module.exports = {
   readConfig,
   resolveOutputPaths,
   parseFrontmatter,
-  countStories,
+  countSpecs,
   countTasks,
   listPendingPrds,
   listPendingSpecs,

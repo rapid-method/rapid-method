@@ -4,7 +4,7 @@ Create a Product Requirements Document — the **capability contract** for a pro
 
 The PRD consolidates strategic requirements and epic breakdown into one artifact:
 - **Strategic content** — Executive Summary, Success Criteria (SMART), Phased Scope, User Journeys, Functional Requirements (capability inventory), Non-Functional Requirements
-- **Epics breakdown** — capabilities organized by area, with user stories nested under each FR that can become individual tech specs
+- **Epics breakdown** — capabilities organized into epics, with the specs that implement each FR nested beneath it
 
 ## Trigger
 
@@ -71,8 +71,8 @@ These are surfaced explicitly in the silent self-check (step-03) and any violati
 The Functional Requirements section is the **binding capability contract**. Anything not listed there will not be built. UX, architecture, and dev only support what's in the FRs.
 
 This is enforced downstream:
-- `rapid create-spec` only offers stories that exist under an FR in an approved PRD
-- `rapid dev` checks that implementation matches the FR's stories
+- `rapid create-spec` only offers specs that exist under an FR in an approved PRD
+- `rapid dev` checks that implementation matches the FR's specs
 
 ## FR Quality Bar (SMART)
 
@@ -95,16 +95,16 @@ Every NFR must follow: `The system shall [metric] [condition] as measured by [me
 ## Traceability Chain
 
 ```
-Brief Vision → Success Criteria → User Journeys → Functional Requirements → Stories → Tech Specs → Implementation
+Brief Vision → Success Criteria → User Journeys → Functional Requirements → Specs → Implementation
 ```
 
-Every FR should trace back to a user journey or success criterion. Every story should trace back to an FR. Every tech spec should trace back to a story.
+Every FR traces back to a user journey or success criterion; every spec traces back to an FR.
 
 ## Core Principles
 
 - **Brief is the source of truth** — vision, personas, MVP scope come from the brief. Don't re-elicit.
-- **Stories are the implementation unit** — each story under an FR becomes one tech spec
-- **MoSCoW priorities** — every story is must/should/could
+- **Specs are the implementation unit** — one spec under an FR, one unit of work
+- **MoSCoW priorities** — every spec is must/should/could
 - **Out of scope is mandatory** — explicitly list what's NOT in this PRD
 - **Just-in-time loading** — only read the current step file
 
@@ -113,9 +113,9 @@ Every FR should trace back to a user journey or success criterion. Every story s
 | Status | Meaning |
 |--------|---------|
 | `draft` | Work in progress (resumable via `stepsCompleted`) |
-| `approved` | Ready — `rapid create-spec` will offer its stories |
-| `in-progress` | At least one story is being implemented as a tech spec |
-| `done` | All `must` stories are implemented |
+| `approved` | Ready — `rapid create-spec` will offer its specs |
+| `in-progress` | At least one spec has been written up and picked up |
+| `done` | All `must` specs are implemented |
 
 `stepsCompleted` tracks the create-prd workflow; `status` tracks the PRD's lifecycle across the project.
 
@@ -131,8 +131,8 @@ If a draft PRD exists with partial `stepsCompleted`, step-01 will detect it and 
 
 ## Next Steps
 
-- `rapid create-spec` — pick a story from this PRD and turn it into an implementation spec
-- Stories track status (`not started` → `in spec` → `in dev` → `done`) so the PRD's overall progress is visible
+- `rapid create-spec` — pick a spec from this PRD and turn it into an implementation spec
+- Specs track status (`not started` → `in spec` → `in dev` → `done`) so the PRD's overall progress is visible
 
 ## Start
 

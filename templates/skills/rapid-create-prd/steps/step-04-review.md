@@ -11,7 +11,7 @@
 Read the current draft PRD file fully. You should see:
 
 - Frontmatter with `status: 'draft'` and `stepsCompleted: [1, 2, 3]`
-- All sections filled: Executive Summary, Success Criteria, Product Scope, User Journeys, Functional Requirements (with capability areas + FRs + stories), Non-Functional Requirements, optional Domain Requirements
+- All sections filled: Executive Summary, Success Criteria, Product Scope, User Journeys, Functional Requirements (with epics + FRs + specs), Non-Functional Requirements, optional Domain Requirements
 
 If anything is missing, return to step-03 and finish generating before continuing.
 
@@ -20,7 +20,7 @@ If anything is missing, return to step-03 and finish generating before continuin
 Hold internally for the presentation:
 - `capability_area_count`
 - `fr_count`
-- `story_count` (split by must / should / could)
+- `spec_count` (split by must / should / could)
 - `nfr_count`
 - `success_criteria_count`
 - `domain_req_count` (0 if section omitted)
@@ -70,8 +70,8 @@ The user can edit as many times as needed. **Do not halt for confirmation betwee
 Common edit requests and how to handle:
 - "Add an FR to Area X" → add it, re-number subsequent FRs only if user explicitly wants, otherwise append
 - "Tighten this NFR" → enforce SMART format
-- "Move FR2 to Growth" → move the FR's MVP-priority stories to Growth scope, update story priorities
-- "Change persona X to Y" → update across stories, journeys, and Executive Summary
+- "Move FR2 to Growth" → move the FR's MVP-priority specs to Growth scope, update spec priorities
+- "Change persona X to Y" → update across specs, journeys, and Executive Summary
 
 ### [C] Cancel
 - Confirm: "Discard the PRD, or keep it as a draft for later?"
@@ -99,17 +99,17 @@ On approval:
 **Status**: approved
 
 ### Capability Contract Locked
-- {capability_area_count} capability areas
+- {capability_area_count} epics
 - {fr_count} Functional Requirements
-- {story_count} stories ({must_count} must / {should_count} should / {could_count} could)
+- {spec_count} specs ({must_count} must / {should_count} should / {could_count} could)
 - {nfr_count} NFRs
 
 ### Recommended Next Step
-- `rapid create-spec` — pick a story from this PRD and turn it into a tech spec
+- `rapid create-spec` — pick a spec planned here and write it up
 
-The PRD is now visible to `rapid create-spec`, which will offer its stories when invoked. As specs get implemented, the PRD's status progresses: `approved` → `in-progress` (first story picked up) → `done` (all `must` stories implemented).
+The PRD is now visible to `rapid create-spec`, which will offer its specs when invoked. As specs get implemented, the PRD's status progresses: `approved` → `in-progress` (first spec picked up) → `done` (all `must` specs implemented).
 
-Story status updates (`not started` → `in spec` → `in dev` → `done`) are maintained by `create-spec` and `dev`.
+Spec status updates (`not started` → `in spec` → `in dev` → `done`) are maintained by `create-spec` and `dev`.
 ```
 
 The PRD is done. No more steps to load.

@@ -132,14 +132,14 @@ Update the spec frontmatter:
 
 Save the spec.
 
-### Update linked PRD story (if any)
+### Update linked PRD spec (if any)
 
-If `prd_ref` is set on the spec (the spec was created from a PRD story), update the PRD file:
+If `prd_ref` is set on the spec (the spec was created from a PRD spec), update the PRD file:
 
 1. Read the PRD at `prd_ref` (path before the `#`)
-2. Find the story by ID (after the `#`, e.g. `S1.1`)
-3. Change the story's `Status` column from `in spec` to `in dev`
-4. If this is the first story moving to `in dev` from this PRD, also update the PRD's `status` from `approved` to `in-progress`
+2. Find the spec by ID (after the `#`, e.g. `S1.1`)
+3. Change the spec's `Status` column from `in spec` to `in dev`
+4. If this is the first spec moving to `in dev` from this PRD, also update the PRD's `status` from `approved` to `in-progress`
 5. Save the PRD
 
 ## 7. Transition (silent — no user halt)

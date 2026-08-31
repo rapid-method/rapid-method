@@ -2,7 +2,7 @@ const { findRapidDir, listPendingPrds } = require('../lib/rapid-docs');
 
 /**
  * Print, as JSON, the PRDs that are ready to be turned into specs
- * (status `approved` or `in-progress`) with their story counts.
+ * (status `approved` or `in-progress`) with their spec counts.
  * Consumed by the create-spec skill to build its picker without
  * reading every PRD into the agent's context.
  */

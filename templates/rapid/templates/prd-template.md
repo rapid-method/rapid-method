@@ -73,7 +73,7 @@ The end-to-end paths users take through this product. Cover at least the primary
 
 ## Functional Requirements
 
-The **capability contract** for the product. Each FR is a testable capability, implementation-agnostic, and groups stories that become individual specs.
+The **capability contract** for the product. Each FR is a testable capability, implementation-agnostic, and groups specs that become individual specs.
 
 > **Critical**: Anything not listed here will not be built. UX, architecture, and dev only support what's in this section.
 
@@ -87,17 +87,17 @@ Every FR must:
 - ❌ NO implementation leakage (technology names, libraries, specific UIs)
 - ❌ NO vague quantifiers ("multiple", "several", "various") — use specific numbers
 
-Aim for **5-8 capability areas**, **15-30 FRs total** for a typical feature/product. Each FR has 1-3 user stories beneath it.
+Aim for **5-8 epics**, **15-30 FRs total** for a typical feature/product. Each FR has 1-3 specs beneath it.
 
 ---
 
-### Capability Area: {Area Name}
+### Epic: {Area Name}
 
-> {1-line description of this capability area's role}
+> {1-line description of this epic's role}
 
 #### FR1: {Actor} can {capability}
 
-**Stories** (each becomes a tech spec):
+**Specs** (each one gets written up by `rapid create-spec`):
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -106,7 +106,7 @@ Aim for **5-8 capability areas**, **15-30 FRs total** for a typical feature/prod
 
 #### FR2: {Actor} can {capability}
 
-**Stories**:
+**Specs**:
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -114,13 +114,13 @@ Aim for **5-8 capability areas**, **15-30 FRs total** for a typical feature/prod
 
 ---
 
-### Capability Area: {Another Area}
+### Epic: {Another Area}
 
 > {description}
 
 #### FR3: {Actor} can {capability}
 
-**Stories**:
+**Specs**:
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -168,13 +168,13 @@ Skip categories that don't apply. Don't pad with "the system shall be reliable" 
 
 ## Status Tracking (auto-maintained)
 
-The PRD's `status` field reflects implementation progress across its stories:
+The PRD's `status` field reflects implementation progress across its specs:
 
 | Status | Meaning |
 |--------|---------|
 | `draft` | Work in progress (resumable via `stepsCompleted`) |
-| `approved` | Ready — `rapid create-spec` will offer its stories |
-| `in-progress` | At least one story has been picked up and is being implemented |
-| `done` | All `must` stories are implemented |
+| `approved` | Ready — `rapid create-spec` will offer its specs |
+| `in-progress` | At least one spec has been picked up and is being implemented |
+| `done` | All `must` specs are implemented |
 
-Story `Status` column values: `not started` → `in spec` (a tech spec exists) → `in dev` (dev workflow running) → `done`.
+Spec `Status` column values: `not started` → `in spec` (the spec has been written up) → `in dev` (dev workflow running) → `done`.

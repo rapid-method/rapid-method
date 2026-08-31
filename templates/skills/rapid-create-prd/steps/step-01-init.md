@@ -70,7 +70,7 @@ Ask **one** question:
 > "What product or feature is this PRD for? Even a rough idea is fine — I'll read the brief (if any) and ask sharper questions next."
 
 Get just enough to know:
-- Rough scope (whole product / a major capability area / a single feature)
+- Rough scope (whole product / a major epic / a single feature)
 - Which user(s) it's for (if mentioned)
 - The core problem or capability it adds
 
@@ -83,7 +83,7 @@ If the user already linked this PRD to a specific section of the brief, note it.
 Hold internally for step-02:
 - `prd_title` (rough)
 - `prd_intent` (1-2 sentences)
-- `prd_scope_size` (whole product / capability area / single feature)
+- `prd_scope_size` (whole product / epic / single feature)
 - `brief_path` (if linked to a brief)
 - `referenced_users`, `referenced_constraints`
 

@@ -54,7 +54,7 @@ The plan flow helps track and define features before implementation. Use it when
 #### What happens
 
 1. **Discovery** — Guided conversation to clarify the feature goal, target users, and expected behavior
-2. **Write PRD** — Fill the template with user stories, acceptance criteria, and scope boundaries
+2. **Write PRD** — Fill the template with specs, acceptance criteria, and scope boundaries
 3. **User Approval** — `[A]pprove` / `[E]dit` / `[C]ancel`
 
 #### Output
@@ -81,10 +81,10 @@ Before anything else, the spec workflow checks for PRDs with status `approved` o
 
 ```
 Found pending PRDs:
-1. {prd_title} (status: approved, {n} user stories)
-2. {prd_title} (status: in-progress, {n}/{total} stories done)
+1. {prd_title} (status: approved, {n} specs)
+2. {prd_title} (status: in-progress, {n}/{total} specs done)
 
-[P] Pick a story from a PRD
+[P] Pick a spec from a PRD
 [S] Start something separate
 ```
 

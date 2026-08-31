@@ -106,13 +106,13 @@ Pull from brief's persona journeys. Expand if step-02 surfaced more detail. Each
 
 This is the **biggest and most important section**. Generate it with care.
 
-For each capability area captured in step-02:
+For each epic captured in step-02:
 
 1. Write a 1-line description of the area's role
 2. List FRs (using `[Actor] can [capability]` format)
-3. Under each FR, list user stories that implement it
+3. Under each FR, list specs that implement it
 
-**Sequential numbering**: FR1, FR2, FR3... across the entire PRD (not restarting per area). Stories under FR1 are S1.1, S1.2; under FR2 are S2.1, S2.2; etc.
+**Sequential numbering**: FR1, FR2, FR3... across the entire PRD (not restarting per area). Specs under FR1 are S1.1, S1.2; under FR2 are S2.1, S2.2; etc.
 
 **FR quality enforcement** (apply as you write):
 - ✅ `[Actor] can [capability]` format
@@ -120,22 +120,22 @@ For each capability area captured in step-02:
 - ❌ NO implementation leakage (no tech names, no specific UIs, no algorithms)
 - ❌ NO vague quantifiers ("multiple", "several", "various")
 
-**Story quality enforcement**:
+**Spec quality enforcement**:
 - Format: `As a {real persona name}, I want to {specific action}, so that {concrete benefit}`
-- Each story should be implementable as ONE tech spec
+- Each spec must stand on its own — one spec, one unit of work
 - Priority: must / should / could
 - Status: starts as `not started`
 
 ```markdown
 ## Functional Requirements
 
-### Capability Area: {Area Name}
+### Epic: {Area Name}
 
 > {1-line description of this area's role in the product}
 
 #### FR1: {Actor} can {capability}
 
-**Stories**:
+**Specs**:
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -144,7 +144,7 @@ For each capability area captured in step-02:
 
 #### FR2: {Actor} can {capability}
 
-**Stories**:
+**Specs**:
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -152,13 +152,13 @@ For each capability area captured in step-02:
 
 ---
 
-### Capability Area: {Another Area}
+### Epic: {Another Area}
 
 > {description}
 
 #### FR3: {Actor} can {capability}
 
-**Stories**:
+**Specs**:
 
 | ID | As a... | I want to... | So that... | Priority | Status |
 |----|---------|--------------|------------|----------|--------|
@@ -166,9 +166,9 @@ For each capability area captured in step-02:
 ```
 
 **Coverage targets**:
-- 5-8 capability areas for typical product/feature scope
+- 5-8 epics for typical product/feature scope
 - 15-30 FRs total
-- 1-3 stories per FR
+- 1-3 specs per FR
 
 ### Non-Functional Requirements
 
@@ -237,16 +237,16 @@ If you find violations, **fix them directly** (rewrite the offending FR/sentence
 
 ### Coverage check
 - [ ] Every brief must-have appears as an FR (or is intentionally cut to Growth/Vision)
-- [ ] Every FR has at least one user story
-- [ ] Every must-have story exists in the MVP scope (not deferred)
+- [ ] Every FR has at least one spec
+- [ ] Every must-have spec exists in the MVP scope (not deferred)
 - [ ] Out of Scope is non-empty
 - [ ] At least one NFR per category that applies
 
 ### Traceability check
 - [ ] Each Success Criterion traces to a brief section or user need
 - [ ] Each FR traces (mentally) to a journey or success criterion
-- [ ] Each story traces to its parent FR (via S{N}.{M} numbering)
-- [ ] Personas used in stories actually exist in the brief / journeys
+- [ ] Each spec traces to its parent FR (via S{N}.{M} numbering)
+- [ ] Personas used in specs actually exist in the brief / journeys
 
 ### Consistency with brief
 - [ ] In Scope (MVP) doesn't contradict the brief's Out of Scope

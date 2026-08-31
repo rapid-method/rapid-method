@@ -41,45 +41,45 @@ Found spec(s) in progress:
 
 ## 3. Check for Pending PRDs
 
-Run the shell command `npx rapid-method pending-prds`. It returns compact JSON of PRDs with status `approved` or `in-progress`, each already carrying `stories_not_started` / `stories_total`. Use this to build the list below — **do not open any PRD file yet**. Only read the chosen PRD fully when the user picks **[P]** (see below).
+Run the shell command `npx rapid-method pending-prds`. It returns compact JSON of PRDs with status `approved` or `in-progress`, each already carrying `specs_not_started` / `specs_total`. Use this to build the list below — **do not open any PRD file yet**. Only read the chosen PRD fully when the user picks **[P]** (see below).
 
 **If the command returns a non-empty list**:
 
-PRDs use a nested structure: capability areas → Functional Requirements (FR1, FR2...) → user stories (S1.1, S1.2...). Stories carry a `Status` column (`not started` / `in spec` / `in dev` / `done`). Filter to **stories with status `not started`** when offering picks.
+PRDs use a nested structure: epics → Functional Requirements (FR1, FR2...) → specs (S1.1, S1.2...). Specs carry a `Status` column (`not started` / `in spec` / `in dev` / `done`). Filter to **specs with status `not started`** when offering picks.
 
 ```
 Found pending PRDs:
 
-1. {prd_title} (status: approved, {n_not_started}/{n_total} stories available)
-2. {prd_title} (status: in-progress, {n_not_started}/{n_total} stories available)
+1. {prd_title} (status: approved, {n_not_started}/{n_total} specs available)
+2. {prd_title} (status: in-progress, {n_not_started}/{n_total} specs available)
 
-[P] Pick a story from a PRD (recommended)
+[P] Pick a spec from a PRD (recommended)
 [S] Start something separate
 ```
 
-- **[P] Pick**: Read the chosen PRD fully. Show all stories with status `not started`, grouped by capability area / FR for context:
+- **[P] Pick**: Read the chosen PRD fully. Show all specs with status `not started`, grouped by epic / FR for context:
 
   ```
   PRD: {title}
 
-  ### Capability Area: User Management
+  ### Epic: User Management
     FR1: Users can sign up with email
       - S1.1 (must): As a new user, I want to sign up with email and password, so that I can access the app — not started
       - S1.2 (should): As a new user, I want to verify my email, so that my account is secure — not started
     FR2: Users can recover forgotten passwords
       - S2.1 (must): As an existing user, I want to reset my password via email link, so that I can regain access — not started
 
-  ### Capability Area: Profiles
+  ### Epic: Profiles
     FR3: Users can edit their profile
       - S3.1 (should): As a logged-in user, I want to update my display name, so that others see me correctly — not started
 
-  Pick a story by ID (e.g., S1.1):
+  Pick a spec by ID (e.g., S1.1):
   ```
 
-  When the user picks a story:
-  - Use the story as the source of intent for the spec
-  - Store the PRD path + story ID for `prd_ref` (e.g., `prds/prd-2026-04-11-auth.md#S1.1`)
-  - Mark the story's status as `in spec` in the PRD file (and save)
+  When the user picks a spec:
+  - Use the spec as the source of intent for the spec
+  - Store the PRD path + spec ID for `prd_ref` (e.g., `prds/prd-2026-04-11-auth.md#S1.1`)
+  - Mark the spec's status as `in spec` in the PRD file (and save)
   - **Skip section 4** (intent already captured) and go straight to section 5
 
 - **[S] Separate**: Continue to section 4.
@@ -114,7 +114,7 @@ Track internally:
 
 Recap the intent in 1–2 lines and let the user confirm before you investigate the code:
 
-> "So we're building {intent}{, from PRD story {id} if picked}. Good to dig into the code and shape the spec, or refine the intent first?"
+> "So we're building {intent}{, from PRD spec {id} if picked}. Good to dig into the code and shape the spec, or refine the intent first?"
 >
 > [A] Continue   [D] Discuss / refine
 

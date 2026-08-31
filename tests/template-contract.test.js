@@ -3,7 +3,7 @@
  *
  * The pending-prds / pending-specs commands parse the PRD and tech-spec
  * markdown produced from the templates in templates/rapid/templates/. If a
- * template changes shape (frontmatter field renamed, story-table Status column
+ * template changes shape (frontmatter field renamed, spec-table Status column
  * moved, "## Tasks" heading or checkbox format changed) the parser would
  * silently miscount. These tests fail loudly on that drift so the template and
  * src/lib/rapid-docs.js are kept in sync.
@@ -13,7 +13,7 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
-const { parseFrontmatter, countStories, countTasks } = require('../src/lib/rapid-docs');
+const { parseFrontmatter, countSpecs, countTasks } = require('../src/lib/rapid-docs');
 
 const TEMPLATES = path.join(__dirname, '..', 'templates', 'rapid', 'templates');
 const read = (file) => fs.readFileSync(path.join(TEMPLATES, file), 'utf8');
@@ -29,10 +29,10 @@ test('PRD template exposes the frontmatter fields the parser reads', () => {
   }
 });
 
-test('PRD template story table still matches the story parser', () => {
-  const { total, notStarted } = countStories(read('prd-template.md'));
-  assert.ok(total >= 1, 'no story rows matched `| S<n>.<n> | … |` — story ID format or table changed');
-  assert.ok(notStarted >= 1, 'no story ended with "not started" — Status column moved or renamed');
+test('PRD template spec table still matches the spec parser', () => {
+  const { total, notStarted } = countSpecs(read('prd-template.md'));
+  assert.ok(total >= 1, 'no spec rows matched `| S<n>.<n> | … |` — spec ID format or table changed');
+  assert.ok(notStarted >= 1, 'no spec ended with "not started" — Status column moved or renamed');
 });
 
 test('spec template exposes the frontmatter fields the parser reads', () => {

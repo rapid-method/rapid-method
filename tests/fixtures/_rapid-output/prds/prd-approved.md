@@ -7,9 +7,9 @@ feature: 'auth'
 
 # PRD: Authentication
 
-## User Stories
+## specs
 
-### Capability Area: User Management
+### Epic: User Management
 
 FR1: Users can sign up
 
