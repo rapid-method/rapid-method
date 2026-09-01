@@ -4,11 +4,29 @@ Releases are published to npm by CI when a `vX.Y.Z` git tag is pushed. Never run
 `npm publish` by hand — the workflow runs the tests and publishes from a clean
 checkout.
 
-## One-time setup
+## How publishing authenticates
 
-Add an **`NPM_TOKEN`** repository secret (Settings → Secrets and variables →
-Actions): an npm **automation** token with publish rights on the `rapid-method`
-package. The release workflow reads it as `NODE_AUTH_TOKEN`.
+There is **no npm token in this repository.** Publishing uses npm *trusted
+publishing* over OpenID Connect: the workflow proves its own identity to npm,
+which mints a credential that lasts only for that run. Nothing long-lived exists
+to leak, rotate or misname.
+
+The trust is registered on npmjs.com (package → Settings → Trusted publisher) and
+is pinned to three things:
+
+| | |
+|---|---|
+| Organization / user | `rapid-method` |
+| Repository | `rapid-method` |
+| Workflow filename | `release.yml` |
+
+**Renaming `.github/workflows/release.yml` breaks publishing** — npm matches the
+filename, and the failure surfaces as a `403` at publish time, not as anything
+that looks like a rename problem. If the file must move, update the trusted
+publisher first.
+
+The workflow also upgrades npm before publishing: trusted publishing needs
+npm ≥ 11.5.1 and Node 22 still ships npm 10.
 
 ## Cutting a release
 
@@ -25,9 +43,15 @@ package. The release workflow reads it as `NODE_AUTH_TOKEN`.
    ```bash
    git push --follow-tags
    ```
+   `main` requires a pull request with a green `test` check and one approval, so
+   unless you are an org admin (who bypasses those rules), the version bump goes
+   through a PR first and only the tag is pushed here.
 5. The **Release** workflow runs on the tag: it installs, runs `npm test`,
    verifies the tag matches `package.json`, publishes to npm, and creates a
    GitHub Release with generated notes.
+
+`v*` tags are protected — only org admins can create, move or delete them, since
+pushing one is what publishes to npm.
 
 ## Versioning (semver)
 
@@ -40,6 +64,12 @@ package. The release workflow reads it as `NODE_AUTH_TOKEN`.
 After the workflow finishes:
 
 ```bash
-npm view rapid-method version   # should show the new version
-npx rapid-method@latest install # smoke-test the published package
+npm view rapid-method version              # should show the new version
+npm view rapid-method dist.attestations    # provenance should be present
+npx rapid-method@latest install            # smoke-test the published package
 ```
+
+The attestation is generated automatically by trusted publishing: it links the
+tarball back to the exact commit and workflow run that produced it, so anyone can
+verify the package was built from this repository rather than uploaded by hand.
+Its absence on a new version means something published outside this pipeline.

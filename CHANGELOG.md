@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.0] - 2026-08-31
+## [1.1.0] - 2026-09-01
 
 The first release since `1.0.2` (March 2026). npm had been stuck there while
 `main` advanced significantly; this ships everything below.
@@ -15,12 +15,15 @@ The first release since `1.0.2` (March 2026). npm had been stuck there while
 ### Added
 - Multi-platform install support.
 - **Plan Flow**: `rapid create-prd` and PRD ↔ spec integration.
-- Read-only CLI commands `pending-prds` and `pending-specs` that scan
-  `_rapid/output` and return compact JSON, so the create-spec / dev skills build
-  their pickers without reading every document into context.
+- Read-only CLI commands `pending-prds` and `pending-specs` that scan the output
+  folder and return compact JSON, so the create-spec / dev skills build their
+  pickers without reading every document into context.
 - Test suite (`node --test`): parser unit tests plus a PRD/spec template ↔ parser
   contract gate.
-- CI workflow (tests on push/PR) and a tag-triggered npm release workflow.
+- CI workflow (tests on push/PR) and a tag-triggered npm release workflow, which
+  publishes over OIDC (npm trusted publishing) rather than a stored token — so
+  releases carry a provenance attestation and the repository holds no npm
+  credential.
 
 ### Changed
 - **Output layout**: all generated artifacts now live in a configurable sibling
